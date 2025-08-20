@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDTH Contact us Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo">
+      <a href="#">
+          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
+      </a>
+  </div>
+
+  
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="courses.html">Courses</a>
+      <span class="caret"></span>
+      <ul class="dropdown-menu">
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="cyber-security.html">Cyber Security</a></li>
+          <li><a href="AI.html">AI</a></li>
+          <li><a href="graphic-design.html">Graphic Design</a></li>
+          <li><a href="ui-ux.html">UI/UX Design</a></li>
+          <li><a href="project-management.html">Project Management</a></li>
+          <li><a href="video-editing.html">Video Editing</a></li>
+          <li><a href="content-marketing.html">Content Marketing</a></li>
+          <li><a href="data-analysis.html">Data Analytics</a></li>
+      </ul>
+    </li>
+  
+    <li><a href="about us.html">About Us</a></li>
+    <li><a href="contact us .html">Contact</a></li>
+    <li><a href="blog.html">Blog</a></li>
+</ul>
+<div class="auth-buttons">
+    <a href="signup.html" class="btn-signup">Sign Up</a>
+    <a href="login.html" class="btn-login">Login</a>
+</div>
+<!-- Hamburger Icon -->
+<div class="hamburger" id="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
+</nav>
+<!-- Side Menu (hidden by default) -->
+<div class="side-menu" id="sideMenu">
+<div class="side-menu-header">
+  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
+  <div class="cancel-icon" id="cancelIcon">
+    <span>&times;</span>
+  </div>
+</div>
+<hr class="menu-separator">
+<div class="theme-switcher">
+  <p>Switch Theme</p>
+  <button id="themeToggle" class="theme-icon">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </button>
+</div>
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li class="dropdown">
+    <a href="courses.html">Courses</a>
+    <span class="caret"></span>
+    <ul class="dropdown-menu">
+      <li><a href="programming.html">Programming</a></li>
+      <li><a href="cyber-security.html">Cyber Security</a></li>
+      <li><a href="AI.html">AI</a></li>
+      <li><a href="graphic-design.html">Graphic Design</a></li>
+      <li><a href="ui-ux.html">UI/UX Design</a></li>
+      <li><a href="project-management.html">Project Management</a></li>
+      <li><a href="video-editing.html">Video Editing</a></li>
+      <li><a href="content-marketing.html">Content Marketing</a></li>
+      <li><a href="data-analysis.html">Data Analytics</a></li>
+    </ul>
+  </li>
+
+  <li><a href="about us.html">About Us</a></li>
+  <li><a href="contact us .html">Contact</a></li>
+  <li><a href="blog.html">Blog</a></li>
+</ul>
+<div class="auth-buttons">
+  <a href="signup.html" class="btn-signup">Sign Up</a>
+  <a href="login.html" class="btn-login">Login</a>
+</div>
+<hr class="menu-separator">
+</div>
+
+
+  
+  <section class="contact-section">
+    <div class="contact-container">
+        <!-- Left Section with Text -->
+        <div class="contact-text">
+            <h1>Contact Us</h1>
+            <p>
+                Let's help you unlock your potential with our interactive courses and expert instructors, 
+                designed to help you learn anytime, anywhere.
+            </p>
+        </div>
+
+        <!-- Right Section with Icons -->
+        <div class="contact-image">
+            <img src="images/contact us image.png" alt="Contact Icons">
+        </div>
+    </div>
+</section>
+
+<div class="contact-container">
+  <div class="contact-info">
+    <h2>Contact Information</h2>
+    <p>You can contact us via the phone number below or send us an email. We are available 24/7.</p>
+    <div class="contact-details">
+      <div class="phone">
+        <div class="icon">
+          <i class="fas fa-phone"></i>
+        </div>
+        <div class="text">
+          <h4>Phone Number</h4>
+          <p>(+234) 816 0330 156</p>
+        </div>
+      </div>
+      
+      <div class="email">
+        <div class="icon">
+          <i class="fas fa-envelope"></i> 
+        </div>
+        <div class="text">
+          <h4>Email Address</h4>
+          <p>mdthdigitalworld@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <div class="eclipse-large"></div>
+  <div class="eclipse-small"></div>
+</div>
+
+  <!-- Contact Form Section -->
+  <div class="contact-form">
+    <h2>Send us a message</h2>
+    <form>
+      <div class="input-group">
+        <input type="text" placeholder="Name" required>
+      </div>
+      <div class="input-group">
+        <input type="email" placeholder="Email address" required>
+      </div>
+      <div class="input-group">
+        <textarea placeholder="Message" row="1" required></textarea>
+      </div>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+</div>
+
+ <!-- FAQ Section -->
+ <section class="faq-section">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+  <p class="faq-subtitle">Got any questions for us? We're here for you.</p>
+
+  <!-- FAQ Container -->
+  <div class="faq-container">
+    <!-- FAQ Item 1 -->
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>How to register?</span>
+        <i class="fa fa-plus toggle-icon"></i>
+      </div>
+      <div class="faq-answer">
+        <p>To register, kindly click on the Sign-up button on the home page, then follow the steps communicated to successfully register on the platform.</p>
+      </div>
+    </div>
+
+    <!-- FAQ Item 2 -->
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What are the courses being offered?</span>
+        <i class="fa fa-plus toggle-icon"></i>
+      </div>
+      <div class="faq-answer">
+        <p>We offer a variety of courses across different fields including web development, design, and marketing.</p>
+      </div>
+    </div>
+
+    <!-- FAQ Item 3 -->
+    <div class="faq-item">
+      <div class="faq-question">
+        <span>What are the payment options?</span>
+        <i class="fa fa-plus toggle-icon"></i>
+      </div>
+      <div class="faq-answer">
+        <p>We accept credit cards, PayPal, and bank transfers.</p>
+      </div>
+    </div>
+
+  <!-- FAQ Item 4 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>How can I get the App?</span>
+      <i class="fa fa-plus toggle-icon"></i>
+    </div>
+    <div class="faq-answer">
+      <p>You can download the app directly from the Google Play Store for Android devices or the Apple App Store for iOS devices. Simply search for our app name and follow the installation instructions.</p>
+    </div>
+  </div>
+
+  <!-- FAQ Item 5 -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>Can I get a refund?</span>
+      <i class="fa fa-plus toggle-icon"></i>
+    </div>
+    <div class="faq-answer">
+      <p>Refunds are subject to our refund policy. If you meet the eligibility criteria, you can request a refund by contacting our support team with your purchase details. Please review our refund policy for more information.</p>
+    </div>
+  </div>
+  </div>
+
+  <!-- More FAQs -->
+  <div class="faq-footer">
+    <a href="more-faqs.html" class="more-faqs">More FAQs &rarr;</a>
+  </div>
+
+  
+  <!-- Social Media -->
+  <div class="social-media">
+    <p>Follow us on Social Media</p>
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="  https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6"><i class="fa-brands fa-twitter"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- JavaScript -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Toggle FAQ
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector('.faq-question');
+    const icon = question.querySelector('.toggle-icon');
+    const answer = item.querySelector('.faq-answer');
+
+    question.addEventListener('click', () => {
+      // Toggle visibility of answer
+      answer.classList.toggle('show');
+
+      // Change the icon from plus to minus and vice versa
+      if (icon.classList.contains('fa-plus')) {
+        icon.classList.remove('fa-plus');
+        icon.classList.add('fa-minus');
+      } else {
+        icon.classList.remove('fa-minus');
+        icon.classList.add('fa-plus');
+      }
+    });
+  });
+});
+;
+</script>
+
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-contact">
+    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
+        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
+        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
+        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
+
+      </div>
+      <div class="footer-links">
+        <h4>PAGES</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about us.html">About</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact us .html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>SOCIAL MEDIA</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
+          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
+          <li><a href="#">Dribble</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>UTILITIES</h4>
+        <ul>
+          <li><a href="#">Style Guide</a></li>
+          <li><a href="#">Change log</a></li>
+          <li><a href="#">Licenses</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+    </div>
+  </footer>
+ 
+    <script src="script.js"></script>
+</body>
+</html>

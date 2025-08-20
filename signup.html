@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SEO Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign up for MDTH's affordable tech education platform. Access industry-aligned courses in programming, data science, AI, and more to thrive in the digital age.">
+    <meta name="keywords" content="tech education, online courses, programming, data science, AI, web development, sign up, MDTH">
+    <meta name="author" content="MDTH">
+    <meta property="og:title" content="Sign Up | MDTH - Affordable Tech Education">
+    <meta property="og:description" content="Join MDTH to access affordable, industry-aligned tech education courses that prepare you for the digital workforce.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.mdth.com/signup">
+    <meta property="og:image" content="https://www.mdth.com/images/mdth-social-share.jpg">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.mdth.com/signup">
+    
+    <!-- Favicon -->
+      <!-- Favicon -->
+    <link rel="icon" href="images/MDTH LOGO.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <title>Sign Up | MDTH - Affordable Tech Education</title>
+    
+    <!-- Preload Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" as="style">
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="stylesheet" href="css/styles.css" as="style">"
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Sign Up | MDTH",
+      "description": "Sign up page for MDTH's tech education platform",
+      "url": "https://www.mdth.com/signup",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.mdth.com"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Sign Up"
+        }]
+      }
+    }
+    </script>
+ </head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo">
+            </a>
+        </div>
+        
+        <div style="display: flex; align-items: center;">
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon theme-icon" id="themeIcon"></i>
+            </div>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-login">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Signup Section -->
+    <section class="signup-container">
+        <!-- Decorative Circles -->
+        <div class="decorative-circle circle-1"></div>
+        <div class="decorative-circle circle-2"></div>
+        <div class="decorative-circle circle-3"></div>
+        
+        <!-- Creative Illustration -->
+        <div class="signup-illustration">
+            <div class="illustration-container">
+                <div class="floating-element element-1">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Students collaborating">
+                </div>
+                <div class="floating-element element-2">
+                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coding on laptop">
+                </div>
+                <div class="floating-element element-3">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Data analysis">
+                </div>
+                <div class="floating-element element-4">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Online learning">
+                </div>
+            </div>
+            
+            <div class="illustration-text">
+                <h2>Transform Your Future with Tech</h2>
+                <p>Join our community of learners and gain access to industry-relevant courses that will propel your career forward in the digital age.</p>
+            </div>
+        </div>
+        
+        <!-- Signup Form -->
+        <div class="signup-form-container">
+            <div class="signup-header">
+                <h1>Join MDTH Today</h1>
+                <p>Start your journey in tech with our industry-aligned courses</p>
+            </div>
+            
+            <form id="signupForm" class="signup-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group password-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required minlength="8">
+                    <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+                    <div class="password-strength">
+                        <div class="strength-meter" id="strengthMeter"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group password-field">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                    <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                </div>
+                
+                <div class="terms-check">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a></label>
+                </div>
+                
+                <button type="submit" class="btn-submit">Create Account</button>
+                
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Log in here</a>
+                </div>
+                
+                <div class="social-login">
+                    <p>Or sign up with</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Sign up with Google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-icon" aria-label="Sign up with Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon" aria-label="Sign up with LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Account Created Successfully!</h2>
+            <p>Welcome to MDTH. We've sent a confirmation email to your address. Please verify to get started with your learning journey.</p>
+            <button class="modal-btn" id="modalCloseBtn">Continue to Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Apply the saved theme
+        if (savedTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Password Toggle Functionality
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Password Strength Indicator
+        password.addEventListener('input', function() {
+            const strengthMeter = document.getElementById('strengthMeter');
+            const passwordValue = this.value;
+            let strength = 0;
+            
+            // Check for length
+            if (passwordValue.length >= 8) strength += 1;
+            if (passwordValue.length >= 12) strength += 1;
+            
+            // Check for uppercase letters
+            if (/[A-Z]/.test(passwordValue)) strength += 1;
+            
+            // Check for numbers
+            if (/[0-9]/.test(passwordValue)) strength += 1;
+            
+            // Check for special characters
+            if (/[^A-Za-z0-9]/.test(passwordValue)) strength += 1;
+            
+            // Update strength meter
+            const width = (strength / 5) * 100;
+            strengthMeter.style.width = `${width}%`;
+            
+            // Update color based on strength
+            if (strength <= 1) {
+                strengthMeter.style.backgroundColor = 'var(--error-color)';
+            } else if (strength <= 3) {
+                strengthMeter.style.backgroundColor = 'var(--warning-color)';
+            } else {
+                strengthMeter.style.backgroundColor = 'var(--success-color)';
+            }
+        });
+
+        // Form Validation and Submission
+        const signupForm = document.getElementById('signupForm');
+        const successModal = document.getElementById('successModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate passwords match
+            if (password.value !== confirmPassword.value) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Validate password strength
+            if (password.value.length < 8) {
+                alert('Password must be at least 8 characters long!');
+                return;
+            }
+            
+            // Validate terms checkbox
+            if (!document.getElementById('terms').checked) {
+                alert('You must agree to the terms and conditions');
+                return;
+            }
+            
+            // Here you would typically send the data to your server
+            // For demo purposes, we'll show the success modal
+            successModal.classList.add('show');
+            
+            // Reset form
+            signupForm.reset();
+        });
+
+        // Close modal
+        modalCloseBtn.addEventListener('click', function() {
+            successModal.classList.remove('show');
+            // Redirect to dashboard or home page
+            window.location.href = 'dashboard.html';
+        });
+
+        // Input field animations
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-3px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Floating elements hover effect
+        const floatingElements = document.querySelectorAll('.floating-element');
+        floatingElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = this.style.transform.replace('rotate', 'scale(1.05) rotate');
+                this.style.zIndex = '10';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = this.style.transform.replace('scale(1.05) ', '');
+                this.style.zIndex = this.classList.contains('element-1') ? '3' : 
+                                    this.classList.contains('element-2') ? '2' : 
+                                    this.classList.contains('element-3') ? '1' : '4';
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

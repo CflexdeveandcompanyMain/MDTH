@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About MDTH | Making a Difference Tech Hub</title>
+    <meta name="description" content="Discover MDTH's journey to transform African tech education through innovation, excellence, and community impact.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563EB;
+            --primary-dark: #1E40AF;
+            --primary-light: #93C5FD;
+            --secondary: #4F46E5;
+            --accent: #EC4899;
+            --success: #10B981;
+            --error: #EF4444;
+            --warning: #F59E0B;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-muted: #9CA3AF;
+            --bg-primary: #F9FAFB;
+            --bg-secondary: #E5E7EB;
+            --bg-tertiary: #D1D5DB;
+            --bg-dark: #111827;
+            --border: #E5E7EB;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
+            --shadow-xl: 0 20px 60px rgba(0,0,0,0.2);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --primary: #3B82F6;
+            --primary-dark: #1E40AF;
+            --primary-light: #1E3A8A;
+            --secondary: #6366F1;
+            --accent: #EC4899;
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --text-muted: #6B7280;
+            --bg-primary: #111827;
+            --bg-secondary: #1F2937;
+            --bg-tertiary: #374151;
+            --bg-dark: #030712;
+            --border: #4B5563;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        /* Custom cursor */
+        body {
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%232563EB' opacity='0.3'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%232563EB'/%3E%3C/svg%3E") 16 16, auto;
+        }
+
+        /* Navigation */
+        /* Navigation Styles */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 5%;
+        background-color: var(--bg-primary);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--text-primary);
+        font-weight: 500;
+        text-decoration: none;
+        position: relative;
+        padding: 8px 0;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--primary);
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 3px;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        transition: width 0.3s ease;
+        border-radius: 3px;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+        width: 100%;
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: var(--card-bg);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        padding: 15px;
+        min-width: 200px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 100;
+        border: 1px solid var(--border);
+    }
+
+    .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .dropdown-menu li {
+        margin-bottom: 10px;
+    }
+
+    .dropdown-menu li:last-child {
+        margin-bottom: 0;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 8px 12px;
+        border-radius: var(--radius-sm);
+        transition: all 0.2s ease;
+        color: var(--text-primary);
+    }
+
+    .dropdown-menu a:hover {
+        background-color: var(--primary-light);
+        color: white;
+    }
+
+    /* Nav Right Section */
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg-secondary);
+        border-radius: 50px;
+        padding: 6px;
+    }
+
+    .theme-toggle-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-primary);
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .theme-toggle-btn.active {
+        background: var(--primary);
+        color: white;
+    }
+
+    /* Auth Buttons */
+    .auth-buttons {
+        display: flex;
+        gap: 12px;
+    }
+
+    .btn-signup,
+    .btn-login {
+        padding: 10px 20px;
+        border-radius: var(--radius-md);
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-signup {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-signup:hover {
+        background: var(--primary-dark);
+    }
+
+    .btn-login {
+        background: transparent;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+    }
+
+    .btn-login:hover {
+        background: var(--primary-light);
+        color: white;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1001;
+    }
+
+    .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: var(--text-primary);
+        transition: all 0.3s ease;
+    }
+
+    /* Side Menu */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--bg-primary);
+        box-shadow: var(--shadow-lg);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .side-menu.active {
+        right: 0;
+    }
+
+    .side-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .cancel-icon {
+        font-size: 28px;
+        cursor: pointer;
+        color: var(--text-primary);
+    }
+
+    .menu-separator {
+        border: none;
+        height: 1px;
+        background-color: var(--border);
+        margin: 15px 0;
+    }
+
+    .theme-switcher {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .theme-switcher p {
+        color: var(--text-primary);
+        font-weight: 500;
+    }
+
+    .mobile-nav-links {
+        list-style: none;
+        margin-bottom: 20px;
+    }
+
+    .mobile-nav-links li {
+        margin-bottom: 15px;
+    }
+
+    .mobile-nav-links a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        padding: 8px 0;
+    }
+
+    .mobile-nav-links a.active {
+        color: var(--primary);
+    }
+
+    .mobile-dropdown-menu {
+        padding-left: 15px;
+        margin-top: 10px;
+        display: none;
+    }
+
+    .mobile-dropdown-menu.active {
+        display: block;
+    }
+
+    .mobile-dropdown-menu li {
+        margin-bottom: 8px;
+    }
+
+    .mobile-dropdown-menu a {
+        color: var(--text-secondary);
+    }
+
+    .mobile-dropdown-menu a:hover {
+        color: var(--primary);
+    }
+
+    .mobile-auth-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .nav-links,
+        .auth-buttons {
+            display: none;
+        }
+        
+        .hamburger {
+            display: block;
+        }
+        
+        .theme-toggle {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .side-menu {
+            width: 100%;
+        }
+    }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="dark"] .hero {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3730A3 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(37, 99, 235, 0.1);
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 32px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Floating shapes */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+            color: var(--primary);
+        }
+
+        .floating-shape:nth-child(1) {
+            top: 20%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .floating-shape:nth-child(2) {
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Impact Numbers */
+        .impact {
+            padding: 100px 0;
+            background: var(--secondary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='none'/%3E%3Cpath d='M20 20h60v60H20z' fill='%23FFFFFF' opacity='0.03'/%3E%3C/svg%3E") repeat;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 64px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .impact-item {
+            text-align: center;
+        }
+
+        .impact-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, white 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .impact-label {
+            font-size: 20px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .impact-description {
+            font-size: 16px;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        /* Story Section */
+        .story {
+            background: var(--bg-secondary);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            line-height: 1.2;
+        }
+
+        .story-text p {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .story-highlight {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(79, 70, 229, 0.1) 100%);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border-left: 6px solid var(--primary);
+            margin: 32px 0;
+        }
+
+        .story-visual {
+            position: relative;
+        }
+
+        .story-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            transform: rotate(-2deg);
+            transition: transform 0.4s ease;
+        }
+
+        .story-card:hover {
+            transform: rotate(0deg);
+        }
+
+        .story-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+
+        .story-card p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Values Section */
+        .values {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        }
+
+        .values h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 80px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .value-card {
+            background: var(--card-bg);
+            padding: 48px;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            margin-bottom: 24px;
+        }
+
+        .value-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .value-card p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team {
+            background: var(--bg-secondary);
+        }
+
+        .team h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .team-subtitle {
+            text-align: center;
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 80px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 48px;
+        }
+
+        .team-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .team-image {
+            height: 280px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 64px;
+        }
+
+        .team-info {
+            padding: 32px;
+        }
+
+        .team-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .team-role {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .team-bio {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .team-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            animation: rotate 40s linear infinite reverse;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 48px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--text-primary);
+        }
+
+        .btn-light:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 80px 0;
+            }
+
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-subtitle {
+                font-size: 20px;
+            }
+
+            .impact-grid {
+                gap: 48px;
+            }
+
+            .impact-number {
+                font-size: 48px;
+            }
+
+            .values h2,
+            .team h2,
+            .story-text h2 {
+                font-size: 36px;
+            }
+
+            .cta h2 {
+                font-size: 36px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .value-card {
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+  <!-- Navigation -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="#">
+                <span>MDTH</span>
+            </a>
+        </div>
+        
+        <ul class="nav-links" id="mainNav">
+            <li><a href="#home">Home</a></li>
+            <li class="dropdown">
+                <a href="#courses">Courses <i class="fas fa-chevron-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="web-development.html">Web Development</a></li>
+                    <li><a href="#data-science">Data Science</a></li>
+                    <li><a href="#ui-ux">UI/UX Design</a></li>
+                    <li><a href="#digital-marketing">Digital Marketing</a></li>
+                </ul>
+            </li>
+            <li><a href="#about" class="active">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#blog">Blog</a></li>
+        </ul>
+        
+        <div class="nav-right">
+            <div class="theme-toggle">
+                <button class="theme-toggle-btn" data-theme="light"><i class="fas fa-sun"></i></button>
+                <button class="theme-toggle-btn active" data-theme="dark"><i class="fas fa-moon"></i></button>
+            </div>
+            
+            <div class="auth-buttons">
+                <a href="signup.html" class="btn btn-signup">Sign Up</a>
+                <a href="login.html" class="btn btn-login">Login</a>
+            </div>
+            
+            <!-- Hamburger Icon -->
+            <div class="hamburger" id="hamburgerBtn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Side Menu -->
+<div class="side-menu" id="sideMenu">
+    <div class="side-menu-header">
+        <div class="logo">
+            <a href="#">
+                <span>MDTH</span>
+            </a>
+        </div>
+        <div class="cancel-icon" id="closeMenuBtn">
+            <span>&times;</span>
+        </div>
+    </div>
+    
+    <hr class="menu-separator">
+    
+    <div class="theme-switcher">
+        <p>Switch Theme</p>
+        <div class="theme-toggle">
+            <button class="theme-toggle-btn" data-theme="light"><i class="fas fa-sun"></i></button>
+            <button class="theme-toggle-btn active" data-theme="dark"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+    
+    <ul class="mobile-nav-links">
+        <li><a href="#home">Home</a></li>
+        <li class="mobile-dropdown">
+            <a href="#courses" class="dropdown-toggle">Courses <i class="fas fa-chevron-down"></i></a>
+            <ul class="mobile-dropdown-menu">
+                <li><a href="web-development.html">Web Development</a></li>
+                <li><a href="#data-science">Data Science</a></li>
+                <li><a href="#ui-ux">UI/UX Design</a></li>
+                <li><a href="#digital-marketing">Digital Marketing</a></li>
+            </ul>
+        </li>
+        <li><a href="#about" class="active">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#blog">Blog</a></li>
+    </ul>
+    
+    <div class="mobile-auth-buttons">
+        <a href="signup.html" class="btn btn-signup">Sign Up</a>
+        <a href="login.html" class="btn btn-login">Login</a>
+    </div>
+    
+    <hr class="menu-separator">
+</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shape">
+            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="40" fill="currentColor"/>
+            </svg>
+        </div>
+        <div class="floating-shape">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <rect width="80" height="80" rx="20" fill="currentColor"/>
+            </svg>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Transforming Africa Through Tech</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Making a Difference<br>
+                    Tech Hub
+                </h1>
+                
+                <p class="hero-subtitle">
+                    We're not just another coding school. We're a movement to democratize tech education across Africa, building the next generation of innovators who will shape the continent's digital future.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#story" class="btn btn-primary">
+                        <span>Our Journey</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="#team" class="btn btn-secondary">
+                        <span>Meet the Team</span>
+                        <i class="fas fa-users"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Numbers -->
+    <section class="impact">
+        <div class="container">
+            <div class="impact-grid">
+                <div class="impact-item animate-on-scroll">
+                    <div class="impact-number">15,000+</div>
+                    <div class="impact-label">Lives Transformed</div>
+                    <div class="impact-description">Students trained across 20+ African countries</div>
+                </div>
+                <div class="impact-item animate-on-scroll">
+                    <div class="impact-number">94%</div>
+                    <div class="impact-label">Success Rate</div>
+                    <div class="impact-description">Students who complete our programs</div>
+                </div>
+                <div class="impact-item animate-on-scroll">
+                    <div class="impact-number">89%</div>
+                    <div class="impact-label">Career Placement</div>
+                    <div class="impact-description">Graduates placed in tech roles within 6 months</div>
+                </div>
+                <div class="impact-item animate-on-scroll">
+                    <div class="impact-number">$2.5M</div>
+                    <div class="impact-label">Salary Impact</div>
+                    <div class="impact-description">Total salary increases achieved by our graduates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section id="story" class="story section-padding">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text animate-on-scroll">
+                    <h2>From Bold Vision to Continental Impact</h2>
+                    <p>
+                        In 2018, three frustrated software engineers in Lagos asked a simple question: "Why is world-class tech education only available to the privileged few?"
+                    </p>
+                    <p>
+                        That question sparked a revolution. Starting with 15 students in a cramped co-working space, we've grown into Africa's most trusted tech education platform, but our mission remains the same: make exceptional tech education accessible to everyone.
+                    </p>
+                    <div class="story-highlight">
+                        <p><strong>Today, every 48 hours, another MDTH graduate starts their dream tech job.</strong> Our secret? We don't just teach code – we transform minds, build confidence, and create lasting change in communities across the continent.</p>
+                    </div>
+                </div>
+                <div class="story-visual animate-on-scroll">
+                    <div class="story-card">
+                        <h3>2018 → 2024</h3>
+                        <p>From 15 students in Lagos to 15,000+ graduates across Africa. From one small room to partnerships with Google, Microsoft, and 200+ tech companies. From a dream to a movement that's reshaping an entire continent's tech landscape.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values section-padding">
+        <div class="container">
+            <h2 class="animate-on-scroll">What Drives Us Every Day</h2>
+            <div class="values-grid">
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Radical Accessibility</h3>
+                    <p>Excellence shouldn't be expensive. Through scholarships, flexible payments, and community programs, we've made world-class tech education available to street hawkers, farmers' children, and corporate executives alike.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Relentless Innovation</h3>
+                    <p>While others teach yesterday's skills, we're obsessed with tomorrow's opportunities. Our curriculum evolves monthly, guided by insights from Silicon Valley and shaped for African realities.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Community First</h3>
+                    <p>We're not just building careers – we're building a movement. Our 15,000+ strong alumni network spans from Cape Town to Cairo, creating opportunities and lifting each other up.</p>
+                </div>
+                <div class="value-card animate-on-scroll">
+                    <div class="value-icon">
+                        <i class="fas fa-globe-africa"></i>
+                    </div>
+                    <h3>African Excellence</h3>
+                    <p>We're proudly African, solving African challenges with world-class solutions. Our graduates don't just get jobs – they start companies, lead teams, and shape the future of tech on the continent.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="team section-padding">
+        <div class="container">
+            <h2 class="animate-on-scroll">The Visionaries Behind the Movement</h2>
+            <p class="team-subtitle animate-on-scroll">
+                Meet the diverse team of educators, technologists, and changemakers who are redefining what's possible in African tech education.
+            </p>
+            
+            <div class="team-grid">
+                <div class="team-card animate-on-scroll">
+                    <div class="team-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Adebayo Johnson</div>
+                        <div class="team-role">Founder & CEO</div>
+                        <div class="team-bio">
+                            Former Google Senior Engineer turned education revolutionary. Adebayo left Silicon Valley to build Africa's answer to elite tech education. His vision: make world-class tech skills as accessible as mobile banking.
+                        </div>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card animate-on-scroll">
+                    <div class="team-image">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Dr. Chioma Okonkwo</div>
+                        <div class="team-role">Chief Learning Officer</div>
+                        <div class="team-bio">
+                            PhD in Educational Psychology from Stanford, former McKinsey consultant. Chioma designs learning experiences that work for the brilliant mechanic in Aba and the MBA graduate in Victoria Island alike.
+                        </div>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card animate-on-scroll">
+                    <div class="team-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Emeka Okafor</div>
+                        <div class="team-role">Chief Technology Officer</div>
+                        <div class="team-bio">
+                            Former Microsoft Principal Engineer and blockchain pioneer. Emeka built the scalable platform that powers our education delivery to students from Lagos to Nairobi, ensuring quality at scale.
+                        </div>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card animate-on-scroll">
+                    <div class="team-image">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="team-info">
+                        <div class="team-name">Funke Adebayo</div>
+                        <div class="team-role">VP of Career Impact</div>
+                        <div class="team-bio">
+                            Former Amazon recruiter with 15+ years connecting talent to opportunity. Funke's network spans 200+ companies across 3 continents. She doesn't just find jobs – she architects career transformations.
+                        </div>
+                        <div class="team-social">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta section-padding">
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <h2>Ready to Write Your Tech Success Story?</h2>
+                <p>
+                    Join the 15,000+ graduates who didn't just learn to code – they learned to think, create, and lead. Your transformation starts with a single click.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#courses" class="btn btn-light">
+                        <span>Explore Programs</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Talk to an Advisor</span>
+                        <i class="fas fa-comments"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+           // Mobile Menu Toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    hamburgerBtn.addEventListener('click', () => {
+        sideMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeMenuBtn.addEventListener('click', () => {
+        sideMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!sideMenu.contains(e.target) && e.target !== hamburgerBtn) {
+            sideMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Mobile dropdown toggle
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const dropdownMenu = toggle.nextElementSibling;
+            dropdownMenu.classList.toggle('active');
+            
+            // Rotate chevron icon
+            const icon = toggle.querySelector('i');
+            icon.classList.toggle('fa-chevron-up');
+            icon.classList.toggle('fa-chevron-down');
+        });
+    });
+    
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation for impact numbers
+        const animateCounters = () => {
+            const counters = document.querySelectorAll('.impact-number');
+            
+            counters.forEach(counter => {
+                const target = counter.textContent.replace(/[^\d.]/g, '');
+                const targetNum = parseFloat(target);
+                const suffix = counter.textContent.replace(/[\d.,]/g, '');
+                const duration = 2000;
+                const increment = targetNum / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < targetNum) {
+                        if (targetNum >= 1000) {
+                            counter.textContent = Math.floor(current).toLocaleString() + suffix;
+                        } else if (targetNum < 100) {
+                            counter.textContent = Math.floor(current) + suffix;
+                        } else {
+                            counter.textContent = Math.floor(current).toLocaleString() + suffix;
+                        }
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        if (targetNum >= 1000) {
+                            counter.textContent = targetNum.toLocaleString() + suffix;
+                        } else {
+                            counter.textContent = targetNum + suffix;
+                        }
+                    }
+                };
+
+                updateCounter();
+            });
+        };
+
+        // Trigger counter animation when impact section is visible
+        const impactObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    impactObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const impactSection = document.querySelector('.impact');
+        if (impactSection) {
+            impactObserver.observe(impactSection);
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for floating shapes
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelectorAll('.floating-shape').forEach((shape, index) => {
+                const speed = 0.3 + (index * 0.1);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Custom cursor interaction
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.custom-cursor');
+            if (cursor) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            }
+        });
+
+        // Add hover effects to interactive elements
+        document.querySelectorAll('.btn, .team-card, .value-card, .story-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                document.body.style.cursor = 'pointer';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                document.body.style.cursor = 'default';
+            });
+        });
+
+        // Theme toggle functionality
+        const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn');
+        const html = document.documentElement;
+        
+        themeToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.getAttribute('data-theme');
+                html.setAttribute('data-theme', theme);
+                
+                // Update active state
+                themeToggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Save preference to localStorage
+                localStorage.setItem('theme', theme);
+            });
+        });
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        
+        // Set the correct button as active
+        document.querySelector(`.theme-toggle-btn[data-theme="${savedTheme}"]`).classList.add('active');
+
+        // Performance optimization: Reduce animations on low-end devices
+        if (navigator.deviceMemory && navigator.deviceMemory < 4) {
+            document.documentElement.style.setProperty('--animation-duration', '0.1s');
+        }
+
+        // Add loading state
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+    </script>
+</body>
+</html>

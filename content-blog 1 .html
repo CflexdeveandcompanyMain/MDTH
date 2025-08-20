@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDTH blogpage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo">
+      <a href="#">
+          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
+      </a>
+  </div>
+
+  
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="courses.html">Courses</a>
+      <span class="caret"></span>
+      <ul class="dropdown-menu">
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="cyber-security.html">Cyber Security</a></li>
+          <li><a href="AI.html">AI</a></li>
+          <li><a href="graphic-design.html">Graphic Design</a></li>
+          <li><a href="ui-ux.html">UI/UX Design</a></li>
+          <li><a href="project-management.html">Project Management</a></li>
+          <li><a href="video-editing.html">Video Editing</a></li>
+          <li><a href="content-marketing.html">Content Marketing</a></li>
+          <li><a href="data-analysis.html">Data Analytics</a></li>
+      </ul>
+    </li>
+  
+    <li><a href="about us.html">About Us</a></li>
+    <li><a href="contact us .html">Contact</a></li>
+    <li><a href="blog.html">Blog</a></li>
+</ul>
+<div class="auth-buttons">
+    <a href="signup.html" class="btn-signup">Sign Up</a>
+    <a href="login.html" class="btn-login">Login</a>
+</div>
+<!-- Hamburger Icon -->
+<div class="hamburger" id="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
+</nav>
+<!-- Side Menu (hidden by default) -->
+<div class="side-menu" id="sideMenu">
+<div class="side-menu-header">
+  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
+  <div class="cancel-icon" id="cancelIcon">
+    <span>&times;</span>
+  </div>
+</div>
+<hr class="menu-separator">
+<div class="theme-switcher">
+  <p>Switch Theme</p>
+  <button id="themeToggle" class="theme-icon">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </button>
+</div>
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li class="dropdown">
+    <a href="courses.html">Courses</a>
+    <span class="caret"></span>
+    <ul class="dropdown-menu">
+      <li><a href="programming.html">Programming</a></li>
+      <li><a href="cyber-security.html">Cyber Security</a></li>
+      <li><a href="AI.html">AI</a></li>
+      <li><a href="graphic-design.html">Graphic Design</a></li>
+      <li><a href="ui-ux.html">UI/UX Design</a></li>
+      <li><a href="project-management.html">Project Management</a></li>
+      <li><a href="video-editing.html">Video Editing</a></li>
+      <li><a href="content-marketing.html">Content Marketing</a></li>
+      <li><a/ href="data-analysis.html">Data Analytics</a></li>
+    </ul>
+  </li>
+
+  <li><a href="about us.html">About Us</a></li>
+  <li><a href="contact us .html">Contact</a></li>
+  <li><a href="blog.html">Blog</a></li>
+</ul>
+<div class="auth-buttons">
+  <a href="signup.html" class="btn-signup">Sign Up</a>
+  <a href="login.html" class="btn-login">Login</a>
+</div>
+<hr class="menu-separator">
+</div>
+
+
+
+  
+  <div class="blog-head-container">
+  <!-- Header Image -->
+  <div class="blog-head-image">
+    <img src="images/blog img 1.jpg" alt="People collaborating" />
+  </div>
+
+  <!-- Content Section -->
+  <div class="main-blog-tags">
+    <span class="badge-text">NEW</span>
+    <span class="time">5 Mins</span>
+  </div>
+  <div class="main-blog-content">
+    <h1>Develop Your Ideas In With Our Graphics Design Course</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero natus
+      pariatur mollitia explicabo earum doloremque! Debitis sit dolor quam!
+      Sapiente autem sunt placeat veniam? Voluptates, reprehenderit mollitia
+      repellendus doloremque porro saepe.
+    </p>
+    <a href="#" class="blog-read-more">Read More</a>
+  </div>
+
+  <!-- Comment Section -->
+  <div class="comments-section">
+    <h2>Add Comment</h2>
+    <form>
+      <label for="name"></label>
+      <input type="text" id="name" placeholder="Name*" class="small-input" required />
+      <label for="email"></label>
+      <input type="email" id="email" placeholder="Email*" class="small-input" required />
+      <label class="checkbox-label">
+        <input type="checkbox" />
+        Save my name, email, and website in this browser for the next time I comment.
+      </label>
+      <label for="comment"></label>
+      <textarea id="comment" placeholder="comments"></textarea>
+      <button type="submit" class="submit-btn">
+        <span class="paper-plane">
+            <i class="fa-regular fa-paper-plane"></i>
+        </span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Newsletter Section -->
+  <div class="newsletter">
+    <h3>Newsletter</h3>
+    <p>Subscribe to our newsletter and get the latest news.</p>
+    <form>
+      <input type="email" placeholder="Email" class="newsletter-input" />
+      <button type="submit" class="subscribe-btn">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-contact">
+    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
+        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
+        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
+        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
+
+      </div>
+      <div class="footer-links">
+        <h4>PAGES</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about us.html">About</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact us .html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>SOCIAL MEDIA</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
+          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
+          <li><a href="#">Dribble</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>UTILITIES</h4>
+        <ul>
+          <li><a href="#">Style Guide</a></li>
+          <li><a href="#">Change log</a></li>
+          <li><a href="#">Licenses</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+    </div>
+  </footer>
+ 
+    <script src="script.js"></script>
+</body>
+</html>

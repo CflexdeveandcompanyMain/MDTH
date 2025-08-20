@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDTH cyber-security-course-page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="courses css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar">
+  <div class="logo">
+      <a href="#">
+          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
+      </a>
+  </div>
+  <div class="course-back" onclick="goToPreviousPage()">
+    <span>
+      <span class="arrow">←</span> Courses
+    </span>
+  </div>
+  
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="dropdown">
+      <a href="courses.html">Courses</a>
+      <span class="caret"></span>
+      <ul class="dropdown-menu">
+          <li><a href="programming.html">Programming</a></li>
+          <li><a href="cyber-security.html">Cyber Security</a></li>
+          <li><a href="AI.html">AI</a></li>
+          <li><a href="graphic-design.html">Graphic Design</a></li>
+          <li><a href="ui-ux.html">UI/UX Design</a></li>
+          <li><a href="project-management.html">Project Management</a></li>
+          <li><a href="video-editing.html">Video Editing</a></li>
+          <li><a href="content-marketing.html">Content Marketing</a></li>
+          <li><a href="data-analysis.html">Data Analytics</a></li>
+      </ul>
+    </li>
+  
+    <li><a href="about us.html">About Us</a></li>
+    <li><a href="contact us .html">Contact</a></li>
+    <li><a href="blog.html">Blog</a></li>
+</ul>
+<div class="auth-buttons">
+    <a href="signup.html" class="btn-signup">Sign Up</a>
+    <a href="login.html" class="btn-login">Login</a>
+</div>
+<!-- Hamburger Icon -->
+<div class="hamburger" id="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+</div>
+</nav>
+<!-- Side Menu (hidden by default) -->
+<div class="side-menu" id="sideMenu">
+<div class="side-menu-header">
+  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
+  <div class="cancel-icon" id="cancelIcon">
+    <span>&times;</span>
+  </div>
+</div>
+<hr class="menu-separator">
+<div class="theme-switcher">
+  <p>Switch Theme</p>
+  <button id="themeToggle" class="theme-icon">
+    <i class="fa fa-moon-o" aria-hidden="true"></i>
+  </button>
+</div>
+<ul class="nav-links">
+  <li><a href="index.html">Home</a></li>
+  <li class="dropdown">
+    <a href="courses.html">Courses</a>
+    <span class="caret"></span>
+    <ul class="dropdown-menu">
+      <li><a href="programming.html">Programming</a></li>
+      <li><a href="cyber-security.html">Cyber Security</a></li>
+      <li><a href="AI.html">AI</a></li>
+      <li><a href="graphic-design.html">Graphic Design</a></li>
+      <li><a href="ui-ux.html">UI/UX Design</a></li>
+      <li><a href="project-management.html">Project Management</a></li>
+      <li><a href="video-editing.html">Video Editing</a></li>
+      <li><a href="content-marketing.html">Content Marketing</a></li>
+      <li><a href="data-analysis.html">Data Analytics</a></li>
+    </ul>
+  </li>
+
+  <li><a href="about us.html">About Us</a></li>
+  <li><a href="contact us .html">Contact</a></li>
+  <li><a href="blog.html">Blog</a></li>
+</ul>
+<div class="auth-buttons">
+  <a href="signup.html" class="btn-signup">Sign Up</a>
+  <a href="login.html" class="btn-login">Login</a>
+</div>
+<hr class="menu-separator">
+</div>
+
+
+<header class="cyber-hero-section">
+  <div class="content-wrapper">
+      <div class="hero-text">
+          <h1>Cyber Security Program</h1>
+          <p>
+            Learn how to protect computers, networks, programs, and data from unauthorized access, 
+            attacks, damage, or theft, and processes designed to safeguard digital assets. 
+          </p>
+          <button class="enrol-btn" 
+          onclick="saveCourseDetails('Cyber Security Program', '  Learn how to protect computers, networks, programs, and data from unauthorized access, attacks, damage, or theft, and processes designed to safeguard digital assets..', 'images/program 2 image.jpg')">
+          Enrol Now
+          </button>
+      </div>
+      <div class="image-wrapper">
+        <img src="courses img/bottom_left_programming_img.png" alt="Programming Illustration">
+      </div>
+  </div>
+</header>
+
+<div class="course-overview">
+  <div class="course-content-wrapper">
+    <div class="course-image">
+      <img src="courses img/cyber image.jpg" alt="cyber-security Course">
+    </div>
+    <div class="course-details">
+      <div class="detail-card">
+        <h4>What you'll learn</h4>
+        <ul>
+          <li>Introduction to programming</li>
+          <li>App Development</li>
+          <li>App Development</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Skill level</h4>
+        <ul>
+          <li>Beginner</li>
+          <li>Intermediate</li>
+          <li>Advanced</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Time commitment</h4>
+        <ul>
+          <li>3 months</li>
+          <li>3-5 Hours/week</li>
+          <li>3-5 Hours/week</li>
+        </ul>
+      </div>
+      <div class="detail-card">
+        <h4>Mode of learning</h4>
+        <ul>
+          <li>Self-paced</li>
+          <li>Instructor-led</li>
+          <li>Expo/ Special cent..</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="about-course">
+    <h2>About this Course</h2>
+    <p>
+    Welcome to our Cyber security course! This comprehensive program will equip you with the  skills needed to protect
+     computers, networks, programs, and data from unauthorized access, attacks, damage, or theft, and processes
+     designed to safeguard digital assets and ensure the confidentiality, integrity, and availability of information.
+     Below is an overview of the curriculum.  
+    </p>
+</div>
+</div>
+
+<div class="curriculum-container">
+  <h2>Curriculum</h2>
+  <hr class="straight-line">
+  <div class="modules">
+      <div class="module">
+          <button class="module-button active">
+              Module 1: Introduction to UI/UX
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container active">
+              <div class="lessons">
+                  <div class="lesson-card">
+                      <div class="lesson-content">
+                          <div class="circle-icon"></div>
+                          <div class="lesson-text">
+                              <h3>Lesson 1</h3>
+                              <h4>Visual Design</h4>
+                              <p>This includes the colors, typography, icons, and overall visual style of the product. The aim is to create an appealing and cohesive look for a user-friendly experience.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="lesson-card">
+                      <div class="lesson-content">
+                          <div class="circle-icon"></div>
+                          <div class="lesson-text">
+                              <h3>Lesson 2</h3>
+                              <h4>Layout</h4>
+                              <p>Organizing elements on the screen in a way that is intuitive and user-friendly. This involves placing buttons, text, images, and other components effectively.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="lesson-card">
+                      <div class="lesson-content">
+                          <div class="circle-icon"></div>
+                          <div class="lesson-text">
+                              <h3>Lesson 3</h3>
+                              <h4>Interactive Design</h4>
+                              <p>Designing components like buttons, sliders, and forms that users interact with. Ensuring these elements are easy to use and respond correctly to user actions.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 2: User Interface UI
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 3: User Experience UX
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 4: How UI and UX Work Together
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 5: Best Practices for UI/UX Design
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 6: Best Practices for UI/UX Design
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 7: Wireframing and Prototyping
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+
+      <div class="module">
+          <button class="module-button">
+              Module 8: Usability Testing
+              <span class="chevron"></span>
+          </button>
+          <div class="lessons-container">
+              <!-- Lessons content would go here -->
+          </div>
+      </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.module-button').forEach(button => {
+      button.addEventListener('click', () => {
+          // Remove active class from all buttons and containers
+          document.querySelectorAll('.module-button').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.lessons-container').forEach(c => c.classList.remove('active'));
+          
+          // Add active class to clicked button and its container
+          button.classList.toggle('active');
+          button.nextElementSibling.classList.toggle('active');
+      });
+  });
+</script>
+
+<section class="testimonial-section">
+  <h2>Experiences Shared by Our Clients</h2>
+  <p>Discover how our clients have found solutions and satisfaction with our services.</p>
+  <div class="testimonial-slider">
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/adekunle.jpeg" alt="" class="testimonial-img">
+      <p>MDTH transformed my coding skills! The hands-on approach and expert guidance helped me build real-world projects confidently.</p>
+      <h4>Adebayo Adekunle</h4>
+      <span>Full-Stack Developer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/chioma.jpeg" alt="" class="testimonial-img">
+      <p>MDTH provided the perfect learning environment. The instructors are knowledgeable, and the projects helped me master front-end development.</p>
+      <h4>Chioma Okafor</h4>
+      <span>UI/UX Designer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/tunde.png" alt="" class="testimonial-img">
+      <p>Before MDTH, I struggled with JavaScript. Now, I build functional web applications with ease! The courses are well-structured and beginner-friendly.</p>
+      <h4>Alex Ogunleye</h4>
+      <span>Software Engineer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/aisha.jpeg" alt="" class="testimonial-img">
+      <p>The data science program at MDTH was an eye-opener! I learned Python, machine learning, and data visualization in a simplified way.</p>
+      <h4>Aisha Bello</h4>
+      <span>Data Analyst</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/segun.jpeg" alt="" class="testimonial-img">
+      <p>MDTH’s cybersecurity course gave me the confidence to work on real security projects. The hands-on labs were a game-changer!</p>
+      <h4>Segun Alabi</h4>
+      <span>Cybersecurity Specialist</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/fadlu.jpg" alt="" class="testimonial-img">
+      <p>The mentorship and practical approach at MDTH made my journey into tech smooth. I now work as a freelance web developer!</p>
+      <h4>Fadlurahman</h4>
+      <span>Freelance Web Developer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/Abdulkhaliq.jpg" alt="" class="testimonial-img">
+      <p>MDTH played a huge role in my growth as a front-end developer.</p>
+      <h4>Abdulkhaliq Adenola</h4>
+      <span>Front-end web developer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/abiola.jpeg" alt="" class="testimonial-img">
+      <p>The graphic design course was exceptional! MDTH's training refined my skills in Adobe Photoshop and Illustrator.</p>
+      <h4>Abiola Oladipo</h4>
+      <span>Graphic Designer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/funke.jpeg" alt="" class="testimonial-img">
+      <p>The hands-on projects at MDTH made my learning experience enjoyable.</p>
+      <h4>Funke Adeyemi</h4>
+      <span> Designer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/emeka.jpeg" alt="" class="testimonial-img">
+      <p>Thanks to MDTH, I now understand  how to create systems and technologies that can perform tasks that typically require human intelligence.</p>
+      <h4>Emeka Uche</h4>
+      <span>AI expert</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/zinab.jpeg" alt="" class="testimonial-img">
+      <p>MDTH's content marketing program taught me  how to create and distribute valuable, relevant, and consistent content to attract and engage a target audience.</p>
+      <h4>Zainab Yusuf</h4>
+      <span>content-marketer</span>
+    </div>
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <img src="test.images/ibrahim.jpeg" alt="" class="testimonial-img">
+      <p>MDTH's project management course taught me the process of planning, executing, and overseeing projects to achieve specific goals within defined constraints such as time, budget, and scope.</p>
+      <h4>Ibrahim</h4>
+      <span>Project Manager</span>
+    </div>
+  </div>
+
+  <div class="slider-controls">
+    <button id="prev-btn">&larr;</button>
+    <button id="next-btn">&rarr;</button>
+  </div>
+</section>
+
+  
+
+
+  
+
+    
+
+
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-contact">
+    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
+        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
+        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
+        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
+
+      </div>
+      <div class="footer-links">
+        <h4>PAGES</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about us.html">About</a></li>
+          <li><a href="project.html">Project</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="contact us .html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>SOCIAL MEDIA</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
+          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
+          <li><a href="#">Dribble</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>UTILITIES</h4>
+        <ul>
+          <li><a href="#">Style Guide</a></li>
+          <li><a href="#">Change log</a></li>
+          <li><a href="#">Licenses</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+    </div>
+  </footer>
+ 
+    <script src="script.js"></script>
+</body>
+</html>
