@@ -1,185 +1,1451 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDTH blogpage</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Favicon -->
+    <link rel="icon" href="images/MDTH LOGO.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <title>MDTH Blog | Tech Insights & Tutorials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #93C5FD;
+            --secondary-color: #4F46E5;
+            --accent-color: #EC4899;
+            --text-color: #1F2937;
+            --text-light: #6B7280;
+            --bg-color: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --success-color: #10B981;
+            --error-color: #EF4444;
+            --warning-color: #F59E0B;
+            --transition: all 0.3s ease;
+        }
 
+        .dark-mode {
+            --primary-color: #3B82F6;
+            --primary-light: #1E40AF;
+            --secondary-color: #6366F1;
+            --accent-color: #EC4899;
+            --text-color: #F9FAFB;
+            --text-light: #D1D5DB;
+            --bg-color: #111827;
+            --card-bg: #1F2937;
+            --border-color: #374151;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--card-bg);
+            box-shadow: 0 1px 3px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--primary-light);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+
+        .fa-sun {
+            left: 8px;
+            color: #F59E0B;
+        }
+
+        .fa-moon {
+            right: 8px;
+            color: #E5E7EB;
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Blog Hero */
+        .blog-hero {
+            padding: 100px 5% 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-color) 50%, rgba(147, 197, 253, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%232563eb' fill-opacity='0.03' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,224C672,235,768,181,864,170.7C960,160,1056,192,1152,192C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blog-hero p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-search {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-search input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .hero-search input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .hero-search i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        /* Blog Layout */
+        .blog-container {
+            display: flex;
+            gap: 40px;
+            padding: 60px 5%;
+        }
+
+        .blog-main {
+            flex: 2;
+        }
+
+        .blog-sidebar {
+            flex: 1;
+        }
+
+        /* Featured Post */
+        .featured-post {
+            margin-bottom: 60px;
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .featured-image {
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .featured-post:hover .featured-image img {
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .featured-content {
+            padding: 30px;
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .post-meta img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .featured-content h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .featured-content p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .post-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .post-card:hover .post-image img {
+            transform: scale(1.05);
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .post-tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .tech-tag { background-color: rgba(59, 130, 246, 0.1); color: var(--primary-color); }
+        .tutorial-tag { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .news-tag { background-color: rgba(236, 72, 153, 0.1); color: var(--accent-color); }
+        .career-tag { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+
+        .post-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .post-excerpt {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .post-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Sidebar */
+        .sidebar-widget {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .sidebar-widget h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Categories */
+        .categories-list {
+            list-style: none;
+        }
+
+        .categories-list li {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .categories-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .categories-list a:hover {
+            color: var(--primary-color);
+        }
+
+        .category-count {
+            background-color: var(--bg-color);
+            color: var(--text-light);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Popular Posts */
+        .popular-posts {
+            list-style: none;
+        }
+
+        .popular-post {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .popular-post:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .popular-post-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .popular-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popular-post-content h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .popular-post-content a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .popular-post-content a:hover {
+            color: var(--primary-color);
+        }
+
+        .popular-post-date {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Tags */
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag-link {
+            padding: 6px 12px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .tag-link:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        /* Newsletter */
+        .newsletter-form {
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .arrow-prev, .arrow-next {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .arrow-prev:hover, .arrow-next:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .page-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .page-number.active, .page-number:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            padding: 80px 5% 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .logo-image-footer {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background-color: var(--card-bg);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .blog-container {
+                flex-direction: column;
+            }
+            
+            .featured-image {
+                height: 300px;
+            }
+            
+            .featured-content h2 {
+                font-size: 1.7rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-auth {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 30px;
+                width: 100%;
+                padding: 0 20px;
+            }
+            
+            .mobile-auth .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px;
+            }
+            
+            .blog-hero {
+                padding: 80px 5% 60px;
+            }
+            
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-hero p {
+                font-size: 1rem;
+            }
+            
+            .featured-image {
+                height: 250px;
+            }
+            
+            .featured-content {
+                padding: 20px;
+            }
+            
+            .featured-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .theme-switch-wrapper {
+                margin-left: 10px;
+            }
+            
+            .theme-switch {
+                width: 50px;
+                height: 28px;
+            }
+            
+            .slider:before {
+                height: 20px;
+                width: 20px;
+            }
+            
+            input:checked + .slider:before {
+                transform: translateX(22px);
+            }
+        }
+        /* Hide mobile-auth by default (desktop) */
+.mobile-auth {
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .nav-links {
+        position: fixed;
+        top: 90px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 90px);
+        background-color: var(--card-bg);
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 40px;
+        gap: 30px;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .blog-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .blog-container {
+        flex-direction: column;
+    }
+    
+    .featured-image {
+        height: 300px;
+    }
+    
+    .featured-content h2 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .auth-buttons {
+        display: none; /* hide desktop buttons */
+    }
+    
+    .mobile-auth {
+        display: flex; /* show mobile buttons */
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 30px;
+        width: 100%;
+        padding: 0 20px;
+    }
+    
+    .mobile-auth .btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .blog-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .blog-hero p {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar {
+        padding: 15px;
+    }
+    
+    .blog-hero {
+        padding: 80px 5% 60px;
+    }
+    
+    .blog-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .blog-hero p {
+        font-size: 1rem;
+    }
+    
+    .featured-image {
+        height: 250px;
+    }
+    
+    .featured-content {
+        padding: 20px;
+    }
+    
+    .featured-content h2 {
+        font-size: 1.5rem;
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .theme-switch-wrapper {
+        margin-left: 10px;
+    }
+    
+    .theme-switch {
+        width: 50px;
+        height: 28px;
+    }
+    
+    .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(22px);
+    }
+}
+
+    </style>
 </head>
 <body>
-<!-- Navigation Bar -->
-<nav class="navbar">
-  <div class="logo">
-      <a href="#">
-          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
-      </a>
-  </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#" class="active">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            
+            <div class="mobile-auth">
+                <a href="#" class="btn btn-signup">Sign Up</a>
+                <a href="#" class="btn btn-login">Login</a>
+            </div>
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-signup">Sign Up</a>
+            <a href="#" class="btn btn-login">Login</a>
+            
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <button class="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
 
-  
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li class="dropdown">
-      <a href="courses.html">Courses</a>
-      <span class="caret"></span>
-      <ul class="dropdown-menu">
-          <li><a href="programming.html">Programming</a></li>
-          <li><a href="cyber-security.html">Cyber Security</a></li>
-          <li><a href="AI.html">AI</a></li>
-          <li><a href="graphic-design.html">Graphic Design</a></li>
-          <li><a href="ui-ux.html">UI/UX Design</a></li>
-          <li><a href="project-management.html">Project Management</a></li>
-          <li><a href="video-editing.html">Video Editing</a></li>
-          <li><a href="content-marketing.html">Content Marketing</a></li>
-          <li><a href="data-analysis.html">Data Analytics</a></li>
-      </ul>
-    </li>
-  
-    <li><a href="about us.html">About Us</a></li>
-    <li><a href="contact us .html">Contact</a></li>
-    <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-    <a href="signup.html" class="btn-signup">Sign Up</a>
-    <a href="login.html" class="btn-login">Login</a>
-</div>
-<!-- Hamburger Icon -->
-<div class="hamburger" id="hamburger">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-</div>
-</nav>
-<!-- Side Menu (hidden by default) -->
-<div class="side-menu" id="sideMenu">
-<div class="side-menu-header">
-  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
-  <div class="cancel-icon" id="cancelIcon">
-    <span>&times;</span>
-  </div>
-</div>
-<hr class="menu-separator">
-<div class="theme-switcher">
-  <p>Switch Theme</p>
-  <button id="themeToggle" class="theme-icon">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-  </button>
-</div>
-<ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li class="dropdown">
-    <a href="courses.html">Courses</a>
-    <span class="caret"></span>
-    <ul class="dropdown-menu">
-      <li><a href="programming.html">Programming</a></li>
-      <li><a href="cyber-security.html">Cyber Security</a></li>
-      <li><a href="AI.html">AI</a></li>
-      <li><a href="graphic-design.html">Graphic Design</a></li>
-      <li><a href="ui-ux.html">UI/UX Design</a></li>
-      <li><a href="project-management.html">Project Management</a></li>
-      <li><a href="video-editing.html">Video Editing</a></li>
-      <li><a href="content-marketing.html">Content Marketing</a></li>
-      <li><a/ href="data-analysis.html">Data Analytics</a></li>
-    </ul>
-  </li>
+    <!-- Blog Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <h1>MDTH Tech Insights</h1>
+            <p>Stay updated with the latest trends, tutorials, and news in the tech world from industry experts.</p>
+            
+            <div class="hero-search">
+                <input type="text" placeholder="Search blog posts...">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+    </section>
 
-  <li><a href="about us.html">About Us</a></li>
-  <li><a href="contact us .html">Contact</a></li>
-  <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-  <a href="signup.html" class="btn-signup">Sign Up</a>
-  <a href="login.html" class="btn-login">Login</a>
-</div>
-<hr class="menu-separator">
+    <!-- Blog Content -->
+    <div class="blog-container container">
+        <main class="blog-main">
+            <!-- Featured Post -->
+            <article class="featured-post">
+                <div class="featured-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Web Development">
+                    <div class="featured-badge">Featured</div>
+                </div>
+                <div class="featured-content">
+                    <div class="post-meta">
+                        <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="Author">
+                        <div>
+                            <span>By John Doe</span>
+                            <span>•</span>
+                            <span>June 15, 2023</span>
+                            <span>•</span>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                    <h2>The Future of Web Development: Trends to Watch in 2023</h2>
+                    <p>Discover the emerging technologies and frameworks that are shaping the future of web development. From AI-powered tools to serverless architecture, learn what skills you need to stay ahead in the rapidly evolving tech landscape.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </article>
+
+            <!-- Posts Grid -->
+            <div class="posts-grid">
+                <!-- Post 1 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Data Science">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="post-tag tech-tag">Data Science</span>
+                            <span class="post-tag tutorial-tag">Tutorial</span>
+                        </div>
+                        <h3><a href="#">Getting Started with Python for Data Analysis</a></h3>
+                        <p class="post-excerpt">Learn how to use Python libraries like Pandas and NumPy to analyze and visualize data effectively.</p>
+                        <div class="post-footer">
+                            <span class="post-date"><i class="far fa-clock"></i> 8 min read</span>
+                            <span>June 10, 2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80" alt="UI/UX Design">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="post-tag design-tag">UI/UX</span>
+                            <span class="post-tag tutorial-tag">Guide</span>
+                        </div>
+                        <h3><a href="#">10 Principles of Good UI Design in 2023</a></h3>
+                        <p class="post-excerpt">Discover the fundamental principles that make user interfaces intuitive, accessible, and enjoyable.</p>
+                        <div class="post-footer">
+                            <span class="post-date"><i class="far fa-clock"></i> 6 min read</span>
+                            <span>June 5, 2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cyber Security">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="post-tag tech-tag">Security</span>
+                            <span class="post-tag news-tag">News</span>
+                        </div>
+                        <h3><a href="#">Latest Cybersecurity Threats and How to Protect Yourself</a></h3>
+                        <p class="post-excerpt">Stay informed about the newest cyber threats and learn practical steps to secure your digital life.</p>
+                        <div class="post-footer">
+                            <span class="post-date"><i class="far fa-clock"></i> 12 min read</span>
+                            <span>May 28, 2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cloud Computing">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="post-tag tech-tag">Cloud</span>
+                            <span class="post-tag tutorial-tag">Tutorial</span>
+                        </div>
+                        <h3><a href="#">AWS vs Azure: Which Cloud Platform is Right for You?</a></h3>
+                        <p class="post-excerpt">A comprehensive comparison of the two leading cloud platforms to help you make an informed decision.</p>
+                        <div class="post-footer">
+                            <span class="post-date"><i class="far fa-clock"></i> 15 min read</span>
+                            <span>May 20, 2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Career">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-tags">
+                            <span class="post-tag career-tag">Career</span>
+                            <span class="post-tag tutorial-tag">Guide</span>
+                        </div>
+                        <h3><a href="#">How to Build a Tech Portfolio That Gets You Hired</a></h3>
+                        <p class="post-excerpt">Learn what employers look for in a tech portfolio and how to showcase your skills effectively.</p>
+                        <div class="post-footer">
+                            <span class="post-date"><i class="far fa-clock"></i> 9 min read</span>
+                            <span>May 15, 2023</span>
+                        </div>
+                    </div>
+                </article>
+
+                    <!-- Post 6 -->
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="AI">
+                </div>
+                <div class="post-content">
+                    <div class="post-tags">
+                        <span class="post-tag tech-tag">AI</span>
+                        <span class="post-tag news-tag">Trends</span>
+                    </div>
+                    <h3><a href="#">The Impact of AI on Modern Software Development</a></h3>
+                    <p class="post-excerpt">Explore how artificial intelligence is revolutionizing the way we build, test, and deploy software applications.</p>
+                    <div class="post-footer">
+                        <span class="post-date"><i class="far fa-clock"></i> 11 min read</span>
+                        <span>May 10, 2023</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="arrow-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="page-number active">1</button>
+            <button class="page-number">2</button>
+            <button class="page-number">3</button>
+            <button class="page-number">4</button>
+            <button class="arrow-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <aside class="blog-sidebar">
+        <!-- About Widget -->
+        <div class="sidebar-widget">
+            <h3>About MDTH</h3>
+            <p>MDTH is a leading tech education platform helping developers of all levels advance their skills and careers through high-quality courses and resources.</p>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="sidebar-widget">
+            <h3>Categories</h3>
+            <ul class="categories-list">
+                <li><a href="#">Web Development</a> <span class="category-count">24</span></li>
+                <li><a href="#">Data Science</a> <span class="category-count">18</span></li>
+                <li><a href="#">Mobile Development</a> <span class="category-count">15</span></li>
+                <li><a href="#">Cloud Computing</a> <span class="category-count">12</span></li>
+                <li><a href="#">UI/UX Design</a> <span class="category-count">9</span></li>
+                <li><a href="#">Cyber Security</a> <span class="category-count">7</span></li>
+                <li><a href="#">Career Advice</a> <span class="category-count">14</span></li>
+            </ul>
+        </div>
+
+        <!-- Popular Posts Widget -->
+        <div class="sidebar-widget">
+            <h3>Popular Posts</h3>
+            <ul class="popular-posts">
+                <li class="popular-post">
+                    <div class="popular-post-image">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="JavaScript">
+                    </div>
+                    <div class="popular-post-content">
+                        <h4><a href="#">Mastering JavaScript: Advanced Concepts Explained</a></h4>
+                        <span class="popular-post-date">May 25, 2023</span>
+                    </div>
+                </li>
+                <li class="popular-post">
+                    <div class="popular-post-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="React">
+                    </div>
+                    <div class="popular-post-content">
+                        <h4><a href="#">React 18 New Features and How to Use Them</a></h4>
+                        <span class="popular-post-date">May 18, 2023</span>
+                    </div>
+                </li>
+                <li class="popular-post">
+                    <div class="popular-post-image">
+                        <img src="https://images.unsplash.com/photo-1544383835-bda2bc66a55d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1216&q=80" alt="Interview">
+                    </div>
+                    <div class="popular-post-content">
+                        <h4><a href="#">Top 50 Interview Questions for Frontend Developers</a></h4>
+                        <span class="popular-post-date">May 10, 2023</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="sidebar-widget">
+            <h3>Tags</h3>
+            <div class="tags-cloud">
+                <a href="#" class="tag-link">JavaScript</a>
+                <a href="#" class="tag-link">React</a>
+                <a href="#" class="tag-link">Python</a>
+                <a href="#" class="tag-link">Node.js</a>
+                <a href="#" class="tag-link">CSS</a>
+                <a href="#" class="tag-link">AWS</a>
+                <a href="#" class="tag-link">Docker</a>
+                <a href="#" class="tag-link">Kubernetes</a>
+                <a href="#" class="tag-link">Machine Learning</a>
+                <a href="#" class="tag-link">API</a>
+                <a href="#" class="tag-link">GraphQL</a>
+                <a href="#" class="tag-link">TypeScript</a>
+            </div>
+        </div>
+
+        <!-- Newsletter Widget -->
+        <div class="sidebar-widget">
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter to get the latest updates directly in your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </aside>
 </div>
 
-
-<div class="blog-container">
-  <div class="blog-item">
-      <div class="blog-card">
-        <a href="content-blog 1 .html">
-          <img src="images/blog img 1.jpg" alt="Working with each other">
-        </a>
-          <div class="text1-card-overlay">
-              <p>September 17. 2024 UX UI Designer</p>
-              <h3>Working with each other</h3>
-          </div>
-      </div>
-  </div>
- 
-  <div class="blog-item">
-      <div class="blog-card">
-        <a href="content-blog 2.html">
-          <img src="images/blog img 2.jpg" alt="Develop Your Idea">
-        </a>
-          <div class="text2-card-overlay">
-            <p>September 17. 2024 UX UI Designer</p>
-              <h3>Develop Your Idea</h3>
-          </div>
-      </div>
-  </div>
-</div>
-
-<div class="blog-logo-container">
-  <div class="blog-logo-item">Zapier</div>
-  <div class="blog-brand-divider"></div>
-  <div class="blog-logo-item">Spotify</div>
-  <div class="blog-brand-divider"></div>
-  <div class="blog-logo-item">Zoom</div>
-  <div class="blog-brand-divider"></div>
-  <div class="blog-logo-item">Adobe</div>
-  <div class="blog-brand-divider"></div>
-  <div class="blog-logo-item">Notion</div>
-  <div class="blog-brand-divider"></div>
-  <div class="blog-logo-item">Netflix</div>
-</div>
-
+<!-- Footer -->
 <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-contact">
-    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
-        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
-        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
-        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
+    <div class="container">
+        <div class="footer-container">
+            <div class="footer-contact">
+                <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image-footer">
+                <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, San Francisco, CA 94103</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@mdth.com</p>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Tutorials</a></li>
+                    <li><a href="#">Webinars</a></li>
+                    <li><a href="#">Documentation</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 <span>MDTH</span>. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
-      </div>
-      <div class="footer-links">
-        <h4>PAGES</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about us.html">About</a></li>
-          <li><a href="project.html">Project</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact us .html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>SOCIAL MEDIA</h4>
-        <ul>
-          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
-          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
-          <li><a href="#">Dribble</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>UTILITIES</h4>
-        <ul>
-          <li><a href="#">Style Guide</a></li>
-          <li><a href="#">Change log</a></li>
-          <li><a href="#">Licenses</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
-    </div>
-  </footer>
- 
-    <script src="script.js"></script>
+<script>
+    // Dark Mode Toggle
+    const toggleSwitch = document.querySelector('#checkbox');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        toggleSwitch.checked = true;
+    }
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+        }    
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    // Mobile Menu Toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        
+        if (navLinks.classList.contains('active')) {
+            hamburger.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+    });
+
+    // Pagination functionality
+    const pageNumbers = document.querySelectorAll('.page-number');
+    const prevButton = document.querySelector('.arrow-prev');
+    const nextButton = document.querySelector('.arrow-next');
+
+    pageNumbers.forEach(number => {
+        number.addEventListener('click', () => {
+            document.querySelector('.page-number.active').classList.remove('active');
+            number.classList.add('active');
+        });
+    });
+
+    prevButton.addEventListener('click', () => {
+        const activePage = document.querySelector('.page-number.active');
+        const prevPage = activePage.previousElementSibling;
+        
+        if (prevPage && prevPage.classList.contains('page-number')) {
+            activePage.classList.remove('active');
+            prevPage.classList.add('active');
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        const activePage = document.querySelector('.page-number.active');
+        const nextPage = activePage.nextElementSibling;
+        
+        if (nextPage && nextPage.classList.contains('page-number')) {
+            activePage.classList.remove('active');
+            nextPage.classList.add('active');
+        }
+    });
+</script>
 </body>
 </html>

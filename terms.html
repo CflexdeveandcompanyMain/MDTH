@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Favicon -->
+    <link rel="icon" href="images/MDTH LOGO.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <title>MDTH - Terms & Privacy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #93C5FD;
+            --secondary-color: #4F46E5;
+            --accent-color: #EC4899;
+            --text-color: #1F2937;
+            --text-light: #6B7280;
+            --bg-color: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --success-color: #10B981;
+            --error-color: #EF4444;
+            --warning-color: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--card-bg);
+            box-shadow: 0 1px 3px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Hero Section */
+        .policy-hero {
+            padding: 80px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-color) 50%, rgba(147, 197, 253, 0.1) 100%);
+        }
+
+        .policy-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .policy-hero p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Tabs */
+        .policy-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .policy-tab {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .policy-tab.active {
+            color: var(--primary-color);
+        }
+
+        .policy-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Policy Content */
+        .policy-content {
+            padding: 40px 5%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .policy-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .policy-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .policy-section h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: var(--secondary-color);
+        }
+
+        .policy-section p {
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .policy-section ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .policy-section li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background-color: rgba(37, 99, 235, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Terms Checkbox */
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+        }
+
+        .terms-check input {
+            margin-right: 15px;
+            margin-top: 3px;
+            accent-color: var(--primary-color);
+        }
+
+        .terms-check label {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .terms-check a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms-check a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            padding: 80px 5% 30px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .logo-image-footer {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .policy-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .policy-hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .policy-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .policy-tab {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .policy-tab.active::after {
+                width: 50%;
+                left: 25%;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .policy-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .policy-hero p {
+                font-size: 1rem;
+            }
+            
+            .terms-check {
+                flex-direction: column;
+            }
+            
+            .terms-check input {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact us .html">Contact</a></li>
+            <li><a href="blog.html">Blog</a></li>
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="signup.html" class="btn btn-signup">Sign Up</a>
+            <a href="login.html" class="btn btn-login">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="policy-hero">
+        <div class="container">
+            <h1>Legal Policies</h1>
+            <p>Understand our terms of service and privacy policy to ensure a secure and transparent learning experience.</p>
+        </div>
+    </section>
+
+    <!-- Tabs -->
+    <div class="container">
+        <div class="policy-tabs">
+            <button class="policy-tab active" data-tab="terms">Terms of Service</button>
+            <button class="policy-tab" data-tab="privacy">Privacy Policy</button>
+        </div>
+    </div>
+
+    <!-- Policy Content -->
+    <div class="policy-content">
+        <!-- Terms of Service -->
+        <div class="policy-section active" id="terms">
+            <h2>Terms of Service</h2>
+            <p>Last updated: January 15, 2024</p>
+            
+            <p>Welcome to MDTH ("we," "our," or "us"). These Terms of Service govern your use of our website and services. By accessing or using our services, you agree to be bound by these terms.</p>
+            
+            <h3>1. Account Registration</h3>
+            <p>To access certain features, you must register for an account. You agree to provide accurate information and keep your credentials secure.</p>
+            
+            <h3>2. Course Enrollment and Payment</h3>
+            <p>By enrolling in a course, you agree to pay the specified fees. We use secure payment processors, and all payments are subject to their terms.</p>
+            
+            <h3>3. Intellectual Property</h3>
+            <p>All course materials, including videos, texts, and resources, are the property of MDTH or our licensors and are protected by copyright laws.</p>
+            
+            <h3>4. User Conduct</h3>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Share your account credentials with others</li>
+                <li>Copy, distribute, or sell course materials</li>
+                <li>Use our services for any illegal purpose</li>
+                <li>Disrupt other students' learning experience</li>
+            </ul>
+            
+            <h3>5. Refund Policy</h3>
+            <p>We offer a 14-day refund policy for most courses. Some promotional courses may have different refund terms.</p>
+            
+            <h3>6. Termination</h3>
+            <p>We reserve the right to terminate or suspend your account for violations of these terms.</p>
+            
+            <div class="highlight">
+                <p>By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
+            </div>
+        </div>
+        
+        <!-- Privacy Policy -->
+        <div class="policy-section" id="privacy">
+            <h2>Privacy Policy</h2>
+            <p>Last updated: January 15, 2024</p>
+            
+            <p>At MDTH, we value your privacy. This Privacy Policy explains how we collect, use, and protect your personal information.</p>
+            
+            <h3>1. Information We Collect</h3>
+            <p>We may collect the following information:</p>
+            <ul>
+                <li>Personal details (name, email, etc.) provided during registration</li>
+                <li>Payment information processed by our secure payment providers</li>
+                <li>Course progress and performance data</li>
+                <li>Technical information (IP address, browser type, device information)</li>
+            </ul>
+            
+            <h3>2. How We Use Your Information</h3>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Provide and improve our services</li>
+                <li>Process payments and enrollments</li>
+                <li>Communicate with you about courses and updates</li>
+                <li>Personalize your learning experience</li>
+                <li>Ensure security and prevent fraud</li>
+            </ul>
+            
+            <h3>3. Data Sharing</h3>
+            <p>We do not sell your personal data. We may share information with:</p>
+            <ul>
+                <li>Payment processors to complete transactions</li>
+                <li>Instructors regarding your course progress</li>
+                <li>Service providers who assist our operations (under confidentiality agreements)</li>
+                <li>Legal authorities when required by law</li>
+            </ul>
+            
+            <h3>4. Data Security</h3>
+            <p>We implement industry-standard security measures to protect your data. However, no method of transmission over the internet is 100% secure.</p>
+            
+            <h3>5. Your Rights</h3>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Access and update your personal information</li>
+                <li>Request deletion of your account and data</li>
+                <li>Opt-out of marketing communications</li>
+                <li>Request information about how your data is used</li>
+            </ul>
+            
+            <div class="highlight">
+                <p>We may update this policy periodically. Continued use of our services constitutes acceptance of the updated policy.</p>
+            </div>
+        </div>
+        
+        <!-- Terms Checkbox (as requested) -->
+        <div class="terms-check">
+            <input type="checkbox" id="terms" name="terms" required>
+            <label for="terms">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="privacy-link">Privacy Policy</a></label>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-contact">
+                    <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image-footer">
+                    <p><i class="far fa-envelope"></i> mdthdig@gmail.com</p>
+                    <p><i class="fas fa-location-dot"></i> Lagos, Nigeria</p>
+                    <p><i class="fas fa-phone"></i> (+234) 816 0330 156</p>
+                </div>
+                <div class="footer-links">
+                    <h4>PAGES</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Project</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>SOCIAL MEDIA</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Dribble</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>UTILITIES</h4>
+                    <ul>
+                        <li><a href="#">Style Guide</a></li>
+                        <li><a href="#">Change log</a></li>
+                        <li><a href="#">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.policy-tab');
+            const sections = document.querySelectorAll('.policy-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.dataset.tab;
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show active section
+                    sections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === target) {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Make terms links switch tabs
+            document.querySelector('.terms-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('[data-tab="terms"]').click();
+            });
+            
+            document.querySelector('.privacy-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector('[data-tab="privacy"]').click();
+            });
+        });
+    </script>
+</body>
+</html>

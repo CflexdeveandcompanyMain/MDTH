@@ -1,454 +1,889 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDTH programming-course-page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="courses css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+{
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
 
+        input:checked + .slider {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+
+        .fa-sun {
+            left: 8px;
+            color: #F59E0B;
+        }
+
+        .fa-moon {
+            right: 8px;
+            color: #E5E7EB;
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .courses-hero {
+            padding: 80px 5%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--bg-color) 50%, rgba(147, 197, 253, 0.1) 100%);
+        }
+
+        .courses-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .courses-hero p {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Search and Filter */
+        .courses-search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .courses-search-container i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .courses-categories {
+            margin-bottom: 40px;
+        }
+
+        .courses-categories ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .courses-categories a {
+            padding: 8px 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .courses-categories a:hover, 
+        .courses-categories a.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 5% 80px;
+        }
+
+        .course-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-image img {
+            transform: scale(1.05);
+        }
+
+        .course-duration {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .course-tags {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .tag {
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .coding-tag { background-color: rgba(59, 130, 246, 0.1); color: var(--primary-color); }
+        .data-tag { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .design-tag { background-color: rgba(236, 72, 153, 0.1); color: var(--accent-color); }
+        .marketing-tag { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+        .beginner-tag { background-color: rgba(16, 185, 129, 0.1); color: var(--success-color); }
+        .intermediate-tag { background-color: rgba(59, 130, 246, 0.1); color: var(--primary-color); }
+        .advanced-tag { background-color: rgba(239, 68, 68, 0.1); color: var(--error-color); }
+
+        .course-content {
+            padding: 0 15px 20px;
+        }
+
+        .course-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .course-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .course-rating span {
+            margin-right: 5px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .join-now-btn {
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .join-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Advanced Pagination */
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pagination-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .pagination-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-color: transparent;
+        }
+
+        .pagination-ellipsis {
+            padding: 0 10px;
+            color: var(--text-light);
+        }
+
+        .pagination-info {
+            margin-top: 15px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            padding: 80px 5% 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .logo-image-footer {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background-color: var(--card-bg);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 40px;
+                gap: 30px;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .courses-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .courses-hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .courses-categories ul {
+                gap: 10px;
+            }
+            
+            .courses-categories a {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-auth {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 30px;
+                width: 100%;
+                padding: 0 20px;
+            }
+            
+            .mobile-auth .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .pagination-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px;
+            }
+            
+            .courses-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .courses-hero p {
+                font-size: 1rem;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .theme-switch-wrapper {
+                margin-left: 10px;
+            }
+            
+            .theme-switch {
+                width: 50px;
+                height: 28px;
+            }
+            
+            .slider:before {
+                height: 20px;
+                width: 20px;
+            }
+            
+            input:checked + .slider:before {
+                transform: translateX(22px);
+            }
+
+            .pagination-container {
+                gap: 5px;
+            }
+
+            .pagination-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- Navigation Bar -->
-<nav class="navbar">
-  <div class="logo">
-      <a href="#">
-          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
-      </a>
-  </div>
-  <div class="course-back" onclick="goToPreviousPage()">
-    <span>
-      <span class="arrow">←</span> Courses
-    </span>
-  </div>
-  
-
-
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li class="dropdown">
-      <a href="courses.html">Courses</a>
-      <span class="caret"></span>
-      <ul class="dropdown-menu">
-          <li><a href="programming.html">Programming</a></li>
-          <li><a href="cyber-security.html">Cyber Security</a></li>
-          <li><a href="AI.html">AI</a></li>
-          <li><a href="graphic-design.html">Graphic Design</a></li>
-          <li><a href="ui-ux.html">UI/UX Design</a></li>
-          <li><a href="project-management.html">Project Management</a></li>
-          <li><a href="video-editing.html">Video Editing</a></li>
-          <li><a href="content-marketing.html">Content Marketing</a></li>
-          <li><a href="data-analysis.html">Data Analytics</a></li>
-      </ul>
-    </li>
-  
-    <li><a href="about us.html">About Us</a></li>
-    <li><a href="contact us .html">Contact</a></li>
-    <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-    <a href="signup.html" class="btn-signup">Sign Up</a>
-    <a href="login.html" class="btn-login">Login</a>
-</div>
-<!-- Hamburger Icon -->
-<div class="hamburger" id="hamburger">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-</div>
-</nav>
-<!-- Side Menu (hidden by default) -->
-<div class="side-menu" id="sideMenu">
-<div class="side-menu-header">
-  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
-  <div class="cancel-icon" id="cancelIcon">
-    <span>&times;</span>
-  </div>
-</div>
-<hr class="menu-separator">
-<div class="theme-switcher">
-  <p>Switch Theme</p>
-  <button id="themeToggle" class="theme-icon">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-  </button>
-</div>
-<ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li class="dropdown">
-    <a href="courses.html">Courses</a>
-    <span class="caret"></span>
-    <ul class="dropdown-menu">
-      <li><a href="programming.html">Programming</a></li>
-      <li><a href="cyber-security.html">Cyber Security</a></li>
-      <li><a href="AI.html">AI</a></li>
-      <li><a href="graphic-design.html">Graphic Design</a></li>
-      <li><a href="ui-ux.html">UI/UX Design</a></li>
-      <li><a href="project-management.html">Project Management</a></li>
-      <li><a href="video-editing.html">Video Editing</a></li>
-      <li><a href="content-marketing.html">Content Marketing</a></li>
-      <li><a href="data-analysis.html">Data Analytics</a></li>
-    </ul>
-  </li>
-
-  <li><a href="about us.html">About Us</a></li>
-  <li><a href="contact us .html">Contact</a></li>
-  <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-  <a href="signup.html" class="btn-signup">Sign Up</a>
-  <a href="login.html" class="btn-login">Login</a>
-</div>
-<hr class="menu-separator">
-</div>
-
-
-
-<header class="programming-hero-section">
-  <div class="content-wrapper">
-      <div class="hero-text">
-          <h1>Programming Program</h1>
-          <p>
-            Learn the process of designing and creating instructions that
-             a computer can follow to perform specific tasks or solve problems. </p>
-             <button class="enrol-btn" 
-             onclick="saveCourseDetails('Programming Program', ' Learn the process of designing and creating instructions that a computer can follow to perform specific tasks or solve problems.', 'images/program 1 image.png')">
-             Enrol Now
-             </button>
-      </div>
-      <div class="image-wrapper">
-        <img src="courses img/bottom_left_programming_img.png" alt="Programming Illustration">
-      </div>
-  </div>
-</header>
-
-<div class="course-overview">
-  <div class="course-content-wrapper">
-    <div class="course-image">
-      <img src="courses img/programming image .jpg" alt="Programming Course">
-    </div>
-    <div class="course-details">
-      <div class="detail-card">
-        <h4>What you'll learn</h4>
-        <ul>
-          <li>Introduction to programming</li>
-          <li>App Development</li>
-          <li>App Development</li>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#" class="active">Courses</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+            
+            <div class="mobile-auth">
+                <a href="#" class="btn btn-signup">Sign Up</a>
+                <a href="#" class="btn btn-login">Login</a>
+            </div>
         </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Skill level</h4>
-        <ul>
-          <li>Beginner</li>
-          <li>Intermediate</li>
-          <li>Advanced</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Time commitment</h4>
-        <ul>
-          <li>3 months</li>
-          <li>3-5 Hours/week</li>
-          <li>3-5 Hours/week</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Mode of learning</h4>
-        <ul>
-          <li>Self-paced</li>
-          <li>Instructor-led</li>
-          <li>Expo/ Special cent..</li>
-        </ul>
-      </div>
+        
+        <div class="auth-buttons">
+            <a href="#" class="btn btn-signup">Sign Up</a>
+            <a href="#" class="btn btn-login">Login</a>
+            
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <button class="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="courses-hero">
+        <div class="container">
+            <h1>Explore Our Tech Courses</h1>
+            <p>Discover industry-leading courses designed to launch your tech career. Learn in-demand skills from experts and advance your career.</p>
+            
+            <div class="courses-search-container">
+                <input type="text" placeholder="Search for courses..." class="search-input">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <nav class="courses-categories">
+                <ul>
+                    <li><a href="#" class="active">All</a></li>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Data Science</a></li>
+                    <li><a href="#">UI/UX Design</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                    <li><a href="#">Cyber Security</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <div class="container">
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Courses will be loaded here by JavaScript -->
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Loading more courses...</p>
+        </div>
+
+        <!-- Advanced Pagination -->
+        <div class="pagination-container" id="paginationContainer">
+            <!-- Pagination will be generated by JavaScript -->
+        </div>
+        <div class="pagination-info" id="paginationInfo">
+            Showing <span id="currentItems">0</span> of <span id="totalItems">0</span> courses
+        </div>
     </div>
-  </div>
-  <div class="about-course">
-    <h2>About this Course</h2>
-    <p>
-    Welcome to our Programming  course! This comprehensive program will equip you with the  skills needed to write code
-    by designing and creating instructions that a computer can follow to perform specific tasks or solve problems. 
-    Below is an overview of the curriculum.   
-    </p>
-</div>
-</div>
 
-<div class="curriculum-container">
-  <h2>Curriculum</h2>
-  <hr class="straight-line">
-  <div class="modules">
-      <div class="module">
-          <button class="module-button active">
-              Module 1: Introduction to UI/UX
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container active">
-              <div class="lessons">
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 1</h3>
-                              <h4>Visual Design</h4>
-                              <p>This includes the colors, typography, icons, and overall visual style of the product. The aim is to create an appealing and cohesive look for a user-friendly experience.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 2</h3>
-                              <h4>Layout</h4>
-                              <p>Organizing elements on the screen in a way that is intuitive and user-friendly. This involves placing buttons, text, images, and other components effectively.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 3</h3>
-                              <h4>Interactive Design</h4>
-                              <p>Designing components like buttons, sliders, and forms that users interact with. Ensuring these elements are easy to use and respond correctly to user actions.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-contact">
+                    <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image-footer">
+                    <p><i class="far fa-envelope"></i> mdthdig@gmail.com</p>
+                    <p><i class="fas fa-location-dot"></i> Lagos, Nigeria</p>
+                    <p><i class="fas fa-phone"></i> (+234) 816 0330 156</p>
+                </div>
+                <div class="footer-links">
+                    <h4>PAGES</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Project</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>SOCIAL MEDIA</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Dribble</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>UTILITIES</h4>
+                    <ul>
+                        <li><a href="#">Style Guide</a></li>
+                        <li><a href="#">Change log</a></li>
+                        <li><a href="#">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+            </div>
+        </div>
+    </footer>
 
-      <div class="module">
-          <button class="module-button">
-              Module 2: User Interface UI
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 3: User Experience UX
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 4: How UI and UX Work Together
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 5: Best Practices for UI/UX Design
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 6: Best Practices for UI/UX Design
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 7: Wireframing and Prototyping
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 8: Usability Testing
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-  </div>
-</div>
-
-<script>
-  document.querySelectorAll('.module-button').forEach(button => {
-      button.addEventListener('click', () => {
-          // Remove active class from all buttons and containers
-          document.querySelectorAll('.module-button').forEach(b => b.classList.remove('active'));
-          document.querySelectorAll('.lessons-container').forEach(c => c.classList.remove('active'));
-          
-          // Add active class to clicked button and its container
-          button.classList.toggle('active');
-          button.nextElementSibling.classList.toggle('active');
-      });
-  });
-</script>
-
-<section class="testimonial-section">
-  <h2>Experiences Shared by Our Clients</h2>
-  <p>Discover how our clients have found solutions and satisfaction with our services.</p>
-  <div class="testimonial-slider">
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/adekunle.jpeg" alt="" class="testimonial-img">
-      <p>MDTH transformed my coding skills! The hands-on approach and expert guidance helped me build real-world projects confidently.</p>
-      <h4>Adebayo Adekunle</h4>
-      <span>Full-Stack Developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/chioma.jpeg" alt="" class="testimonial-img">
-      <p>MDTH provided the perfect learning environment. The instructors are knowledgeable, and the projects helped me master front-end development.</p>
-      <h4>Chioma Okafor</h4>
-      <span>UI/UX Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/tunde.png" alt="" class="testimonial-img">
-      <p>Before MDTH, I struggled with JavaScript. Now, I build functional web applications with ease! The courses are well-structured and beginner-friendly.</p>
-      <h4>Alex Ogunleye</h4>
-      <span>Software Engineer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/aisha.jpeg" alt="" class="testimonial-img">
-      <p>The data science program at MDTH was an eye-opener! I learned Python, machine learning, and data visualization in a simplified way.</p>
-      <h4>Aisha Bello</h4>
-      <span>Data Analyst</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/segun.jpeg" alt="" class="testimonial-img">
-      <p>MDTH’s cybersecurity course gave me the confidence to work on real security projects. The hands-on labs were a game-changer!</p>
-      <h4>Segun Alabi</h4>
-      <span>Cybersecurity Specialist</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/fadlu.jpg" alt="" class="testimonial-img">
-      <p>The mentorship and practical approach at MDTH made my journey into tech smooth. I now work as a freelance web developer!</p>
-      <h4>Fadlurahman</h4>
-      <span>Freelance Web Developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/Abdulkhaliq.jpg" alt="" class="testimonial-img">
-      <p>MDTH played a huge role in my growth as a front-end developer.</p>
-      <h4>Abdulkhaliq Adenola</h4>
-      <span>Front-end web developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/abiola.jpeg" alt="" class="testimonial-img">
-      <p>The graphic design course was exceptional! MDTH's training refined my skills in Adobe Photoshop and Illustrator.</p>
-      <h4>Abiola Oladipo</h4>
-      <span>Graphic Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/funke.jpeg" alt="" class="testimonial-img">
-      <p>The hands-on projects at MDTH made my learning experience enjoyable.</p>
-      <h4>Funke Adeyemi</h4>
-      <span> Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/emeka.jpeg" alt="" class="testimonial-img">
-      <p>Thanks to MDTH, I now understand  how to create systems and technologies that can perform tasks that typically require human intelligence.</p>
-      <h4>Emeka Uche</h4>
-      <span>AI expert</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/zinab.jpeg" alt="" class="testimonial-img">
-      <p>MDTH's content marketing program taught me  how to create and distribute valuable, relevant, and consistent content to attract and engage a target audience.</p>
-      <h4>Zainab Yusuf</h4>
-      <span>content-marketer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/ibrahim.jpeg" alt="" class="testimonial-img">
-      <p>MDTH's project management course taught me the process of planning, executing, and overseeing projects to achieve specific goals within defined constraints such as time, budget, and scope.</p>
-      <h4>Ibrahim</h4>
-      <span>Project Manager</span>
-    </div>
-  </div>
-
-  <div class="slider-controls">
-    <button id="prev-btn">&larr;</button>
-    <button id="next-btn">&rarr;</button>
-  </div>
-</section>
-
-  
-
-  
-
-  
-
-
-<footer class="footer">
-    <div class="footer-container">
-      <div class="footer-contact">
-    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
-        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
-        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
-        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
-
-      </div>
-      <div class="footer-links">
-        <h4>PAGES</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about us.html">About</a></li>
-          <li><a href="project.html">Project</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact us .html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>SOCIAL MEDIA</h4>
-        <ul>
-          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
-          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
-          <li><a href="#">Dribble</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>UTILITIES</h4>
-        <ul>
-          <li><a href="#">Style Guide</a></li>
-          <li><a href="#">Change log</a></li>
-          <li><a href="#">Licenses</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
-    </div>
-  </footer>
- 
-    <script src="script.js"></script>
-</body>
-</html>
+    <script>
+        // Course data - 30 courses for demonstration
+        const allCourses = [
+            {
+                id: 1,
+                title: "Web Development Bootcamp",
+                description: "Master HTML, CSS, JavaScript and modern frameworks to build responsive websites.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "3 Months",
+                tags: ["coding", "beginner"],
+                rating: 4.7,
+                reviews: 142,
+                price: "₦35,000"
+            },
+            {
+                id: 2,
+                title: "Data Science Mastery",
+                description: "Learn Python, SQL, and machine learning to analyze and visualize complex data.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "4 Months",
+                tags: ["data", "intermediate"],
+                rating: 4.9,
+                reviews: 76,
+                price: "₦60,000"
+            },
+            {
+                id: 3,
+                title: "UI/UX Design Pro",
+                description: "Create stunning interfaces with Figma and Adobe XD. Learn design principles.",
+                image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=1080&q=80",
+                duration: "2 Months",
+                tags: ["design", "beginner"],
+                rating: 4.8,
+                reviews: 98,
+                price: "₦45,000"
+            },
+            {
+                id: 4,
+                title: "Digital Marketing Strategy",
+                description: "Master SEO, social media, email marketing and analytics to grow businesses.",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1115&q=80",
+                duration: "6 Weeks",
+                tags: ["marketing", "beginner"],
+                rating: 4.6,
+                reviews: 88,
+                price: "₦25,000"
+            },
+            {
+                id: 5,
+                title: "Cyber Security Fundamentals",
+                description: "Protect systems from threats and vulnerabilities. Learn ethical hacking techniques.",
+                image: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "3 Months",
+                tags: ["coding", "advanced"],
+                rating: 4.7,
+                reviews: 64,
+                price: "₦55,000"
+            },
+            {
+                id: 6,
+                title: "AWS Cloud Practitioner",
+                description: "Master Amazon Web Services infrastructure and deployment strategies.",
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "10 Weeks",
+                tags: ["coding", "intermediate"],
+                rating: 4.8,
+                reviews: 53,
+                price: "₦48,000"
+            },
+            {
+                id: 7,
+                title: "Mobile App Development with Flutter",
+                description: "Build cross-platform mobile apps with Google's Flutter framework.",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "3 Months",
+                tags: ["coding", "intermediate"],
+                rating: 4.7,
+                reviews: 89,
+                price: "₦42,000"
+            },
+            {
+                id: 8,
+                title: "Python for Data Analysis",
+                description: "Learn data manipulation and analysis with Python's powerful libraries.",
+                image: "https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "8 Weeks",
+                tags: ["data", "beginner"],
+                rating: 4.6,
+                reviews: 72,
+                price: "₦32,000"
+            },
+            {
+                id: 9,
+                title: "Advanced JavaScript Patterns",
+                description: "Master advanced JavaScript concepts and design patterns for scalable applications.",
+                image: "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "6 Weeks",
+                tags: ["coding", "advanced"],
+                rating: 4.9,
+                reviews: 56,
+                price: "₦38,000"
+            },
+            {
+                id: 10,
+                title: "Social Media Marketing Mastery",
+                description: "Learn to create engaging social media campaigns that drive results.",
+                image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "4 Weeks",
+                tags: ["marketing", "beginner"],
+                rating: 4.5,
+                reviews: 121,
+                price: "₦22,000"
+            },
+            {
+                id: 11,
+                title: "React Native Mobile Development",
+                description: "Build native mobile apps using React Native framework.",
+                image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "10 Weeks",
+                tags: ["coding", "intermediate"],
+                rating: 4.7,
+                reviews: 94,
+                price: "₦45,000"
+            },
+            {
+                id: 12,
+                title: "Machine Learning Fundamentals",
+                description: "Introduction to machine learning algorithms and applications.",
+                image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "12 Weeks",
+                tags: ["data", "advanced"],
+                rating: 4.8,
+                reviews: 67,
+                price: "₦65,000"
+            },
+            {
+                id: 13,
+                title: "DevOps Engineering",
+                description: "Learn CI/CD, containerization, and cloud deployment strategies.",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1115&q=80",
+                duration: "8 Weeks",
+                tags: ["coding", "advanced"],
+                rating: 4.9,
+                reviews: 45,
+                price: "₦52,000"
+            },
+            {
+                id: 14,
+                title: "Content Marketing Strategy",
+                description: "Create compelling content that engages audiences and drives conversions.",
+                image: "https://images.unsplash.com/photo-1432888622747-4eb9a8f5a07a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "6 Weeks",
+                tags: ["marketing", "intermediate"],
+                rating: 4.6,
+                reviews: 83,
+                price: "₦28,000"
+            },
+            {
+                id: 15,
+                title: "Blockchain Development",
+                description: "Learn to build decentralized applications on blockchain platforms.",
+                image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "12 Weeks",
+                tags: ["coding", "advanced"],
+                rating: 4.8,
+                reviews: 38,
+                price: "₦70,000"
+            },
+            {
+                id: 16,
+                title: "Advanced CSS & Sass",
+                description: "Master modern CSS techniques including Flexbox, Grid, and Sass preprocessor.",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "6 Weeks",
+                tags: ["coding", "intermediate"],
+                rating: 4.7,
+                reviews: 112,
+                price: "₦32,000"
+            },
+            {
+                id: 17,
+                title: "Data Visualization with D3.js",
+                description: "Create interactive and dynamic data visualizations for the web.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "8 Weeks",
+                tags: ["data", "intermediate"],
+                rating: 4.6,
+                reviews: 59,
+                price: "₦38,000"
+            },
+            {
+                id: 18,
+                title: "Email Marketing Automation",
+                description: "Build effective email campaigns that convert with automation tools.",
+                image: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "4 Weeks",
+                tags: ["marketing", "beginner"],
+                rating: 4.5,
+                reviews: 97,
+                price: "₦24,000"
+            },
+            {
+                id: 19,
+                title: "Full Stack Development with MERN",
+                description: "Build full stack applications using MongoDB, Express, React, and Node.js.",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "4 Months",
+                tags: ["coding", "advanced"],
+                rating: 4.9,
+                reviews: 88,
+                price: "₦75,000"
+            },
+            {
+                id: 20,
+                title: "Introduction to Cybersecurity",
+                description: "Learn the basics of cybersecurity and how to protect systems from threats.",
+                image: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "6 Weeks",
+                tags: ["coding", "beginner"],
+                rating: 4.6,
+                reviews: 70,
+                price: "₦30,000"
+            },
+            {
+                id: 21,
+                title: "Google Analytics for Beginners",
+                description: "Understand website traffic and user behavior with Google Analytics.",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
+                duration: "2 Weeks",
+                tags: ["marketing", "beginner"],
+                rating: 4.5,z
