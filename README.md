@@ -5,26 +5,58 @@ Our mission is to bridge the skill gap in tech by providing structured courses, 
 
 ---
 
-##  Features
+## 🚀 Live Demo  
+👉 [MDTH Platform – Try it Live](https://mdth.onrender.com/)  
 
-- **Affordable Learning** – High-quality tech courses at a fraction of traditional costs.
-- **Industry-Aligned Curriculum** – Content built in collaboration with tech experts.
-- **Mentorship & Community** – Learn alongside peers and get guidance from professionals.
-- **Practical Projects** – Hands-on projects to build a strong portfolio.
-- **Flexible Learning** – Study at your own pace with on-demand lessons.
-- **Job-Readiness** – Resume-building, interview prep, and career support.
+![MDTH Landing Page](/public/images/blog%20img%201.jpg)  
+*Landing page with modern responsive UI*
+
+---
+
+## ✨ Features
+
+- **💰 Affordable Learning** – High-quality tech courses at a fraction of traditional costs.  
+- **📚 Industry-Aligned Curriculum** – Content built in collaboration with tech experts.  
+- **🤝 Mentorship & Community** – Learn alongside peers and get guidance from professionals.  
+- **🛠️ Practical Projects** – Hands-on projects to build a strong portfolio.  
+- **⏱️ Flexible Learning** – Study at your own pace with on-demand lessons.  
+- **🎯 Job-Readiness** – Resume-building, interview prep, and career support.  
+
+---
+
+## 📸 Screenshots
+
+### Dashboard  
+![MDTH Dashboard](/public/courses%20img/uiux%20image%20.jpg)  
+*Personalized dashboard where learners track progress.*
+
+### Course Page  
+![MDTH Course Page](/public/images/course image 2.jpg)  
+*Interactive course interface with videos, notes, and assignments.*
+
+### Certificates  
+![MDTH Certificate](/public/courses%20img/ai%20image%20.jpg)  
+*Earn verifiable certificates after course completion.*
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, CSS3, JavaScript
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Authentication:** JWT-based secure authentication
-- **Deployment:** Railway
+- **Frontend:** HTML5, CSS3, JavaScript  
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB  
+- **Authentication:** JWT-based secure authentication  
+- **Deployment:** Railway  
 
 ---
+
+## 📦 Installation & Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/mdth.git
+   cd mdth
+```
 
 ## 📦 Installation & Setup
 
