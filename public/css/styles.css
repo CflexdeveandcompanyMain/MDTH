@@ -3191,3 +3191,16 @@ body.dark-mode .btn:hover {
     font-size: 20px;
   }
 }
+/* Default: show on desktop */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Hide on mobile (screen width <= 768px) */
+@media (max-width: 768px) {
+    .auth-buttons {
+        display: none;
+    }
+}
