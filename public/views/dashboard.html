@@ -802,331 +802,254 @@
     <div class="overlay" id="overlay"></div>
 
     <script>
-        // Database simulation (in a real app, this would be API calls)
-        const simulateDatabase = {
-            getUserData: function() {
-                return new Promise((resolve) => {
-                    // Check if we have cached data
-                    const cachedData = localStorage.getItem('userData');
-                    if (cachedData) {
-                        setTimeout(() => resolve(JSON.parse(cachedData)), 800);
-                        return;
-                    }
-                    
-                    // Simulate API call delay
-                    setTimeout(() => {
-                        const userData = {
-                            user: {
-                                id: 12345,
-                                name: "Sarah Johnson",
-                                email: "sarah.j@example.com",
-                                role: "Premium Student",
-                                avatar: "https://ui-avatars.com/api/?name=Sarah+Johnson&background=EC4899&color=fff"
-                            },
-                            stats: {
-                                courses: 5,
-                                hours: 24,
-                                progress: 78,
-                                certificates: 2
-                            },
-                            courses: [
-                                {
-                                    id: 1,
-                                    title: "Web Development",
-                                    image: "images/program 1 image.png",
-                                    completedModules: 8,
-                                    totalModules: 12,
-                                    progress: 67
-                                },
-                                {
-                                    id: 2,
-                                    title: "Data Science Bootcamp",
-                                    image: "images/program 3 image .jpg",
-                                    completedModules: 5,
-                                    totalModules: 10,
-                                    progress: 50
-                                },
-                                {
-                                    id: 3,
-                                    title: "UI/UX Design Mastery",
-                                    image: "images/program 2 image.jpg",
-                                    completedModules: 3,
-                                    totalModules: 8,
-                                    progress: 38
-                                }
-                            ],
-                            upcoming: [
-                                {
-                                    type: "assignment",
-                                    title: "Web Development Project",
-                                    description: "Module 3 Assignment",
-                                    dueDate: "Tomorrow, 5:00 PM"
-                                },
-                                {
-                                    type: "event",
-                                    title: "Live Q&A Session",
-                                    description: "Data Science Bootcamp",
-                                    dueDate: "Aug 25, 2:00 PM"
-                                }
-                            ],
-                            activities: [
-                                {
-                                    type: "video",
-                                    title: "Completed Video Lesson",
-                                    description: "JavaScript Fundamentals - Module 2",
-                                    time: "2 hours ago"
-                                },
-                                {
-                                    type: "assignment",
-                                    title: "Submitted Assignment",
-                                    description: "HTML/CSS Portfolio Project",
-                                    time: "Yesterday, 3:45 PM"
-                                },
-                                {
-                                    type: "achievement",
-                                    title: "Earned Achievement",
-                                    description: "Code Explorer Badge",
-                                    time: "2 days ago"
-                                },
-                                {
-                                    type: "forum",
-                                    title: "Posted in Forum",
-                                    description: "React vs Vue.js discussion",
-                                    time: "3 days ago"
-                                }
-                            ]
-                        };
-                        
-                        // Cache the data
-                        localStorage.setItem('userData', JSON.stringify(userData));
-                        resolve(userData);
-                    }, 1500);
-                });
-            },
-            
-            // Simulate updating user progress
-            updateUserProgress: function(courseId, progress) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
-                        
-                        if (userData.courses) {
-                            const course = userData.courses.find(c => c.id === courseId);
-                            if (course) {
-                                course.progress = progress;
-                                course.completedModules = Math.floor((progress / 100) * course.totalModules);
-                                
-                                // Update overall stats
-                                const totalProgress = userData.courses.reduce((sum, c) => sum + c.progress, 0);
-                                userData.stats.progress = Math.round(totalProgress / userData.courses.length);
-                                
-                                localStorage.setItem('userData', JSON.stringify(userData));
-                                resolve(userData);
-                            }
-                        }
-                        
-                        resolve(null);
-                    }, 500);
-                });
-            }
-        };
+// API functions
+const api = {
+  async getUserData() {
+    const response = await fetch('/api/user-data', {
+      credentials: 'include'
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+    
+    return response.json();
+  },
+  
+  async updateProgress(courseId, progress) {
+    const response = await fetch('/api/update-progress', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({ courseId, progress })
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to update progress');
+    }
+    
+    return response.json();
+  },
+  
+  async logout() {
+    const response = await fetch('/api/logout', {
+      method: 'POST',
+      credentials: 'include'
+    });
+    
+    return response.json();
+  }
+};
 
-        // DOM Elements
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        const themeToggle = document.querySelector('.theme-toggle');
-        const logoutBtn = document.getElementById('logoutBtn');
-        
-        // User data elements
-        const userAvatar = document.getElementById('userAvatar');
-        const userName = document.getElementById('userName');
-        const userRole = document.getElementById('userRole');
-        
-        // Stats elements
-        const statCourses = document.getElementById('statCourses');
-        const statHours = document.getElementById('statHours');
-        const statProgress = document.getElementById('statProgress');
-        const statCertificates = document.getElementById('statCertificates');
-        const overallProgress = document.getElementById('overallProgress');
-        
-        // Content elements
-        const upcomingList = document.getElementById('upcomingList');
-        const coursesGrid = document.getElementById('coursesGrid');
-        const activityList = document.getElementById('activityList');
-        
-        // Mobile menu toggle
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
-        
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-        
-        // Theme toggle functionality
-        themeToggle.addEventListener('click', () => {
-            const isDarkMode = document.body.getAttribute('data-theme') === 'dark';
-            document.body.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
-            
-            // Update icon
-            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-            
-            // Save preference to localStorage
-            localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
-        });
-        
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.setAttribute('data-theme', savedTheme);
-            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        }
-        
-        // Logout functionality
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('userData');
-                // In a real app, this would redirect to logout endpoint
-                alert('Logout successful! Redirecting to login...');
-                // window.location.href = '/login';
-            }
-        });
-        
-        // Initialize progress circles
-        function initProgressCircles() {
-            const progressCircles = document.querySelectorAll('.progress-circle-value');
-            progressCircles.forEach(circle => {
-                const percent = parseInt(circle.parentElement.nextElementSibling.querySelector('.progress-percent').textContent);
-                const circumference = 2 * Math.PI * 54;
-                const offset = circumference - (percent / 100) * circumference;
-                circle.style.strokeDashoffset = offset;
-            });
-        }
-        
-        // Format activity icon based on type
-        function getActivityIcon(type) {
-            switch(type) {
-                case 'video': return 'fas fa-play-circle';
-                case 'assignment': return 'fas fa-check-circle';
-                case 'achievement': return 'fas fa-medal';
-                case 'forum': return 'fas fa-comment';
-                case 'event': return 'fas fa-video';
-                default: return 'fas fa-circle';
-            }
-        }
-        
-        // Render user data to the dashboard
-        function renderUserData(userData) {
-            // User profile
-            userAvatar.src = userData.user.avatar;
-            userName.textContent = userData.user.name;
-            userRole.textContent = userData.user.role;
-            
-            // Stats
-            statCourses.textContent = userData.stats.courses;
-            statHours.textContent = userData.stats.hours;
-            statProgress.textContent = userData.stats.progress + '%';
-            statCertificates.textContent = userData.stats.certificates;
-            overallProgress.textContent = userData.stats.progress + '%';
-            
-            // Upcoming deadlines
-            upcomingList.innerHTML = '';
-            userData.upcoming.forEach(item => {
-                upcomingList.innerHTML += `
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <i class="${getActivityIcon(item.type)}"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">${item.title}</div>
-                            <div class="activity-desc">${item.description}</div>
-                            <div class="activity-time">Due: ${item.dueDate}</div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            // Courses
-            coursesGrid.innerHTML = '';
-            userData.courses.forEach(course => {
-                coursesGrid.innerHTML += `
-                    <div class="course-card">
-                        <div class="course-image">
-                            <img src="${course.image}" alt="${course.title}">
-                        </div>
-                        <div class="course-content">
-                            <h3 class="course-title">${course.title}</h3>
-                            <div class="course-info">
-                                <span>${course.completedModules}/${course.totalModules} Modules</span>
-                                <span>${course.progress}%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: ${course.progress}%;"></div>
-                            </div>
-                            <button class="course-action" data-course-id="${course.id}">Continue Learning</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            // Recent activities
-            activityList.innerHTML = '';
-            userData.activities.forEach(activity => {
-                activityList.innerHTML += `
-                    <div class="activity-item">
-                        <div class="activity-icon">
-                            <i class="${getActivityIcon(activity.type)}"></i>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">${activity.title}</div>
-                            <div class="activity-desc">${activity.description}</div>
-                            <div class="activity-time">${activity.time}</div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            // Add event listeners to course buttons
-            document.querySelectorAll('.course-action').forEach(button => {
-                button.addEventListener('click', () => {
-                    const courseId = parseInt(button.getAttribute('data-course-id'));
-                    // Simulate progress update
-                    const newProgress = Math.min(100, userData.courses.find(c => c.id === courseId).progress + 10);
-                    
-                    simulateDatabase.updateUserProgress(courseId, newProgress)
-                        .then(updatedData => {
-                            if (updatedData) {
-                                renderUserData(updatedData);
-                                initProgressCircles();
-                            }
-                        });
-                });
-            });
-            
-            // Initialize progress circles after data is loaded
-            initProgressCircles();
-        }
-        
-        // Load user data on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show loading state
-            document.body.classList.add('loading');
-            
-            simulateDatabase.getUserData()
-                .then(userData => {
-                    renderUserData(userData);
-                    document.body.classList.remove('loading');
-                })
-                .catch(error => {
-                    console.error('Error loading user data:', error);
-                    alert('Failed to load user data. Please try again later.');
-                    document.body.classList.remove('loading');
-                });
-        });
-    </script>
+// DOM Elements
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const themeToggle = document.querySelector('.theme-toggle');
+const logoutBtn = document.getElementById('logoutBtn');
+
+// User data elements
+const userAvatar = document.getElementById('userAvatar');
+const userName = document.getElementById('userName');
+const userRole = document.getElementById('userRole');
+
+// Stats elements
+const statCourses = document.getElementById('statCourses');
+const statHours = document.getElementById('statHours');
+const statProgress = document.getElementById('statProgress');
+const statCertificates = document.getElementById('statCertificates');
+const overallProgress = document.getElementById('overallProgress');
+
+// Content elements
+const upcomingList = document.getElementById('upcomingList');
+const coursesGrid = document.getElementById('coursesGrid');
+const activityList = document.getElementById('activityList');
+
+// Mobile menu toggle
+menuToggle.addEventListener('click', () => {
+  sidebar.classList.toggle('active');
+  overlay.classList.toggle('active');
+});
+
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('active');
+  overlay.classList.remove('active');
+});
+
+// Theme toggle functionality
+themeToggle.addEventListener('click', () => {
+  const isDarkMode = document.body.getAttribute('data-theme') === 'dark';
+  document.body.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
+  
+  // Update icon
+  themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+  
+  // Save preference to localStorage
+  localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+});
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.body.setAttribute('data-theme', savedTheme);
+  themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+}
+
+// Logout functionality
+logoutBtn.addEventListener('click', async (e) => {
+  e.preventDefault();
+  if (confirm('Are you sure you want to logout?')) {
+    try {
+      await api.logout();
+      window.location.href = '/login.html'; // Redirect to login page
+    } catch (error) {
+      console.error('Logout failed:', error);
+      alert('Logout failed. Please try again.');
+    }
+  }
+});
+
+// Initialize progress circles
+function initProgressCircles() {
+  const progressCircles = document.querySelectorAll('.progress-circle-value');
+  progressCircles.forEach(circle => {
+    const percent = parseInt(circle.parentElement.nextElementSibling.querySelector('.progress-percent').textContent);
+    const circumference = 2 * Math.PI * 54;
+    const offset = circumference - (percent / 100) * circumference;
+    circle.style.strokeDashoffset = offset;
+  });
+}
+
+// Format activity icon based on type
+function getActivityIcon(type) {
+  switch(type) {
+    case 'video': return 'fas fa-play-circle';
+    case 'assignment': return 'fas fa-check-circle';
+    case 'achievement': return 'fas fa-medal';
+    case 'forum': return 'fas fa-comment';
+    case 'event': return 'fas fa-video';
+    default: return 'fas fa-circle';
+  }
+}
+
+// Render user data to the dashboard
+function renderUserData(userData) {
+  // User profile
+  userAvatar.src = userData.user.avatar;
+  userName.textContent = userData.user.name;
+  userRole.textContent = userData.user.role;
+  
+  // Stats
+  statCourses.textContent = userData.stats.courses;
+  statHours.textContent = userData.stats.hours;
+  statProgress.textContent = userData.stats.progress + '%';
+  statCertificates.textContent = userData.stats.certificates;
+  overallProgress.textContent = userData.stats.progress + '%';
+  
+  // Upcoming deadlines
+  upcomingList.innerHTML = '';
+  userData.upcoming.forEach(item => {
+    upcomingList.innerHTML += `
+      <div class="activity-item">
+        <div class="activity-icon">
+          <i class="${getActivityIcon(item.type)}"></i>
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">${item.title}</div>
+          <div class="activity-desc">${item.description}</div>
+          <div class="activity-time">Due: ${item.dueDate}</div>
+        </div>
+      </div>
+    `;
+  });
+  
+  // Courses
+  coursesGrid.innerHTML = '';
+  userData.courses.forEach(course => {
+    coursesGrid.innerHTML += `
+      <div class="course-card">
+        <div class="course-image">
+          <img src="${course.image}" alt="${course.title}">
+        </div>
+        <div class="course-content">
+          <h3 class="course-title">${course.title}</h3>
+          <div class="course-info">
+            <span>${course.completedModules}/${course.totalModules} Modules</span>
+            <span>${course.progress}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${course.progress}%;"></div>
+          </div>
+          <button class="course-action" data-course-id="${course.id}">Continue Learning</button>
+        </div>
+      </div>
+    `;
+  });
+  
+  // Recent activities
+  activityList.innerHTML = '';
+  userData.activities.forEach(activity => {
+    activityList.innerHTML += `
+      <div class="activity-item">
+        <div class="activity-icon">
+          <i class="${getActivityIcon(activity.type)}"></i>
+        </div>
+        <div class="activity-content">
+          <div class="activity-title">${activity.title}</div>
+          <div class="activity-desc">${activity.description}</div>
+          <div class="activity-time">${activity.time}</div>
+        </div>
+      </div>
+    `;
+  });
+  
+  // Add event listeners to course buttons
+  document.querySelectorAll('.course-action').forEach(button => {
+    button.addEventListener('click', async () => {
+      const courseId = button.getAttribute('data-course-id');
+      const currentProgress = parseInt(button.parentElement.querySelector('.course-info span:last-child').textContent);
+      const newProgress = Math.min(100, currentProgress + 10);
+      
+      try {
+        const result = await api.updateProgress(courseId, newProgress);
+        renderUserData(result.user);
+        initProgressCircles();
+      } catch (error) {
+        console.error('Failed to update progress:', error);
+        alert('Failed to update progress. Please try again.');
+      }
+    });
+  });
+  
+  // Initialize progress circles after data is loaded
+  initProgressCircles();
+}
+
+// Load user data on page load
+document.addEventListener('DOMContentLoaded', async function() {
+  // Show loading state
+  document.body.classList.add('loading');
+  
+  try {
+    const userData = await api.getUserData();
+    renderUserData(userData);
+    document.body.classList.remove('loading');
+  } catch (error) {
+    console.error('Error loading user data:', error);
+    
+    // Check if it's an authentication error
+    if (error.message.includes('Unauthorized') || error.message.includes('401')) {
+      alert('Your session has expired. Please log in again.');
+      window.location.href = '/login.html';
+    } else {
+      alert('Failed to load user data. Please try again later.');
+      document.body.classList.remove('loading');
+    }
+  }
+});
+</script>
+ 
 </body>
 </html>

@@ -83,7 +83,12 @@ router.get('/AI', (req, res) => {
     res.sendFile(path.join(viewsPath, 'AI.html')); 
 } 
 );
-  
+//forgot-password
+router.get('/forgot-password', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'forgot-password.html')); 
+}
+);
+
 // 404 fallback
 router.get('*', (req, res) => {
   res.sendFile(path.join(viewsPath, '404.html'));
