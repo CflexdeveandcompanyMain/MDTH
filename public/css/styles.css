@@ -2928,6 +2928,7 @@ h4 {
   -webkit-overflow-scrolling: touch;
 }
 /* Trusted By Section */
+/* Trusted By Section */
 .trusted-by {
   background: #2563eb; /* primary blue */
   padding: 40px 20px;
@@ -2936,39 +2937,29 @@ h4 {
   overflow: hidden;
 }
 
-.trusted-by::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
-  pointer-events: none;
-}
-
 .trusted-title {
   color: #fff;
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 30px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
 }
 
 .brand-logos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 20px;
-  max-width: 700px;
-  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
   position: relative;
-  z-index: 1;
 }
 
-.brand-logos img {
+.logo-track {
+  display: flex;
+  gap: 40px;
+  animation: scroll 15s linear infinite;
+  width: max-content; /* ensures track shrinks to content */
+}
+
+.logo-track img {
   width: 80px;
   height: 80px;
   object-fit: contain;
@@ -2979,53 +2970,22 @@ h4 {
   opacity: 0.95;
 }
 
-.brand-logos img:hover {
-  transform: translateY(-4px) scale(1.05);
+.logo-track img:hover {
+  transform: scale(1.05);
   background: rgba(255, 255, 255, 0.25);
   opacity: 1;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .trusted-by {
-    padding: 30px 15px;
+/* animation */
+@keyframes scroll {
+  from {
+    transform: translateX(100%);
   }
-
-  .trusted-title {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
-  }
-
-  .brand-logos {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    max-width: 400px;
-  }
-
-  .brand-logos img {
-    width: 60px;
-    height: 60px;
-    padding: 8px;
+  to {
+    transform: translateX(-100%);
   }
 }
 
-@media (max-width: 480px) {
-  .trusted-title {
-    font-size: 1.125rem;
-  }
-
-  .brand-logos {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    max-width: 300px;
-  }
-
-  .brand-logos img {
-    width: 50px;
-    height: 50px;
-    padding: 6px;
-  }
-}
 
 /* Dark Mode Toggle Styles */
 .theme-toggle {

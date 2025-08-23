@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MDTH Student Profile - Manage your learning profile, track progress, and showcase achievements">
+    <title>MDTH Digital World | Student Profile</title>
+    
+    <!-- Preload Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" as="style">
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --primary-light: #93C5FD;
+            --secondary-color: #4F46E5;
+            --accent-color: #EC4899;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --text-color: #1F2937;
+            --text-light: #6B7280;
+            --bg-color: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --sidebar-bg: #1F2937;
+            --border-color: #E5E7EB;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --primary-color: #3B82F6;
+            --primary-light: #1E40AF;
+            --secondary-color: #6366F1;
+            --accent-color: #EC4899;
+            --text-color: #F3F4F6;
+            --text-light: #9CA3AF;
+            --bg-color: #111827;
+            --card-bg: #1F2937;
+            --sidebar-bg: #111827;
+            --border-color: #4B5563;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--bg-color);
+            box-shadow: 0 1px 3px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+
+        .btn-login:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-left: 20px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: var(--card-bg);
+            box-shadow: 0 1px 3px var(--shadow-color);
+        }
+
+        /* Profile Container */
+        .profile-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-edit {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .profile-title {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 12px 25px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        /* Profile Content */
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .profile-sidebar {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .contact-info li:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .contact-detail {
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            padding: 6px 12px;
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .profile-main {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+        }
+
+        .card-action {
+            color: var(--primary-color);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .course-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .course-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .course-image {
+            height: 160px;
+            overflow: hidden;
+        }
+
+        .course-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-details {
+            padding: 15px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .course-progress {
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--bg-color);
+            border-radius: 3px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .course-action {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .course-action:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Achievements */
+        .badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+        }
+
+        .badge[data-tooltip] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .badge[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 100;
+        }
+
+        /* Activity List */
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .activity-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            padding: 60px 5% 30px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-contact {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .logo-image-footer {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary-color);
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .profile-actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 15px;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .profile-name {
+                font-size: 1.8rem;
+            }
+            
+            .profile-stats {
+                gap: 15px;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html" class="active">Profile</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+        <div class="auth-buttons">
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+            <a href="dashboard.html" class="btn btn-login">Dashboard</a>
+            <a href="login.html" class="btn btn-signup">Logout</a>
+        </div>
+    </nav>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=2563EB&color=fff&size=150" alt="Profile Avatar">
+                <div class="avatar-edit">
+                    <i class="fas fa-camera"></i>
+                </div>
+            </div>
+            
+            <div class="profile-info">
+                <h1 class="profile-name">John Doe</h1>
+                <p class="profile-title">Web Development Student at MDTH</p>
+                <p class="profile-bio">Passionate about frontend development and UI/UX design. Currently learning React and Node.js to become a full-stack developer.</p>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Courses</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">78%</div>
+                    <div class="stat-label">Avg. Progress</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Badges</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">42</div>
+                    <div class="stat-label">Completed Lessons</div>
+                </div>
+            </div>
+            
+            <div class="profile-actions">
+                <button class="btn-primary">Edit Profile</button>
+                <button class="btn-secondary">Share Profile</button>
+            </div>
+        </div>
+        
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Sidebar -->
+            <div class="profile-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Contact Information</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-detail">johndoe@example.com</div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-detail">+234 816 0330 156</div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-detail">Lagos, Nigeria</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Social Links</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Figma</span>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">Account Details</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="contact-detail">Member since: Jan 2023</div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="contact-detail">Last login: Today</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="profile-main">
+                <!-- Enrolled Courses -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Enrolled Courses</h2>
+                        <div class="card-action">View All</div>
+                    </div>
+                    
+                    <div class="courses-grid">
+                        <!-- Course 1 -->
+                        <div class="course-item">
+                            <div class="course-image">
+                                <img src="images/program 1 image.png" alt="Web Development">
+                            </div>
+                            <div class="course-details">
+                                <h3 class="course-name">Web Development</h3>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%;"></div>
+                                    </div>
+                                    <div class="progress-text">
+                                        <span>Progress</span>
+                                        <span>75%</span>
+                                    </div>
+                                </div>
+                                <button class="course-action">Continue</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Course 2 -->
+                        <div class="course-item">
+                            <div class="course-image">
+                                <img src="images/program 3 image .jpg" alt="Data Science">
+                            </div>
+                            <div class="course-details">
+                                <h3 class="course-name">Data Science Bootcamp</h3>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 40%;"></div>
+                                    </div>
+                                    <div class="progress-text">
+                                        <span>Progress</span>
+                                        <span>40%</span>
+                                    </div>
+                                </div>
+                                <button class="course-action">Continue</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Course 3 -->
+                        <div class="course-item">
+                            <div class="course-image">
+                                <img src="images/program 2 image.jpg" alt="UI/UX Design">
+                            </div>
+                            <div class="course-details">
+                                <h3 class="course-name">UI/UX Design Mastery</h3>
+                                <div class="course-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%;"></div>
+                                    </div>
+                                    <div class="progress-text">
+                                        <span>Progress</span>
+                                        <span>60%</span>
+                                    </div>
+                                </div>
+                                <button class="course-action">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Achievements -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Achievements & Badges</h2>
+                        <div class="card-action">View All</div>
+                    </div>
+                    
+                    <div class="badges-container">
+                        <div class="badge" data-tooltip="Completed First Course">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div class="badge" data-tooltip="Perfect Attendance">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="badge" data-tooltip="Quiz Master">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="badge" data-tooltip="Project Contributor">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="badge" data-tooltip="Fast Learner">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="badge" data-tooltip="Community Helper">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Activity -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2 class="card-title">Recent Activity</h2>
+                        <div class="card-action">View All</div>
+                    </div>
+                    
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Completed Video Lesson</div>
+                                <div class="activity-desc">JavaScript Fundamentals - Module 2</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Submitted Assignment</div>
+                                <div class="activity-desc">HTML/CSS Portfolio Project</div>
+                                <div class="activity-time">Yesterday, 3:45 PM</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Earned Achievement</div>
+                                <div class="activity-desc">Code Explorer Badge</div>
+                                <div class="activity-time">2 days ago</div>
+                            </div>
+                        </li>
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Posted in Forum</div>
+                                <div class="activity-desc">React vs Vue.js discussion</div>
+                                <div class="activity-time">3 days ago</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-contact">
+                <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
+                <p><i class="fa-regular fa-envelope"></i> mdthdig@gmail.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
+                <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
+            </div>
+            <div class="footer-links">
+                <h4>PAGES</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>SOCIAL MEDIA</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Dribble</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>UTILITIES</h4>
+                <ul>
+                    <li><a href="#">Style Guide</a></li>
+                    <li><a href="#">Change log</a></li>
+                    <li><a href="#">Licenses</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        
+        themeToggle.addEventListener('click', () => {
+            const isDarkMode = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
+            
+            // Update icon
+            themeToggle.innerHTML = isDarkMode ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+            
+            // Save preference to localStorage
+            localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+        });
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        
+        // Simple avatar edit functionality
+        const avatarEdit = document.querySelector('.avatar-edit');
+        avatarEdit.addEventListener('click', () => {
+            alert('Avatar edit feature would open a file upload dialog');
+        });
+    </script>
+</body>
+</html>
