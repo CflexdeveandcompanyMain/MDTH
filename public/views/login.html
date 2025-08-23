@@ -576,11 +576,12 @@
     </script>
  </head>
 <body>
+   <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="index.html">
-                <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo">
+            <a href="/index">
+                <img src="https://via.placeholder.com/150x40/4361ee/ffffff?text=MDTH" alt="MDTH Logo">
             </a>
         </div>
         
@@ -603,7 +604,7 @@
         <div class="login-illustration">
             <div class="illustration-container">
                 <div class="floating-element element-1">
-                    <img src="https://plus.unsplash.com/premium_photo-1689700526675-883c3578e7b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D" alt="Students collaborating">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Students collaborating">
                 </div>
                 <div class="floating-element element-2">
                     <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coding on laptop">
@@ -612,7 +613,7 @@
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Data analysis">
                 </div>
                 <div class="floating-element element-4">
-                    <img src="https://images.unsplash.com/photo-1528901166007-3784c7dd3653?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Online learning">
+                    <img src="https://images.unsplash.com/photo-1528901166007-3784c7dd3653?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Online learning">
                 </div>
             </div>
             
@@ -647,7 +648,7 @@
                         <label for="remember">Remember me</label>
                     </div>
                     <div class="forgot-password">
-                        <a href="/forgot-password">Forgot password?</a>
+                        <a href="#" id="forgotPasswordLink">Forgot password?</a>
                     </div>
                 </div>
                 
@@ -681,45 +682,27 @@
         </div>
     </div>
 
+    <!-- Forgot Password Modal -->
+    <div class="modal forgot-password-modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <h2>Reset Your Password</h2>
+            <p>Enter your email address and we'll send you instructions to reset your password.</p>
+            
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <input type="email" id="resetEmail" name="email" placeholder="Enter your email address" required>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn modal-btn-secondary" id="cancelResetBtn">Cancel</button>
+                    <button type="submit" class="modal-btn">Send Reset Instructions</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Theme Toggle Functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const body = document.body;
-
-        // Check for saved theme preference or use preferred color scheme
-        const savedTheme = localStorage.getItem('theme') || 
-                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-        // Apply the saved theme
-        if (savedTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.classList.replace('fa-moon', 'fa-sun');
-        }
-
-        // Toggle theme on button click
-        themeToggle.addEventListener('click', () => {
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.setAttribute('data-theme', 'light');
-                themeIcon.classList.replace('fa-sun', 'fa-moon');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.classList.replace('fa-moon', 'fa-sun');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Password Toggle Functionality
-        const togglePassword = document.getElementById('togglePassword');
-        const password = document.getElementById('password');
-
-        togglePassword.addEventListener('click', function() {
-            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-            password.setAttribute('type', type);
-            this.classList.toggle('fa-eye-slash');
-        });
-
         // Backend Integration - API Configuration
         const API_BASE_URL = 'https://mdth.onrender.com/api';
 
@@ -799,6 +782,51 @@
         // Initialize auth manager
         const auth = new AuthManager();
 
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        const loginForm = document.getElementById('loginForm');
+        const errorModal = document.getElementById('errorModal');
+        const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const cancelResetBtn = document.getElementById('cancelResetBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+
+        // Theme Toggle Functionality
+        const savedTheme = localStorage.getItem('theme') || 
+                         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        // Apply the saved theme
+        if (savedTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Password Toggle Functionality
+        togglePassword.addEventListener('click', function() {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
         // Check if already logged in
         if (auth.isAuthenticated()) {
             window.location.href = '/dashboard';
@@ -810,34 +838,6 @@
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
             toast.textContent = message;
-            
-            // Add styles if not already added
-            if (!document.querySelector('#toast-styles')) {
-                const style = document.createElement('style');
-                style.id = 'toast-styles';
-                style.textContent = `
-                    .toast {
-                        position: fixed;
-                        top: 20px;
-                        right: 20px;
-                        padding: 12px 20px;
-                        border-radius: 4px;
-                        color: white;
-                        z-index: 1000;
-                        opacity: 0;
-                        transform: translateY(-20px);
-                        transition: opacity 0.3s, transform 0.3s;
-                    }
-                    .toast.error { background-color: #f44336; }
-                    .toast.success { background-color: #4CAF50; }
-                    .toast.info { background-color: #2196F3; }
-                    .toast.show {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                `;
-                document.head.appendChild(style);
-            }
             
             document.body.appendChild(toast);
             
@@ -851,12 +851,19 @@
             }, 3000);
         }
 
-        // Form Validation and Submission with Backend Integration
-        const loginForm = document.getElementById('loginForm');
-        const errorModal = document.getElementById('errorModal');
-        const errorMessage = document.getElementById('errorMessage');
-        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        // Show modal function
+        function showModal(modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
 
+        // Hide modal function
+        function hideModal(modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Form Validation and Submission with Backend Integration
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -910,7 +917,7 @@
                 
                 // Show error in modal
                 errorMessage.textContent = errorMsg;
-                errorModal.classList.add('show');
+                showModal(errorModal);
                 
             } finally {
                 // Re-enable submit button
@@ -919,50 +926,86 @@
             }
         });
 
-        // Close modal
-        modalCloseBtn.addEventListener('click', function() {
-            errorModal.classList.remove('show');
-        });
-
-        // Close modal when clicking outside of it
-        errorModal.addEventListener('click', function(e) {
-            if (e.target === errorModal) {
-                errorModal.classList.remove('show');
+        // Forgot password form submission
+        forgotPasswordForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('resetEmail').value.trim();
+            
+            if (!email) {
+                showMessage('Please enter your email address', 'error');
+                return;
+            }
+            
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Call backend forgot password API
+                const response = await fetch(`${API_BASE_URL}/forgot-password`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to send reset instructions');
+                }
+                
+                // Show success message
+                showMessage('Password reset instructions have been sent to your email.', 'success');
+                
+                // Hide modal
+                hideModal(forgotPasswordModal);
+                
+                // Reset form
+                forgotPasswordForm.reset();
+                
+            } catch (error) {
+                console.error('Forgot password error:', error);
+                showMessage(error.message || 'Failed to send reset instructions. Please try again.', 'error');
+            } finally {
+                submitBtn.textContent = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
 
-        // Input field animations
-        const inputs = document.querySelectorAll('input');
-        inputs.forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-3px)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
+        // Forgot password link click
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showModal(forgotPasswordModal);
         });
 
-        // Floating elements hover effect
-        const floatingElements = document.querySelectorAll('.floating-element');
-        floatingElements.forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.transform = this.style.transform.includes('rotate') ? 
-                    this.style.transform.replace('rotate', 'scale(1.05) rotate') : this.style.transform + ' scale(1.05)';
-                this.style.zIndex = '10';
-                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2)';
-            });
-            
-            element.addEventListener('mouseleave', function() {
-                this.style.transform = this.style.transform.replace('scale(1.05) ', '');
-                this.style.zIndex = this.classList.contains('element-1') ? '3' : 
-                                    this.classList.contains('element-2') ? '2' : 
-                                    this.classList.contains('element-3') ? '1' : '4';
-                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
-            });
+        // Close modals
+        modalCloseBtn.addEventListener('click', function() {
+            hideModal(errorModal);
         });
 
-        // Additional utility functions for login page
+        cancelResetBtn.addEventListener('click', function() {
+            hideModal(forgotPasswordModal);
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === errorModal) {
+                hideModal(errorModal);
+            }
+            if (e.target === forgotPasswordModal) {
+                hideModal(forgotPasswordModal);
+            }
+        });
 
         // Function to handle "Remember Me" functionality
         function setupRememberMe() {
@@ -988,49 +1031,6 @@
             }
         }
 
-        // Function to handle forgot password
-        function setupForgotPassword() {
-            const forgotPasswordLink = document.querySelector('.forgot-password a');
-            
-            if (forgotPasswordLink) {
-                forgotPasswordLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const email = prompt('Please enter your email address:');
-                    if (email && email.includes('@')) {
-                        // Call forgot password API
-                        handleForgotPassword(email);
-                    } else if (email) {
-                        alert('Please enter a valid email address');
-                    }
-                });
-            }
-        }
-
-        // Function to handle forgot password API call
-        async function handleForgotPassword(email) {
-            try {
-                const response = await fetch(`${API_BASE_URL}/forgot-password`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email })
-                });
-                
-                const data = await response.json();
-                
-                if (response.ok) {
-                    alert('Password reset instructions have been sent to your email.');
-                } else {
-                    alert(data.error || 'Failed to send password reset email');
-                }
-            } catch (error) {
-                console.error('Forgot password error:', error);
-                alert('Error sending password reset email. Please try again.');
-            }
-        }
-
         // Function to check authentication status on page load
         async function checkAuthStatus() {
             if (auth.token) {
@@ -1052,7 +1052,6 @@
 
         // Initialize additional features
         setupRememberMe();
-        setupForgotPassword();
 
         // Check authentication status when page loads
         checkAuthStatus();
