@@ -88,6 +88,12 @@ router.get('/forgot-password', (req, res) => {
     res.sendFile(path.join(viewsPath, 'forgot-password.html')); 
 }
 );
+//terms
+router.get('/terms', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'terms.html'));
+}
+);
+
 
 // 404 fallback
 router.get('*', (req, res) => {
