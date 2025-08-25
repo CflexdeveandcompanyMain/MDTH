@@ -83,7 +83,29 @@ router.get('/AI', (req, res) => {
     res.sendFile(path.join(viewsPath, 'AI.html')); 
 } 
 );
-  
+//data-analytics
+router.get('/data-analytics', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'data-analytics.html')); 
+}
+);
+//programming
+router.get('/programming', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'programming.html')); 
+}
+);
+
+//forgot-password
+router.get('/forgot-password', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'forgot-password.html')); 
+}
+);
+//terms
+router.get('/terms', (req, res) => {
+    res.sendFile(path.join(viewsPath, 'terms.html'));
+}
+);
+
+
 // 404 fallback
 router.get('*', (req, res) => {
   res.sendFile(path.join(viewsPath, '404.html'));
