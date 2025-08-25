@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" href="images/MDTH LOGO.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <title>Data Analytics Course | MDTH Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4A40E5;
+            --accent-color: #FF6584;
+            --text-color: #333333;
+            --text-color-light: #666666;
+            --bg-color: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --border-color: #E0E0E0;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #7B74FF;
+            --secondary-color: #5D54FF;
+            --text-color: #FFFFFF;
+            --text-color-light: #CCCCCC;
+            --bg-color: #121212;
+            --bg-secondary: #1E1E1E;
+            --border-color: #333333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--bg-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin: 0 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-signup {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-signup:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-login:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider i {
+            font-size: 14px;
+            color: white;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Course Hero Section */
+        .course-hero {
+            padding: 3rem 0;
+            background-color: var(--bg-secondary);
+            transition: var(--transition);
+        }
+
+        .course-hero-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .course-video-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background-color: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .course-video {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .course-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-controls button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 30%;
+            background: var(--primary-color);
+        }
+
+        .course-info-sidebar {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .course-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .enroll-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: var(--text-color-light);
+        }
+
+        .course-features i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .instructor-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .instructor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-details h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .instructor-details p {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        /* Course Tabs */
+        .course-tabs {
+            padding: 3rem 0;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .tab-link {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-color-light);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-link:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .course-description {
+            margin-bottom: 2rem;
+        }
+
+        .course-description p {
+            margin-bottom: 1rem;
+        }
+
+        .learning-objectives {
+            margin-bottom: 2rem;
+        }
+
+        .learn-list {
+            list-style: none;
+        }
+
+        .learn-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .learn-list i {
+            color: var(--primary-color);
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .requirements-section, .audience-section, .tags-section {
+            margin-bottom: 2rem;
+        }
+
+        .requirements-list, .audience-list {
+            list-style: none;
+        }
+
+        .requirements-list li, .audience-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .requirements-list i, .audience-list i {
+            color: var(--primary-color);
+            margin-right: 0.8rem;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            transition: var(--transition);
+        }
+
+        /* Curriculum */
+        .course-progress {
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background-color: var(--bg-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-details {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        .lecture-list {
+            padding: 0 1.5rem;
+            background-color: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .lecture-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .lecture-item:last-child {
+            border-bottom: none;
+        }
+
+        .lecture-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lecture-info i {
+            color: var(--primary-color);
+        }
+
+        .lecture-duration {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        /* Reviews */
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .overall-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .rating-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .rating-stars {
+            color: #FFC107;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-count {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        .reviews-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .reviewer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reviewer-info h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .review-date {
+            color: var(--text-color-light);
+            font-size: 0.8rem;
+        }
+
+        .review-content p {
+            margin-top: 0.5rem;
+        }
+
+        /* Instructor */
+        .instructor-profile {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .instructor-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-bio p {
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-secondary);
+            padding: 3rem 0 1rem;
+            transition: var(--transition);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-color-light);
+        }
+
+        .footer-contact i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+            transition: var(--transition);
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-color-light);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color-light);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .logo-image-footer {
+            height: 40px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .course-hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .instructor-profile {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-auth {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+            
+            .tab-link {
+                padding: 0.8rem 1rem;
+            }
+        }
+        /* Default: show on desktop */
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Hide on mobile (screen width <= 768px) */
+        @media (max-width: 768px) {
+            .auth-buttons {
+                display: none;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact us">Contact</a></li>
+            <li><a href="/blog">Blog</a></li>
+            
+            <div class="mobile-auth">
+                <a href="/signup" class="btn btn-signup">Sign Up</a>
+                <a href="/login" class="btn btn-login">Login</a>
+            </div>
+        </ul>
+        
+        <div class="auth-buttons">
+            <a href="/signup" class="btn btn-signup">Sign Up</a>
+            <a href="/login" class="btn btn-login">Login</a>
+            
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <button class="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Course Hero Section -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="course-hero-content">
+                <div class="course-video-container">
+                    <div class="course-video">
+                        <!-- Cloudinary Video Embed -->
+                        <iframe 
+                            src="https://cdn.pixabay.com/video/2024/06/06/215500_tiny.mp4" 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <div class="video-controls">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                            <button class="mute-btn"><i class="fas fa-volume-up"></i></button>
+                            <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-info-sidebar">
+                    <div class="course-price">₦55,000</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                    
+                    <ul class="course-features">
+                        <li><i class="far fa-clock"></i> 3 Months Duration</li>
+                        <li><i class="fas fa-film"></i> 42 Video Lessons</li>
+                        <li><i class="fas fa-certificate"></i> Certificate of Completion</li>
+                        <li><i class="fas fa-infinity"></i> Lifetime Access</li>
+                        <li><i class="fas fa-mobile-alt"></i> Access on Mobile and TV</li>
+                    </ul>
+                    
+                    <div class="instructor-info">
+                        <div class="instructor-avatar">
+                            <img src="https://plus.unsplash.com/premium_photo-1689700526632-e2d6d5a282c6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDR8fHxlbnwwfHx8fHw%3D" alt="Instructor">
+                        </div>
+                        <div class="instructor-details">
+                            <h4>Chinedu Adeyemi</h4>
+                            <p>Senior Data Analyst</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Content Tabs -->
+    <section class="course-tabs">
+        <div class="container">
+            <div class="tabs-header">
+                <div class="tab-link active" data-tab="overview">Overview</div>
+                <div class="tab-link" data-tab="curriculum">Curriculum</div>
+                <div class="tab-link" data-tab="reviews">Reviews</div>
+                <div class="tab-link" data-tab="instructor">Instructor</div>
+            </div>
+            
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <div class="course-description">
+                    <h2>Data Analytics Mastery Course</h2>
+                    <p>Master the art of transforming raw data into actionable insights with our comprehensive Data Analytics course. Learn industry-standard tools like Python, SQL, and Tableau while understanding the fundamental principles of data cleaning, visualization, and statistical analysis.</p>
+                    <p>This course is designed for beginners and intermediate analysts who want to build a strong foundation in data analytics and create portfolio-worthy projects that will impress employers and clients in the African market.</p>
+                </div>
+                
+                <div class="learning-objectives">
+                    <h2>What Will You Learn?</h2>
+                    <ul class="learn-list">
+                        <li><i class="fas fa-check-circle"></i> Completely understand the data analytics process from collection to visualization</li>
+                        <li><i class="fas fa-check-circle"></i> How to clean and preprocess data for analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Master SQL for database querying and management</li>
+                        <li><i class="fas fa-check-circle"></i> Python programming for data analysis with Pandas and NumPy</li>
+                        <li><i class="fas fa-check-circle"></i> Create compelling data visualizations with Tableau and Power BI</li>
+                        <li><i class="fas fa-check-circle"></i> Statistical analysis techniques for deriving insights</li>
+                        <li><i class="fas fa-check-circle"></i> Build interactive dashboards for business intelligence</li>
+                        <li><i class="fas fa-check-circle"></i> Present data findings effectively to stakeholders</li>
+                    </ul>
+                </div>
+                
+                <div class="requirements-section">
+                    <h2>Requirements</h2>
+                    <ul class="requirements-list">
+                        <li><i class="fas fa-check"></i> Basic computer literacy</li>
+                        <li><i class="fas fa-check"></i> A computer/Laptop (Mac or Windows)</li>
+                        <li><i class="fas fa-check"></i> Internet Connection</li>
+                        <li><i class="fas fa-check"></i> No prior programming experience required</li>
+                    </ul>
+                </div>
+                
+                <div class="audience-section">
+                    <h2>Who is this course for?</h2>
+                    <ul class="audience-list">
+                        <li><i class="fas fa-user"></i> Beginners - People who have little to no prior knowledge of data analytics</li>
+                        <li><i class="fas fa-user"></i> Business Professionals - Those who want to make data-driven decisions</li>
+                        <li><i class="fas fa-user"></i> Marketers - Professionals looking to analyze campaign performance</li>
+                        <li><i class="fas fa-user"></i> Students - Those preparing for careers in data-related fields</li>
+                        <li><i class="fas fa-user"></i> Entrepreneurs - Business owners who want to leverage data for growth</li>
+                    </ul>
+                </div>
+                
+                <div class="tags-section">
+                    <h2>Course Tags</h2>
+                    <div class="tags-container">
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Tableau</span>
+                        <span class="tag">Visualization</span>
+                        <span class="tag">Statistics</span>
+                        <span class="tag">Excel</span>
+                        <span class="tag">Business Intelligence</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Curriculum Tab -->
+            <div class="tab-content" id="curriculum">
+                <h2>Course Content</h2>
+                <p class="course-progress">0/42 Lessons (0% Complete)</p>
+                
+                <div class="course-content-list">
+                    <!-- INTRODUCTION -->
+                    <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title">
+                                <i class="fas fa-chevron-down"></i>
+                                <h3>Introduction to Data Analytics</h3>
+                            </div>
+                            <div class="section-details">
+                                <span>5 Lessons</span>
+                                <span>48 min</span>
+                            </div>
+                        </div>
+                        <div class="lecture-list">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>What is Data Analytics?</span></div><span class="lecture-duration">12:15</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Data Analytics in the African Context</span></div><span class="lecture-duration">10:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Types of Data Analytics</span></div><span class="lecture-duration">09:45</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Career Paths in Data Analytics</span></div><span class="lecture-duration">08:20</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Course Resources & Setup</span></div><span class="lecture-duration">PDF</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- DATA COLLECTION -->
+                    <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Data Collection & Cleaning</h3></div>
+                            <div class="section-details"><span>6 Lessons</span><span>65 min</span></div>
+                        </div>
+                        <div class="lecture-list" style="display: none;">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Data Sources & Collection Methods</span></div><span class="lecture-duration">14:20</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Data Cleaning Techniques</span></div><span class="lecture-duration">12:15</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Handling Missing Data</span></div><span class="lecture-duration">10:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Data Transformation</span></div><span class="lecture-duration">11:45</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Working with African Datasets</span></div><span class="lecture-duration">09:40</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Data Cleaning Cheat Sheet</span></div><span class="lecture-duration">PDF</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- SQL -->
+                    <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title"><i class="fas fa-chevron-right"></i><h3>SQL for Data Analysis</h3></div>
+                            <div class="section-details"><span>8 Lessons</span><span>95 min</span></div>
+                        </div>
+                        <div class="lecture-list" style="display: none;">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Introduction to SQL</span></div><span class="lecture-duration">12:10</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Basic SQL Queries</span></div><span class="lecture-duration">14:25</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Filtering and Sorting Data</span></div><span class="lecture-duration">11:20</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Aggregate Functions</span></div><span class="lecture-duration">13:45</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Joining Tables</span></div><span class="lecture-duration">15:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Advanced SQL Techniques</span></div><span class="lecture-duration">12:15</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>SQL for Business Analysis</span></div><span class="lecture-duration">10:40</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>SQL Practice Exercises</span></div><span class="lecture-duration">PDF</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- PYTHON -->
+                    <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Python for Data Analysis</h3></div>
+                            <div class="section-details"><span>7 Lessons</span><span>88 min</span></div>
+                        </div>
+                        <div class="lecture-list" style="display: none;">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Python Basics for Analytics</span></div><span class="lecture-duration">15:20</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Pandas for Data Manipulation</span></div><span class="lecture-duration">16:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Data Cleaning with Python</span></div><span class="lecture-duration">14:15</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Exploratory Data Analysis</span></div><span class="lecture-duration">12:40</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Statistical Analysis with Python</span></div><span class="lecture-duration">13:35</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Working with African Economic Data</span></div><span class="lecture-duration">10:25</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Python Code Repository</span></div><span class="lecture-duration">Download</span></div>
+                        </div>
+                    </div>
+                    
+                    <!-- DATA VISUALIZATION -->
+                               <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Data Visualization</h3></div>
+                            <div class="section-details"><span>6 Lessons</span><span>72 min</span></div>
+                        </div>
+                        <div class="lecture-list" style="display: none;">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Principles of Data Visualization</span></div><span class="lecture-duration">14:10</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Tableau Fundamentals</span></div><span class="lecture-duration">15:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Creating Interactive Dashboards</span></div><span class="lecture-duration">13:45</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Power BI for Business Reports</span></div><span class="lecture-duration">12:20</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Visualizing African Market Data</span></div><span class="lecture-duration">10:15</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Visualization Templates</span></div><span class="lecture-duration">Download</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Statistical Analysis</h3></div>
+                            <div class="section-details"><span>5 Lessons</span><span>60 min</span></div>
+                        </div>
+                        <div class="lecture-list" style="display: none;">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Descriptive Statistics</span></div><span class="lecture-duration">14:25</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Inferential Statistics</span></div><span class="lecture-duration">13:10</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Hypothesis Testing</span></div><span class="lecture-duration">12:45</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Correlation and Regression</span></div><span class="lecture-duration">11:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Statistical Analysis Cheat Sheet</span></div><span class="lecture-duration">PDF</span></div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="section-header">
+                            <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Capstone Project</h3></div>
+                            <div class="section-details"><span>5 Lessons</span><span>Project</span></div>
+                        </div>
+                        <div class="lecture-list" style="display: none;">
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Project Overview & Dataset</span></div><span class="lecture-duration">08:15</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Data Cleaning & Preparation</span></div><span class="lecture-duration">10:20</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Analysis & Visualization</span></div><span class="lecture-duration">12:40</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Insights & Recommendations</span></div><span class="lecture-duration">09:30</span></div>
+                            <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Project Submission Guidelines</span></div><span class="lecture-duration">PDF</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="reviews">
+                <div class="reviews-header">
+                    <div class="overall-rating">
+                        <div class="rating-number">4.8</div>
+                        <div>
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <div class="rating-count">Based on 124 reviews</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-signup">Write a Review</button>
+                </div>
+                
+                <div class="reviews-list">
+                    <div class="review-card">
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Amina Okeke</h4>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="review-date">2 weeks ago</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h3>Life-changing course!</h3>
+                            <p>This course completely transformed my career. I went from knowing nothing about data to landing a job as a junior data analyst in just 3 months. The African context examples made everything so relatable and practical.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">
+                                <img src="https://images.unsplash.com/photo-1588674845784-9d0c32777b3a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFmcmljYW4lMjBzdHVkZW50JTIwcG9pbnRpbmclMjBhdCUyMGElMjBsYXB0b3B8ZW58MHx8MHx8fDA%3D" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Oluwaseun Adebayo</h4>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="review-date">1 month ago</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h3>Excellent content and delivery</h3>
+                            <p>As a business owner, I needed to understand how to leverage data for decision making. This course broke down complex concepts into digestible chunks. The SQL and Tableau sections were particularly helpful for analyzing my business data.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">
+                                <img src="https://plus.unsplash.com/premium_photo-1663040533990-b75feed9aab1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEyfHx8ZW58MHx8fHx8" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Zahara Mohammed</h4>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="review-date">3 weeks ago</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <h3>Perfect for beginners</h3>
+                            <p>I was completely new to data analytics, but the instructor made everything so easy to understand. The hands-on projects helped me build a portfolio that impressed employers. I just received a job offer with a 40% salary increase!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="instructor">
+                <h2>About the Instructor</h2>
+                
+                <div class="instructor-profile">
+                    <div class="instructor-image">
+                        <img src="https://plus.unsplash.com/premium_photo-1689700526675-883c3578e7b9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fGFmcmljYW4lMjB0ZWNoJTIwc2Nob29sfGVufDB8fDB8fHww" alt="Chinedu Adeyemi">
+                    </div>
+                    <div class="instructor-bio">
+                        <h3>Chinedu Adeyemi</h3>
+                        <p class="instructor-title">Senior Data Analyst with 8+ years of experience</p>
+                        
+                        <p>Chinedu is a seasoned data professional with extensive experience in transforming raw data into actionable insights for businesses across Africa. He has worked with major corporations including MTN, Dangote Group, and Flutterwave, helping them leverage data for strategic decision-making.</p>
+                        
+                        <p>With a Master's degree in Data Science from the University of Lagos and multiple certifications in data analytics, Chinedu brings both academic knowledge and practical industry experience to his teaching. He is passionate about empowering African professionals with data skills that are relevant to our unique market context.</p>
+                        
+                        <p>Chinedu has trained over 2,000 students across the continent, with many securing positions in top companies or using their new skills to grow their businesses. His teaching methodology focuses on practical, real-world applications rather than just theoretical concepts.</p>
+                        
+                        <div class="instructor-stats">
+                            <div class="stat">
+                                <h4>2,000+</h4>
+                                <p>Students Trained</p>
+                            </div>
+                            <div class="stat">
+                                <h4>8+</h4>
+                                <p>Years Experience</p>
+                            </div>
+                            <div class="stat">
+                                <h4>94%</h4>
+                                <p>Career Impact Rate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image-footer">
+                    <p>MDTH Courses provides industry-relevant training to empower African professionals with future-proof skills.</p>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> +234 806 123 4567</p>
+                        <p><i class="fas fa-envelope"></i> info@mdthcourses.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Innovation Road, Lagos, Nigeria</p>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Popular Courses</h4>
+                    <ul>
+                        <li><a href="#">Data Analytics</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">UX/UI Design</a></li>
+                        <li><a href="#">Project Management</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 MDTH Courses. All rights reserved. Designed with <span>♥</span> for African professionals</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle Functionality
+        const toggleSwitch = document.querySelector('#checkbox');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggleSwitch.checked = true;
+        }
+        
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            }    
+        }
+        
+        toggleSwitch.addEventListener('change', switchTheme, false);
+        
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Tab Switching Functionality
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Remove active class from all tabs
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                link.classList.add('active');
+                document.getElementById(link.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Curriculum Section Accordion
+        const sectionHeaders = document.querySelectorAll('.section-header');
+        
+        sectionHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const lectureList = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                // Toggle lecture list visibility
+                if (lectureList.style.display === 'none') {
+                    lectureList.style.display = 'block';
+                    icon.classList.remove('fa-chevron-right');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    lectureList.style.display = 'none';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-right');
+                }
+            });
+        });
+        
+        // Video Controls Functionality (Basic Implementation)
+        const playBtn = document.querySelector('.play-btn');
+        const muteBtn = document.querySelector('.mute-btn');
+        const fullscreenBtn = document.querySelector('.fullscreen-btn');
+        const videoIframe = document.querySelector('.course-video iframe');
+        
+        playBtn.addEventListener('click', () => {
+            // This would need more complex implementation for actual video control
+            console.log('Play/Pause video');
+        });
+        
+        muteBtn.addEventListener('click', () => {
+            // This would need more complex implementation for actual video control
+            const icon = muteBtn.querySelector('i');
+            if (icon.classList.contains('fa-volume-up')) {
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-mute');
+            } else {
+                icon.classList.remove('fa-volume-mute');
+                icon.classList.add('fa-volume-up');
+            }
+        });
+        
+        fullscreenBtn.addEventListener('click', () => {
+            // This would need more complex implementation for actual fullscreen control
+            console.log('Toggle fullscreen');
+        });
+        
+        // Enroll Button Functionality
+        const enrollBtn = document.querySelector('.enroll-btn');
+        
+        enrollBtn.addEventListener('click', () => {
+            alert('Redirecting to enrollment page...');
+            // In a real implementation, this would redirect to a checkout page
+            // window.location.href = '/checkout';
+        });
+    </script>
+</body>
+</html>

@@ -664,6 +664,199 @@ app.delete('/api/users/:id', authenticateToken, async (req, res) => {
   await user.save();
   res.json({ message: 'User deleted successfully' });
 });
+// Get user data for dashboard
+app.get('/api/user-data', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    
+    // Get user
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    
+    // Get user's courses with progress
+    const userCourses = await UserCourseProgress.find({ userId })
+      .populate('courseId')
+      .sort({ lastAccessed: -1 });
+    
+    // Format courses for response
+    const courses = userCourses.map(uc => ({
+      id: uc._id,
+      title: uc.courseId.title,
+      image: uc.courseId.image,
+      completedModules: uc.completedModules,
+      totalModules: uc.courseId.totalModules,
+      progress: uc.progress
+    }));
+    
+    // Get recent activities
+    const activities = await Activity.find({ userId })
+      .sort({ time: -1 })
+      .limit(5)
+      .select('type title description time');
+    
+    // Get upcoming deadlines
+    const deadlines = await Deadline.find({ 
+      userId, 
+      dueDate: { $gte: new Date() } 
+    })
+      .sort({ dueDate: 1 })
+      .limit(3)
+      .select('type title description dueDate');
+    
+    // Calculate stats
+    const totalCourses = userCourses.length;
+    const totalHours = userCourses.reduce((sum, uc) => sum + (uc.courseId.duration * (uc.progress / 100)), 0);
+    const avgProgress = userCourses.length > 0 
+      ? userCourses.reduce((sum, uc) => sum + uc.progress, 0) / userCourses.length 
+      : 0;
+    const certificates = userCourses.filter(uc => uc.progress === 100).length;
+    
+    // Update user stats
+    user.stats = {
+      courses: totalCourses,
+      hours: Math.round(totalHours),
+      progress: Math.round(avgProgress),
+      certificates: certificates
+    };
+    await user.save();
+    
+    // Format response to match frontend expectations
+    res.json({
+      user: {
+        id: user._id,
+        name: user.fullName || user.username,
+        email: user.email,
+        role: 'Student',
+        avatar: user.avatar
+      },
+      stats: user.stats,
+      courses: courses,
+      upcoming: deadlines.map(d => ({
+        type: d.type,
+        title: d.title,
+        description: d.description,
+        dueDate: formatDueDate(d.dueDate)
+      })),
+      activities: activities.map(a => ({
+        type: a.type,
+        title: a.title,
+        description: a.description,
+        time: formatActivityTime(a.time)
+      }))
+    });
+  } catch (error) {
+    console.error('User data error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Update progress endpoint (for the course buttons)
+app.post('/api/update-progress', authenticateToken, async (req, res) => {
+  try {
+    const { courseId, progress } = req.body;
+    const userId = req.user.userId;
+    
+    const userProgress = await UserCourseProgress.findOne({ 
+      _id: courseId, 
+      userId 
+    }).populate('courseId');
+    
+    if (!userProgress) {
+      return res.status(404).json({ error: 'Progress record not found' });
+    }
+    
+    // Update progress
+    userProgress.progress = Math.min(100, Math.max(0, progress));
+    userProgress.completedModules = Math.floor((userProgress.progress / 100) * userProgress.courseId.totalModules);
+    userProgress.lastAccessed = new Date();
+    
+    await userProgress.save();
+    
+    // Create an activity record
+    const activity = new Activity({
+      userId,
+      type: 'video',
+      title: 'Progress updated',
+      description: `${userProgress.courseId.title} - Now at ${userProgress.progress}% complete`,
+      time: new Date()
+    });
+    await activity.save();
+    
+    // Return updated user data (same format as /api/user-data)
+    const user = await User.findById(userId);
+    const userCourses = await UserCourseProgress.find({ userId }).populate('courseId');
+    const activities = await Activity.find({ userId })
+      .sort({ time: -1 })
+      .limit(5)
+      .select('type title description time');
+    const deadlines = await Deadline.find({ 
+      userId, 
+      dueDate: { $gte: new Date() } 
+    })
+      .sort({ dueDate: 1 })
+      .limit(3)
+      .select('type title description dueDate');
+    
+    // Calculate updated stats
+    const totalCourses = userCourses.length;
+    const totalHours = userCourses.reduce((sum, uc) => sum + (uc.courseId.duration * (uc.progress / 100)), 0);
+    const avgProgress = userCourses.length > 0 
+      ? userCourses.reduce((sum, uc) => sum + uc.progress, 0) / userCourses.length 
+      : 0;
+    const certificates = userCourses.filter(uc => uc.progress === 100).length;
+    
+    // Update user stats
+    user.stats = {
+      courses: totalCourses,
+      hours: Math.round(totalHours),
+      progress: Math.round(avgProgress),
+      certificates: certificates
+    };
+    await user.save();
+    
+    // Format response to match frontend expectations
+    res.json({
+      user: {
+        id: user._id,
+        name: user.fullName || user.username,
+        email: user.email,
+        role: 'Student',
+        avatar: user.avatar
+      },
+      stats: user.stats,
+      courses: userCourses.map(uc => ({
+        id: uc._id,
+        title: uc.courseId.title,
+        image: uc.courseId.image,
+        completedModules: uc.completedModules,
+        totalModules: uc.courseId.totalModules,
+        progress: uc.progress
+      })),
+      upcoming: deadlines.map(d => ({
+        type: d.type,
+        title: d.title,
+        description: d.description,
+        dueDate: formatDueDate(d.dueDate)
+      })),
+      activities: activities.map(a => ({
+        type: a.type,
+        title: a.title,
+        description: a.description,
+        time: formatActivityTime(a.time)
+      }))
+    });
+  } catch (error) {
+    console.error('Progress update error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Logout endpoint
+app.post('/api/logout', (req, res) => {
+  // Since we're using JWT tokens stored on the client side,
+  // logout is handled by the client by removing the token
+  res.json({ message: 'Logged out successfully' });
+});
 
 // Use routes for serving HTML pages
 app.use('/', routes);

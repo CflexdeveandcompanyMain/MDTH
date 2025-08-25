@@ -3,451 +3,1291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDTH ui-ux-course-page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="courses css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/MDTH LOGO.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <title>UI/UX Design Course | MDTH Courses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+             :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4A40E5;
+            --accent-color: #FF6584;
+            --text-color: #333333;
+            --text-color-light: #666666;
+            --bg-color: #FFFFFF;
+            --bg-secondary: #F8F9FA;
+            --border-color: #E0E0E0;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
 
+        [data-theme="dark"] {
+            --primary-color: #7B74FF;
+            --secondary-color: #5D54FF;
+            --text-color: #FFFFFF;
+            --text-color-light: #CCCCCC;
+            --bg-color: #121212;
+            --bg-secondary: #1E1E1E;
+            --border-color: #333333;
+            --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--bg-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin: 0 1rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .auth-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .btn-signup {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-signup:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-login {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-login:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            position: relative;
+            width: 60px;
+            height: 34px;
+        }
+
+        .theme-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .slider i {
+            font-size: 14px;
+            color: white;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        /* Course Hero Section */
+        .course-hero {
+            padding: 3rem 0;
+            background-color: var(--bg-secondary);
+            transition: var(--transition);
+        }
+
+        .course-hero-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .course-video-container {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            background-color: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .course-video {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .course-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-controls button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 30%;
+            background: var(--primary-color);
+        }
+
+        .course-info-sidebar {
+            background-color: var(--bg-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+
+        .course-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 1.5rem;
+        }
+
+        .enroll-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .course-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            color: var(--text-color-light);
+        }
+
+        .course-features i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .instructor-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .instructor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-details h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .instructor-details p {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        /* Course Tabs */
+        .course-tabs {
+            padding: 3rem 0;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .tab-link {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-color-light);
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tab-link:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .course-description {
+            margin-bottom: 2rem;
+        }
+
+        .course-description p {
+            margin-bottom: 1rem;
+        }
+
+        .learning-objectives {
+            margin-bottom: 2rem;
+        }
+
+        .learn-list {
+            list-style: none;
+        }
+
+        .learn-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+        }
+
+        .learn-list i {
+            color: var(--primary-color);
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+        }
+
+        .requirements-section, .audience-section, .tags-section {
+            margin-bottom: 2rem;
+        }
+
+        .requirements-list, .audience-list {
+            list-style: none;
+        }
+
+        .requirements-list li, .audience-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .requirements-list i, .audience-list i {
+            color: var(--primary-color);
+            margin-right: 0.8rem;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .tag {
+            padding: 0.5rem 1rem;
+            background-color: var(--bg-secondary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            transition: var(--transition);
+        }
+
+        /* Curriculum */
+        .course-progress {
+            color: var(--text-color-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background-color: var(--bg-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-details {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        .lecture-list {
+            padding: 0 1.5rem;
+            background-color: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .lecture-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .lecture-item:last-child {
+            border-bottom: none;
+        }
+
+        .lecture-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lecture-info i {
+            color: var(--primary-color);
+        }
+
+        .lecture-duration {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        /* Reviews */
+        .reviews-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .overall-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .rating-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .rating-stars {
+            color: #FFC107;
+            margin-bottom: 0.5rem;
+        }
+
+        .rating-count {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        .reviews-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+
+        .reviewer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reviewer-info h4 {
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+
+        .review-date {
+            color: var(--text-color-light);
+            font-size: 0.8rem;
+        }
+
+        .review-content p {
+            margin-top: 0.5rem;
+        }
+
+        /* Instructor */
+        .instructor-profile {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .instructor-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .instructor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .instructor-bio p {
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--bg-secondary);
+            padding: 3rem 0 1rem;
+            transition: var(--transition);
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--text-color-light);
+        }
+
+        .footer-contact i {
+            margin-right: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-color-light);
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color-light);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .logo-image-footer {
+            height: 40px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .course-hero-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .instructor-profile {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--bg-color);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-auth {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+            
+            .tab-link {
+                padding: 0.8rem 1rem;
+            }
+        }
+        /* Default: show on desktop */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Hide on mobile (screen width <= 768px) */
+@media (max-width: 768px) {
+    .auth-buttons {
+        display: none;
+    }
+}
+
+    </style>
 </head>
 <body>
-<!-- Navigation Bar -->
-<nav class="navbar">
-  <div class="logo">
-      <a href="#">
-          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
-      </a>
-  </div>
-  <div class="course-back" onclick="goToPreviousPage()">
-    <span>
-      <span class="arrow">←</span> Courses
-    </span>
-  </div>
-  
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li class="dropdown">
-      <a href="courses.html">Courses</a>
-      <span class="caret"></span>
-      <ul class="dropdown-menu">
-          <li><a href="programming.html">Programming</a></li>
-          <li><a href="cyber-security.html">Cyber Security</a></li>
-          <li><a href="AI.html">AI</a></li>
-          <li><a href="graphic-design.html">Graphic Design</a></li>
-          <li><a href="ui-ux.html">UI/UX Design</a></li>
-          <li><a href="project-management.html">Project Management</a></li>
-          <li><a href="video-editing.html">Video Editing</a></li>
-          <li><a href="content-marketing.html">Content Marketing</a></li>
-          <li><a href="data-analysis.html">Data Analytics</a></li>
-      </ul>
-    </li>
-  
-    <li><a href="about us.html">About Us</a></li>
-    <li><a href="contact us .html">Contact</a></li>
-    <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-    <a href="signup.html" class="btn-signup">Sign Up</a>
-    <a href="login.html" class="btn-login">Login</a>
-</div>
-<!-- Hamburger Icon -->
-<div class="hamburger" id="hamburger">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-</div>
-</nav>
-<!-- Side Menu (hidden by default) -->
-<div class="side-menu" id="sideMenu">
-<div class="side-menu-header">
-  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
-  <div class="cancel-icon" id="cancelIcon">
-    <span>&times;</span>
-  </div>
-</div>
-<hr class="menu-separator">
-<div class="theme-switcher">
-  <p>Switch Theme</p>
-  <button id="themeToggle" class="theme-icon">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-  </button>
-</div>
-<ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li class="dropdown">
-    <a href="courses.html">Courses</a>
-    <span class="caret"></span>
-    <ul class="dropdown-menu">
-      <li><a href="programming.html">Programming</a></li>
-      <li><a href="cyber-security.html">Cyber Security</a></li>
-      <li><a href="AI.html">AI</a></li>
-      <li><a href="graphic-design.html">Graphic Design</a></li>
-      <li><a href="ui-ux.html">UI/UX Design</a></li>
-      <li><a href="project-management.html">Project Management</a></li>
-      <li><a href="video-editing.html">Video Editing</a></li>
-      <li><a href="content-marketing.html">Content Marketing</a></li>
-      <li><a href="data-analysis.html">Data Analytics</a></li>
-    </ul>
-  </li>
-
-  <li><a href="about us.html">About Us</a></li>
-  <li><a href="contact us .html">Contact</a></li>
-  <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-  <a href="signup.html" class="btn-signup">Sign Up</a>
-  <a href="login.html" class="btn-login">Login</a>
-</div>
-<hr class="menu-separator">
-</div>
-
-
-
-<header class="uiux-hero-section">
-  <div class="content-wrapper">
-      <div class="hero-text">
-          <h1>UX/UI Design Program</h1>
-          <p>
-            Master the art of creating intuitive user interfaces (UI) and enhancing user experiences (UX). 
-            Learn design principles, wireframing, prototyping, and usability testing techniques. </p>
-            <button class="enrol-btn" 
-            onclick="saveCourseDetails('UX/UI Design Program', '  Master the art of creating intuitive user interfaces (UI) and enhancing user experiences (UX). Learn design principles, wireframing, prototyping, and usability testing techniques.', 'images/program 5 image .jpg')">
-            Enrol Now
-            </button>
-      </div>
-      <div class="image-wrapper">
-        <img src="courses img/bottom_left_programming_img.png" alt="Programming Illustration">
-      </div>
-  </div>
-</header>
-
-<div class="course-overview">
-  <div class="course-content-wrapper">
-    <div class="course-image">
-      <img src="courses img/uiux image .jpg" alt="ui-ux Course">
-    </div>
-    <div class="course-details">
-      <div class="detail-card">
-        <h4>What you'll learn</h4>
-        <ul>
-          <li>Introduction to programming</li>
-          <li>App Development</li>
-          <li>App Development</li>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact us">Contact</a></li>
+            <li><a href="/blog">Blog</a></li>
+            
+            <div class="mobile-auth">
+                <a href="/signup" class="btn btn-signup">Sign Up</a>
+                <a href="/login" class="btn btn-login">Login</a>
+            </div>
         </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Skill level</h4>
-        <ul>
-          <li>Beginner</li>
-          <li>Intermediate</li>
-          <li>Advanced</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Time commitment</h4>
-        <ul>
-          <li>3 months</li>
-          <li>3-5 Hours/week</li>
-          <li>3-5 Hours/week</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Mode of learning</h4>
-        <ul>
-          <li>Self-paced</li>
-          <li>Instructor-led</li>
-          <li>Expo/ Special cent..</li>
-        </ul>
-      </div>
+        
+        <div class="auth-buttons">
+            <a href="/signup" class="btn btn-signup">Sign Up</a>
+            <a href="/login" class="btn btn-login">Login</a>
+            
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <button class="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Course Hero Section -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="course-hero-content">
+                <div class="course-video-container">
+                    <div class="course-video">
+                        <!-- Cloudinary Video Embed -->
+                        <iframe 
+                            src="https://cdn.pixabay.com/video/2024/09/24/233043_large.mp4" 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <div class="video-controls">
+                            <button class="play-btn"><i class="fas fa-play"></i></button>
+                            <div class="progress-bar">
+                                <div class="progress"></div>
+                            </div>
+                            <button class="mute-btn"><i class="fas fa-volume-up"></i></button>
+                            <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="course-info-sidebar">
+                    <div class="course-price">₦45,000</div>
+                    <button class="enroll-btn">Enroll Now</button>
+                    
+                    <ul class="course-features">
+                        <li><i class="far fa-clock"></i> 2 Months Duration</li>
+                        <li><i class="fas fa-film"></i> 35 Video Lessons</li>
+                        <li><i class="fas fa-certificate"></i> Certificate of Completion</li>
+                        <li><i class="fas fa-infinity"></i> Lifetime Access</li>
+                        <li><i class="fas fa-mobile-alt"></i> Access on Mobile and TV</li>
+                    </ul>
+                    
+                    <div class="instructor-info">
+                        <div class="instructor-avatar">
+                            <img src="https://plus.unsplash.com/premium_photo-1707155465391-5cfc46746a34?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE1fHx8ZW58MHx8fHx8" alt="Instructor">
+                        </div>
+                        <div class="instructor-details">
+                            <h4>Ngozi Eze</h4>
+                            <p>Senior UI/UX Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Content Tabs -->
+    <section class="course-tabs">
+        <div class="container">
+            <div class="tabs-header">
+                <div class="tab-link active" data-tab="overview">Overview</div>
+                <div class="tab-link" data-tab="curriculum">Curriculum</div>
+                <div class="tab-link" data-tab="reviews">Reviews</div>
+                <div class="tab-link" data-tab="instructor">Instructor</div>
+            </div>
+            
+            <!-- Overview Tab -->
+            <div class="tab-content active" id="overview">
+                <div class="course-description">
+                    <h2>UI/UX Design Pro Course</h2>
+                    <p>Master the art of creating stunning user interfaces and experiences with our comprehensive UI/UX Design Pro course. Learn industry-standard tools like Figma and Adobe XD while understanding the fundamental principles of design thinking, user research, and interaction design.</p>
+                    <p>This course is designed for beginners and intermediate designers who want to build a strong foundation in UI/UX design and create portfolio-worthy projects that will impress employers and clients alike.</p>
+                </div>
+                
+                <div class="learning-objectives">
+                    <h2>What Will You Learn?</h2>
+                    <ul class="learn-list">
+                        <li><i class="fas fa-check-circle"></i> Completely understand the UI/UX design process from research to implementation</li>
+                        <li><i class="fas fa-check-circle"></i> How to conduct user research and create user personas</li>
+                        <li><i class="fas fa-check-circle"></i> Understanding design principles, color theory, and typography</li>
+                        <li><i class="fas fa-check-circle"></i> Master industry tools: Figma, Adobe XD, and prototyping tools</li>
+                        <li><i class="fas fa-check-circle"></i> Create wireframes, mockups, and interactive prototypes</li>
+                        <li><i class="fas fa-check-circle"></i> Design responsive layouts for web and mobile applications</li>
+                        <li><i class="fas fa-check-circle"></i> Conduct usability testing and incorporate feedback</li>
+                        <li><i class="fas fa-check-circle"></i> Build a professional design portfolio to showcase your skills</li>
+                    </ul>
+                </div>
+                
+                <div class="requirements-section">
+                    <h2>Requirements</h2>
+                    <ul class="requirements-list">
+                        <li><i class="fas fa-check"></i> An Open Mind & Willingness to Learn</li>
+                        <li><i class="fas fa-check"></i> A computer/Laptop (Mac or Windows)</li>
+                        <li><i class="fas fa-check"></i> Internet Connection</li>
+                        <li><i class="fas fa-check"></i> No prior design experience required</li>
+                    </ul>
+                </div>
+                
+                <div class="audience-section">
+                    <h2>Who is this course for?</h2>
+                    <ul class="audience-list">
+                        <li><i class="fas fa-user"></i> Beginners - People who have little to no prior knowledge of UI/UX design</li>
+                        <li><i class="fas fa-user"></i> Developers - Programmers who want to expand their skill set into design</li>
+                        <li><i class="fas fa-user"></i> Graphic Designers - Professionals looking to transition into UI/UX design</li>
+                        <li><i class="fas fa-user"></i> Product Managers - Professionals who want to better understand the design process</li>
+                        <li><i class="fas fa-user"></i> Entrepreneurs - Business owners who want to design their own digital products</li>
+                    </ul>
+                </div>
+                
+                <div class="tags-section">
+                    <h2>Course Tags</h2>
+                    <div class="tags-container">
+                        <span class="tag">UI Design</span>
+                        <span class="tag">UX Research</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">Adobe XD</span>
+                        <span class="tag">Wireframing</span>
+                        <span class="tag">Prototyping</span>
+                        <span class="tag">User Testing</span>
+                        <span class="tag">Design Thinking</span>
+                    </div>
+                </div>
+            </div>
+            
+              
+        <!-- Curriculum Tab -->
+        <div class="tab-content" id="curriculum">
+            <h2>Course Content</h2>
+            <p class="course-progress">0/31 Lessons (0% Complete)</p>
+            
+            <div class="course-content-list">
+                <!-- INTRODUCTION -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-chevron-down"></i>
+                            <h3>Introduction to UI/UX Design</h3>
+                        </div>
+                        <div class="section-details">
+                            <span>5 Lessons</span>
+                            <span>45 min</span>
+                        </div>
+                    </div>
+                    <div class="lecture-list">
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>What is UI/UX Design?</span></div><span class="lecture-duration">10:25</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Difference between UI and UX</span></div><span class="lecture-duration">08:15</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Design Thinking Process</span></div><span class="lecture-duration">12:40</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>UI/UX Career Paths</span></div><span class="lecture-duration">07:30</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Course Resources</span></div><span class="lecture-duration">PDF</span></div>
+                    </div>
+                </div>
+                
+                <!-- USER RESEARCH -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chevron-right"></i><h3>User Research & Personas</h3></div>
+                        <div class="section-details"><span>4 Lessons</span><span>38 min</span></div>
+                    </div>
+                    <div class="lecture-list" style="display: none;">
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Research Methods</span></div><span class="lecture-duration">12:15</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Creating User Personas</span></div><span class="lecture-duration">10:30</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Empathy Mapping</span></div><span class="lecture-duration">08:45</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>User Research Template</span></div><span class="lecture-duration">PDF</span></div>
+                    </div>
+                </div>
+                
+                <!-- WIREFRAMING -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Wireframing & Prototyping</h3></div>
+                        <div class="section-details"><span>6 Lessons</span><span>72 min</span></div>
+                    </div>
+                    <div class="lecture-list" style="display: none;">
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Low-Fidelity Wireframes</span></div><span class="lecture-duration">15:20</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>High-Fidelity Mockups</span></div><span class="lecture-duration">18:30</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Interactive Prototyping</span></div><span class="lecture-duration">14:15</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Design Systems</span></div><span class="lecture-duration">12:40</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Responsive Design Principles</span></div><span class="lecture-duration">08:35</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Wireframing Kit</span></div><span class="lecture-duration">Figma</span></div>
+                    </div>
+                </div>
+                
+                <!-- VISUAL DESIGN -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Visual Design Principles</h3></div>
+                        <div class="section-details"><span>5 Lessons</span><span>55 min</span></div>
+                    </div>
+                    <div class="lecture-list" style="display: none;">
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Typography Basics</span></div><span class="lecture-duration">12:10</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Color Theory in UI</span></div><span class="lecture-duration">14:25</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Spacing & Layout Grids</span></div><span class="lecture-duration">11:20</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Visual Hierarchy</span></div><span class="lecture-duration">09:45</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Design Style Guide</span></div><span class="lecture-duration">PDF</span></div>
+                    </div>
+                </div>
+                
+                <!-- FIGMA MASTERY -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Figma Mastery</h3></div>
+                        <div class="section-details"><span>7 Lessons</span><span>85 min</span></div>
+                    </div>
+                    <div class="lecture-list" style="display: none;">
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Getting Started with Figma</span></div><span class="lecture-duration">10:15</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Frames & Components</span></div><span class="lecture-duration">13:30</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Auto-Layout Essentials</span></div><span class="lecture-duration">12:40</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Prototyping in Figma</span></div><span class="lecture-duration">15:25</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Plugins & Widgets</span></div><span class="lecture-duration">11:35</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Collaboration & Handoff</span></div><span class="lecture-duration">13:10</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Figma Resource Kit</span></div><span class="lecture-duration">Download</span></div>
+                    </div>
+                </div>
+                
+                <!-- PORTFOLIO PROJECT -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chevron-right"></i><h3>Portfolio Project</h3></div>
+                        <div class="section-details"><span>4 Lessons</span><span>48 min</span></div>
+                    </div>
+                    <div class="lecture-list" style="display: none;">
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Choosing Your Project Brief</span></div><span class="lecture-duration">10:30</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Designing the Wireframes</span></div><span class="lecture-duration">12:20</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-play-circle"></i><span>Building High-Fidelity Designs</span></div><span class="lecture-duration">14:15</span></div>
+                        <div class="lecture-item"><div class="lecture-info"><i class="fas fa-file-alt"></i><span>Portfolio Submission Guidelines</span></div><span class="lecture-duration">PDF</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- Reviews Tab -->
+<div class="tab-content" id="reviews">
+    <div class="reviews-section">
+        <div class="reviews-header">
+            <h2>Student Reviews</h2>
+            <div class="overall-rating">
+                <div class="rating-number">4.8</div>
+                <div>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="rating-count">Based on 247 reviews</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reviews-list">
+            <div class="review-card">
+                <div class="reviewer">
+                    <div class="reviewer-avatar">
+                        <img src="https://images.unsplash.com/photo-1646300291345-e7f3f97986ed?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGFmcmljYW4lMjB0ZWNoJTIwc2Nob29sfGVufDB8fDB8fHww" alt="Chinedu Okoro">
+                    </div>
+                    <div class="reviewer-info">
+                        <h4>Chinedu Okoro</h4>
+                        <div class="review-date">2 weeks ago</div>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>This course completely transformed my understanding of African design principles. The instructor explains complex concepts with Nigerian examples that made everything relatable. The hands-on projects were challenging but incredibly rewarding.</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="reviewer">
+                    <div class="reviewer-avatar">
+                        <img src="https://media.istockphoto.com/id/1770699822/photo/happy-schoolgirl-in-computer-class.webp?a=1&b=1&s=612x612&w=0&k=20&c=_XZtfQnVt4rKXZJr3a0ePWz9zXtDLB68f8EQz-nTGCs=" alt="Amina Yusuf">
+                    </div>
+                    <div class="reviewer-info">
+                        <h4>Amina Yusuf</h4>
+                        <div class="review-date">1 month ago</div>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>As a complete beginner from Lagos, I was nervous about starting this course, but the structured approach made it easy to follow. The feedback on my projects was detailed and helped me improve quickly. Now I'm creating designs that reflect our rich African heritage!</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="reviewer">
+                    <div class="reviewer-avatar">
+                        <img src="https://plus.unsplash.com/premium_photo-1689700527592-3c3aadca400c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tunde Adebayo">
+                    </div>
+                    <div class="reviewer-info">
+                        <h4>Tunde Adebayo</h4>
+                        <div class="review-date">3 weeks ago</div>
+                    </div>
+                </div>
+                <div class="review-content">
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>The design tutorials were exceptional with a focus on African aesthetics. I went from knowing nothing to creating professional designs that celebrate our culture in just a few weeks. The course materials are comprehensive and well-organized.</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="about-course">
-    <h2>About this Course</h2>
-    <p>
-   Welcome to our UI/UX Design course! This comprehensive program will equip you with the knowledge and 
-   skills to create exceptional user interfaces (UI) and enhance user experiences (UX). Dive into the world of
-   design thinking, wireframing, prototyping, and usability testing. Below is an overview of the curriculum. 
-   Welcome to our UI/UX Design course! This comprehensive program will equip you with the knowledge and skills
-   to create exceptional user interfaces (UI) and enhance user experiences (UX). Dive into the world of design
-   thinking, wireframing, prototyping, and usability testing. Below is an overview of the curriculum.</p>
 </div>
+
+<!-- Instructor Tab -->
+<div class="tab-content" id="instructor">
+    <div class="instructor-section">
+        <h2>About the Instructor</h2>
+        <div class="instructor-profile">
+            <div class="instructor-image">
+                <img src="https://plus.unsplash.com/premium_photo-1707155465798-dd7c3e9c0d6c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YWZyaWNhbiUyMHRlY2glMjBzY2hvb2x8ZW58MHx8MHx8fDA%3D" alt="Ngozi Eze">
+            </div>
+            <div class="instructor-bio">
+                <h3>Ngozi Eze</h3>
+                <p>Senior African Design Specialist with over 8 years of experience in the industry. Ngozi has worked with leading pan-African companies including Jumia, Andela, and Flutterwave, where she helped design user experiences that resonate with African users.</p>
+                <p>She is passionate about teaching and has mentored hundreds of aspiring designers across Africa through her courses and workshops. Ngozi believes in practical, hands-on learning that prepares students for real-world design challenges while celebrating African visual heritage.</p>
+                <p>Her design philosophy centers around creating intuitive, accessible, and culturally relevant experiences that solve real user problems while celebrating Africa's diverse visual traditions.</p>
+            </div>
+        </div>
+    </div>
 </div>
+            </div>
+        </div>
+    </section>
 
-<div class="curriculum-container">
-  <h2>Curriculum</h2>
-  <hr class="straight-line">
-  <div class="modules">
-      <div class="module">
-          <button class="module-button active">
-              Module 1: Introduction to UI/UX
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container active">
-              <div class="lessons">
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 1</h3>
-                              <h4>Visual Design</h4>
-                              <p>This includes the colors, typography, icons, and overall visual style of the product. The aim is to create an appealing and cohesive look for a user-friendly experience.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 2</h3>
-                              <h4>Layout</h4>
-                              <p>Organizing elements on the screen in a way that is intuitive and user-friendly. This involves placing buttons, text, images, and other components effectively.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 3</h3>
-                              <h4>Interactive Design</h4>
-                              <p>Designing components like buttons, sliders, and forms that users interact with. Ensuring these elements are easy to use and respond correctly to user actions.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-contact">
+                    <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image-footer">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Education Street, Learning City</p>
+                    <p><i class="fas fa-phone"></i> +234 123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> info@mdthcourses.com</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Popular Courses</h4>
+                    <ul>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Data Science</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                        <li><a href="#">Graphic Design</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 <span>MDTH Courses</span>. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-      <div class="module">
-          <button class="module-button">
-              Module 2: User Interface UI
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 3: User Experience UX
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 4: How UI and UX Work Together
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 5: Best Practices for UI/UX Design
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 6: Best Practices for UI/UX Design
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 7: Wireframing and Prototyping
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-
-      <div class="module">
-          <button class="module-button">
-              Module 8: Usability Testing
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-  </div>
-</div>
-<script>
-  document.querySelectorAll('.module-button').forEach(button => {
-      button.addEventListener('click', () => {
-          // Remove active class from all buttons and containers
-          document.querySelectorAll('.module-button').forEach(b => b.classList.remove('active'));
-          document.querySelectorAll('.lessons-container').forEach(c => c.classList.remove('active'));
-          
-          // Add active class to clicked button and its container
-          button.classList.toggle('active');
-          button.nextElementSibling.classList.toggle('active');
-      });
-  });
-</script>
-
-<section class="testimonial-section">
-  <h2>Experiences Shared by Our Clients</h2>
-  <p>Discover how our clients have found solutions and satisfaction with our services.</p>
-  <div class="testimonial-slider">
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/adekunle.jpeg" alt="" class="testimonial-img">
-      <p>MDTH transformed my coding skills! The hands-on approach and expert guidance helped me build real-world projects confidently.</p>
-      <h4>Adebayo Adekunle</h4>
-      <span>Full-Stack Developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/chioma.jpeg" alt="" class="testimonial-img">
-      <p>MDTH provided the perfect learning environment. The instructors are knowledgeable, and the projects helped me master front-end development.</p>
-      <h4>Chioma Okafor</h4>
-      <span>UI/UX Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/tunde.png" alt="" class="testimonial-img">
-      <p>Before MDTH, I struggled with JavaScript. Now, I build functional web applications with ease! The courses are well-structured and beginner-friendly.</p>
-      <h4>Alex Ogunleye</h4>
-      <span>Software Engineer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/aisha.jpeg" alt="" class="testimonial-img">
-      <p>The data science program at MDTH was an eye-opener! I learned Python, machine learning, and data visualization in a simplified way.</p>
-      <h4>Aisha Bello</h4>
-      <span>Data Analyst</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/segun.jpeg" alt="" class="testimonial-img">
-      <p>MDTH’s cybersecurity course gave me the confidence to work on real security projects. The hands-on labs were a game-changer!</p>
-      <h4>Segun Alabi</h4>
-      <span>Cybersecurity Specialist</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/fadlu.jpg" alt="" class="testimonial-img">
-      <p>The mentorship and practical approach at MDTH made my journey into tech smooth. I now work as a freelance web developer!</p>
-      <h4>Fadlurahman</h4>
-      <span>Freelance Web Developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/Abdulkhaliq.jpg" alt="" class="testimonial-img">
-      <p>MDTH played a huge role in my growth as a front-end developer.</p>
-      <h4>Abdulkhaliq Adenola</h4>
-      <span>Front-end web developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/abiola.jpeg" alt="" class="testimonial-img">
-      <p>The graphic design course was exceptional! MDTH's training refined my skills in Adobe Photoshop and Illustrator.</p>
-      <h4>Abiola Oladipo</h4>
-      <span>Graphic Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/funke.jpeg" alt="" class="testimonial-img">
-      <p>The hands-on projects at MDTH made my learning experience enjoyable.</p>
-      <h4>Funke Adeyemi</h4>
-      <span> Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/emeka.jpeg" alt="" class="testimonial-img">
-      <p>Thanks to MDTH, I now understand  how to create systems and technologies that can perform tasks that typically require human intelligence.</p>
-      <h4>Emeka Uche</h4>
-      <span>AI expert</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/zinab.jpeg" alt="" class="testimonial-img">
-      <p>MDTH's content marketing program taught me  how to create and distribute valuable, relevant, and consistent content to attract and engage a target audience.</p>
-      <h4>Zainab Yusuf</h4>
-      <span>content-marketer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/ibrahim.jpeg" alt="" class="testimonial-img">
-      <p>MDTH's project management course taught me the process of planning, executing, and overseeing projects to achieve specific goals within defined constraints such as time, budget, and scope.</p>
-      <h4>Ibrahim</h4>
-      <span>Project Manager</span>
-    </div>
-  </div>
-
-  <div class="slider-controls">
-    <button id="prev-btn">&larr;</button>
-    <button id="next-btn">&rarr;</button>
-  </div>
-</section>
-  
-
-
-  
-
-    
-
-
-<footer class="footer">
-    <div class="footer-container">
-      <div class="footer-contact">
-    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
-        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
-        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
-        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
-
-      </div>
-      <div class="footer-links">
-        <h4>PAGES</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about us.html">About</a></li>
-          <li><a href="project.html">Project</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact us .html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>SOCIAL MEDIA</h4>
-        <ul>
-          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
-          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
-          <li><a href="#">Dribble</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>UTILITIES</h4>
-        <ul>
-          <li><a href="#">Style Guide</a></li>
-          <li><a href="#">Change log</a></li>
-          <li><a href="#">Licenses</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
-    </div>
-  </footer>
- 
-    <script src="script.js"></script>
+    <script>
+        // JavaScript for tab functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const tabId = link.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    tabLinks.forEach(tab => tab.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to current tab and content
+                    link.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Section accordion functionality
+            const sectionHeaders = document.querySelectorAll('.section-header');
+            
+            sectionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const lectureList = header.nextElementSibling;
+                    const icon = header.querySelector('i');
+                    
+                    // Toggle lecture list visibility
+                    if (lectureList.style.display === 'none' || !lectureList.style.display) {
+                        lectureList.style.display = 'block';
+                        icon.classList.remove('fa-chevron-right');
+                        icon.classList.add('fa-chevron-down');
+                    } else {
+                        lectureList.style.display = 'none';
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-right');
+                    }
+                });
+            });
+            
+            // Dark mode toggle functionality
+            const toggleSwitch = document.querySelector('#checkbox');
+            const currentTheme = localStorage.getItem('theme');
+            
+            if (currentTheme) {
+                document.documentElement.setAttribute('data-theme', currentTheme);
+                
+                if (currentTheme === 'dark') {
+                    toggleSwitch.checked = true;
+                }
+            }
+            
+            function switchTheme(e) {
+                if (e.target.checked) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                }    
+            }
+            
+            toggleSwitch.addEventListener('change', switchTheme, false);
+            
+            // Mobile menu functionality
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                // Change icon based on menu state
+                const icon = hamburger.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
