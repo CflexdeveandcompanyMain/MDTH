@@ -72,7 +72,7 @@ npm install
 ```
 Setup environment variables and run 
 ```
-npm run dev
+npx server.js
 ```
 Browse Courses and select one to enroll
 
