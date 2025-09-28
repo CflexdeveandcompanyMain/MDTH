@@ -628,6 +628,166 @@
 
       // Initialize real-time validation
       setupRealTimeValidation();
+      // Email Verification Functionality
+class EmailVerification {
+    constructor() {
+        this.verificationStep = 1; // 1: signup, 2: verify email
+        this.userData = null;
+    }
+
+    async sendVerificationCode(email) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/send-verification-code`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to send verification code');
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Error sending verification code:', error);
+            throw error;
+        }
+    }
+
+    async verifyCode(email, code) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/verify-code`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, code })
+            });
+
+            const data = await response.json();
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Verification failed');
+            }
+
+            return data;
+        } catch (error) {
+            console.error('Error verifying code:', error);
+            throw error;
+        }
+    }
+
+    showVerificationStep() {
+        // Hide signup form, show verification form
+        document.getElementById('signupForm').style.display = 'none';
+        document.getElementById('verificationForm').style.display = 'block';
+    }
+
+    showSignupStep() {
+        // Show signup form, hide verification form
+        document.getElementById('signupForm').style.display = 'block';
+        document.getElementById('verificationForm').style.display = 'none';
+    }
+}
+
+// Initialize email verification
+const emailVerification = new EmailVerification();
+
+// Modify your signup form submission
+if (signupForm) {
+    signupForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const fullName = document.getElementById('fullname')?.value.trim();
+        const username = document.getElementById('username')?.value.trim();
+        const email = document.getElementById('email')?.value.trim();
+        const passwordValue = password?.value;
+        const confirmPasswordValue = confirmPassword?.value;
+        const termsChecked = document.getElementById('terms')?.checked;
+        
+        // Client-side validation (your existing validation code)
+        // ... [your existing validation code] ...
+        
+        // Store user data for later use
+        emailVerification.userData = {
+            fullName,
+            username,
+            email,
+            password: passwordValue
+        };
+
+        // Disable submit button and show loading state
+        const submitBtn = signupForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending Code...';
+        submitBtn.disabled = true;
+        
+        try {
+            // Send verification code
+            await emailVerification.sendVerificationCode(email);
+            
+            // Show verification step
+            emailVerification.showVerificationStep();
+            
+            showMessage('Verification code sent to your email!', 'success');
+            
+        } catch (error) {
+            console.error('Error:', error);
+            showMessage(error.message || 'Failed to send verification code', 'error');
+        } finally {
+            // Re-enable submit button
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+}
+
+// Add verification form submission
+const verificationForm = document.getElementById('verificationForm');
+if (verificationForm) {
+    verificationForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const codeInputs = document.querySelectorAll('.code-input');
+        const code = Array.from(codeInputs).map(input => input.value).join('');
+        
+        if (code.length !== 6) {
+            showMessage('Please enter the 6-digit code', 'error');
+            return;
+        }
+
+        const submitBtn = verificationForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Verifying...';
+        submitBtn.disabled = true;
+
+        try {
+            // Verify the code
+            await emailVerification.verifyCode(emailVerification.userData.email, code);
+            
+            // If verification successful, proceed with registration
+            const result = await auth.register(emailVerification.userData);
+            
+            showMessage('Account created successfully!', 'success');
+            
+            if (successModal) {
+                successModal.classList.add('show');
+            }
+            
+        } catch (error) {
+            console.error('Verification error:', error);
+            showMessage(error.message || 'Verification failed', 'error');
+        } finally {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+}
 
       // Add event listener for DOMContentLoaded to ensure everything loads properly
       document.addEventListener('DOMContentLoaded', function() {

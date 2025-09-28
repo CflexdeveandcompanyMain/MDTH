@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MDTH Student Dashboard - Track your learning progress, access courses, and achieve your tech career goals">
+    <title>MDTH Digital World | Professional LMS Dashboard</title>
+    
+    <!-- Preload Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" as="style">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo">
+                <span>MDTH Dashboard</span>
+            </div>
+            
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-book"></i>
+                    <span>My Courses</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-tasks"></i>
+                    <span>Assignments</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                </a>
+                
+                <div class="menu-label">Resources</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Video Library</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-file-download"></i>
+                    <span>Downloads</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certificates</span>
+                </a>
+                
+                <div class="menu-label">Account</div>
+                
+                <a href="#" class="menu-item">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="#" class="menu-item" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="dashboard-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search courses, materials...">
+                </div>
+                
+                <div class="header-actions">
+                    <div class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    
+                    <div class="theme-toggle">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img id="userAvatar" src="https://ui-avatars.com/api/?name=User&background=2563EB&color=fff" alt="User Avatar">
+                        </div>
+                        <div class="user-info">
+                            <div class="user-name" id="userName">Loading...</div>
+                            <div class="user-role" id="userRole">Student</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personalized Greeting -->
+            <div class="widget" style="margin-bottom: 25px;">
+                <h2 id="greeting">Hi there! 👋</h2>
+                <p id="greetingSubtitle">Ready to continue your learning journey?</p>
+            </div>
+            
+            <!-- Dashboard Widgets -->
+            <div class="dashboard-widgets">
+                <!-- Stats Widget -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Learning Stats</h3>
+                    </div>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-value" id="statCourses">0</div>
+                            <div class="stat-label">Courses</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="statHours">0</div>
+                            <div class="stat-label">Hours</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="statProgress">0%</div>
+                            <div class="stat-label">Avg. Progress</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="statCertificates">0</div>
+                            <div class="stat-label">Certificates</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Widget -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Overall Progress</h3>
+                    </div>
+                    <div class="progress-circle">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="progress-circle-bg" cx="60" cy="60" r="54"></circle>
+                            <circle class="progress-circle-value" cx="60" cy="60" r="54" stroke-dashoffset="339.3"></circle>
+                        </svg>
+                        <div class="progress-text">
+                            <div class="progress-percent" id="overallProgress">0%</div>
+                            <div class="progress-label">Completed</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Upcoming Widget -->
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Upcoming Deadlines</h3>
+                        <div class="widget-action">View All</div>
+                    </div>
+                    <div class="activity-list" id="upcomingList">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Loading assignments...</div>
+                                <div class="activity-desc">Please wait</div>
+                                <div class="activity-time">Due: ...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- My Courses Section -->
+            <div class="section-title">
+                <h2>My Courses</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Courses will be populated by JavaScript -->
+                <div class="course-card">
+                    <div class="course-image">
+                        <div style="height:100%; display:flex; align-items:center; justify-content:center; background:#f0f0f0;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Loading course data...</h3>
+                        <div class="course-info">
+                            <span>0/0 Modules</span>
+                            <span>0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <button class="course-action">Continue Learning</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Available Courses Section -->
+            <div class="section-title">
+                <h2>Available Courses</h2>
+                <a href="#" class="view-all">Browse All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="courses-grid" id="availableCoursesGrid">
+                <!-- Available courses will be populated by JavaScript -->
+            </div>
+            
+            <!-- Recent Activity Section -->
+            <div class="section-title">
+                <h2>Recent Activity</h2>
+                <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="widget">
+                <div class="activity-list" id="activityList">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Loading activities...</div>
+                            <div class="activity-desc">Please wait while we fetch your data</div>
+                            <div class="activity-time">Just now</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Section -->
+            <div class="section-title">
+                <h2>Top Learners</h2>
+                <a href="#" class="view-all">Full Leaderboard <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="widget">
+                <div class="leaderboard" id="leaderboard">
+                    <!-- Leaderboard will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Enroll in Course</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h4 id="courseModalTitle">Course Title</h4>
+                <p id="courseModalPrice">Price: ₦15,000</p>
+                
+                <div class="payment-options">
+                    <div class="payment-option" data-payment="paystack">
+                        <img src="https://paystack.com/images/paystack-logo.svg" alt="Paystack">
+                        <div>Paystack</div>
+                    </div>
+                    <div class="payment-option" data-payment="flutterwave">
+                        <img src="https://flutterwave.com/images/logo/full.svg" alt="Flutterwave">
+                        <div>Flutterwave</div>
+                    </div>
+                </div>
+                
+                <div class="payment-form" id="paystackForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div style="display: flex; gap: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY">
+                        </div>
+                                           <div class="form-group" style="flex: 1;">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cardName">Name on Card</label>
+                    <input type="text" id="cardName" placeholder="John Doe">
+                </div>
+                <button class="payment-btn" id="processPayment">Process Payment</button>
+                
+                <div class="payment-form active" id="flutterwaveForm">
+                    <p>You will be redirected to Flutterwave to complete your payment securely.</p>
+                    <button class="payment-btn" id="redirectToFlutterwave">Proceed to Payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        <div class="toast-message">Operation completed successfully!</div>
+    </div>
+    
+    <!-- Overlay for Mobile Menu -->
+    <div class="overlay" id="overlay"></div>
+
+  <script>
+    // DOM Elements
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menuToggle');
+    const overlay = document.getElementById('overlay');
+    const themeToggle = document.querySelector('.theme-toggle');
+    const paymentModal = document.getElementById('paymentModal');
+    const modalClose = document.getElementById('modalClose');
+    const toast = document.getElementById('toast');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // User data (will be populated from API)
+    let userData = null;
+
+    // Initialize Dashboard
+    document.addEventListener('DOMContentLoaded', function() {
+        checkAuthentication();
+        setupEventListeners();
+    });
+
+    // Check if user is authenticated
+    async function checkAuthentication() {
+        try {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            await initializeDashboard();
+        } catch (error) {
+            console.error('Authentication error:', error);
+            window.location.href = 'login.html';
+        }
+    }
+
+    // Fetch dashboard data from your API
+    async function fetchDashboardData() {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch('/api/dashboard', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.status === 401) {
+                // Token expired or invalid
+                localStorage.removeItem('authToken');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch dashboard data: ${response.status}`);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching dashboard data:', error);
+            showToast('Error loading dashboard data', 'error');
+            throw error;
+        }
+    }
+
+    // Fetch available courses
+    async function fetchAvailableCourses() {
+        try {
+            const response = await fetch('/api/courses/available');
+            if (!response.ok) {
+                throw new Error('Failed to fetch available courses');
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching available courses:', error);
+            return [];
+        }
+    }
+
+    // Fetch leaderboard data
+    async function fetchLeaderboard() {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch('/api/dashboard/leaderboard', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                // If leaderboard endpoint doesn't exist, return empty array
+                return [];
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching leaderboard:', error);
+            return [];
+        }
+    }
+
+    async function initializeDashboard() {
+        try {
+            showToast('Loading your dashboard...', 'success');
+            
+            // Fetch dashboard data and available courses in parallel
+            const [dashboardData, availableCourses, leaderboard] = await Promise.all([
+                fetchDashboardData(),
+                fetchAvailableCourses(),
+                fetchLeaderboard()
+            ]);
+
+            userData = dashboardData;
+
+            // Set user data
+            document.getElementById('userName').textContent = userData.user.name;
+            document.getElementById('userRole').textContent = userData.user.role || 'Student';
+            document.getElementById('userAvatar').src = generateAvatar(userData.user);
+            
+            // Set greeting based on time of day
+            setGreeting();
+            
+            // Update stats
+            updateStats();
+            
+            // Render courses
+            renderEnrolledCourses(userData.courses || []);
+            renderAvailableCourses(availableCourses);
+            
+            // Render activities
+            renderActivities(userData.activities || []);
+            
+            // Render leaderboard
+            renderLeaderboard(leaderboard);
+            
+            // Set up progress circles
+            setupProgressCircles();
+
+            showToast('Dashboard loaded successfully!', 'success');
+
+        } catch (error) {
+            console.error('Error initializing dashboard:', error);
+            showToast('Failed to load dashboard data', 'error');
+        }
+    }
+
+    // Generate avatar with multiple fallback options
+    function generateAvatar(user) {
+        // Priority 1: User's custom avatar
+        if (user.avatar) {
+            return user.avatar;
+        }
+        
+        // Priority 2: Gravatar based on email
+        if (user.email) {
+            const hash = md5(user.email.trim().toLowerCase());
+            return `https://www.gravatar.com/avatar/${hash}?d=identicon&s=200`;
+        }
+        
+        // Priority 3: UI Avatars with user's name
+        const name = encodeURIComponent(user.name || 'User');
+        return `https://ui-avatars.com/api/?name=${name}&background=2563eb&color=fff&size=200&bold=true&font-size=0.8`;
+    }
+
+    // Simple MD5 function for Gravatar
+    function md5(input) {
+        // Note: For production, use a proper MD5 library like 'blueimp-md5'
+        return CryptoJS.MD5(input).toString();
+    }
+
+    function setGreeting() {
+        const hour = new Date().getHours();
+        const greeting = document.getElementById('greeting');
+        const subtitle = document.getElementById('greetingSubtitle');
+        const firstName = userData.user.name ? userData.user.name.split(' ')[0] : 'there';
+        
+        if (hour < 12) {
+            greeting.innerHTML = `Good morning, ${firstName}! ☀️`;
+            subtitle.textContent = "Ready to learn something new today?";
+        } else if (hour < 18) {
+            greeting.innerHTML = `Good afternoon, ${firstName}! 🌤️`;
+            subtitle.textContent = "How's your learning journey going?";
+        } else {
+            greeting.innerHTML = `Good evening, ${firstName}! 🌙`;
+            subtitle.textContent = "Time to review what you learned today!";
+        }
+    }
+
+    function updateStats() {
+        const stats = userData.stats || {
+            courses: 0,
+            hours: 0,
+            progress: 0,
+            certificates: 0
+        };
+
+        document.getElementById('statCourses').textContent = stats.courses;
+        document.getElementById('statHours').textContent = stats.hours;
+        document.getElementById('statProgress').textContent = stats.progress + '%';
+        document.getElementById('statCertificates').textContent = stats.certificates;
+        document.getElementById('overallProgress').textContent = stats.progress + '%';
+        
+        // Animate progress circle
+        const progressCircle = document.querySelector('.progress-circle-value');
+        if (progressCircle) {
+            const radius = progressCircle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            const offset = circumference - (stats.progress / 100) * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
+    }
+
+    function renderEnrolledCourses(courses) {
+        const grid = document.getElementById('coursesGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        if (courses.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-book-open fa-3x"></i>
+                    <h3>No courses enrolled yet</h3>
+                    <p>Start your learning journey by enrolling in a course!</p>
+                    <button class="btn-primary" onclick="scrollToAvailableCourses()">Browse Courses</button>
+                </div>
+            `;
+            return;
+        }
+        
+        courses.forEach(course => {
+            const courseCard = createCourseCard(course, true);
+            grid.appendChild(courseCard);
+        });
+    }
+
+    function renderAvailableCourses(courses) {
+        const grid = document.getElementById('availableCoursesGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        if (courses.length === 0) {
+            grid.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-search fa-3x"></i>
+                    <h3>No courses available</h3>
+                    <p>Check back later for new courses!</p>
+                </div>
+            `;
+            return;
+        }
+        
+        courses.forEach(course => {
+            const courseCard = createCourseCard(course, false);
+            grid.appendChild(courseCard);
+        });
+    }
+
+    function createCourseCard(course, isEnrolled) {
+        const card = document.createElement('div');
+        card.className = 'course-card';
+        
+        const progress = course.progress || 0;
+        const completedModules = course.completedModules || 0;
+        const totalModules = course.totalModules || 0;
+        const courseId = course.courseId || course._id;
+        const enrollmentId = course.enrollmentId || course.id;
+        
+        card.innerHTML = `
+            <div class="course-image">
+                <img src="${course.image || course.thumbnail || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}" 
+                     alt="${course.title}" 
+                     onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+                ${!isEnrolled ? `<div class="course-badge">NEW</div>` : ''}
+                ${course.category ? `<div class="course-badge" style="background: var(--primary-color);">${course.category.toUpperCase()}</div>` : ''}
+                ${isEnrolled && progress === 100 ? `<div class="course-badge" style="background: var(--success-color);">COMPLETED</div>` : ''}
+            </div>
+            <div class="course-content">
+                <h3 class="course-title">${course.title}</h3>
+                <div class="course-meta">
+                    <span class="course-instructor">
+                        <i class="fas fa-user"></i> ${course.instructor || 'MDTH Instructor'}
+                    </span>
+                    ${course.level ? `<span class="course-level">${course.level}</span>` : ''}
+                </div>
+                ${isEnrolled ? `
+                    <div class="course-info">
+                        <span>${completedModules}/${totalModules} Modules</span>
+                        <span>${progress}% Complete</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progress}%;"></div>
+                    </div>
+                ` : `
+                    <div class="course-info">
+                        <span><i class="fas fa-clock"></i> ${course.duration || 'Self-paced'}</span>
+                        <span class="course-price">${course.price ? `₦${parseInt(course.price).toLocaleString()}` : 'Free'}</span>
+                    </div>
+                `}
+                <div class="course-actions">
+                    ${isEnrolled ? `
+                        <button class="course-action continue-learning" data-course-id="${courseId}" data-enrollment-id="${enrollmentId}">
+                            <i class="fas fa-play"></i> ${progress === 100 ? 'Review' : 'Continue'}
+                        </button>
+                        <button class="course-action secondary telegram-join" data-link="${course.telegramLink || '#'}">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </button>
+                    ` : `
+                        <button class="course-action enroll-btn" data-course-id="${courseId}" data-course-title="${course.title}" data-course-price="${course.price || 'Free'}">
+                            <i class="fas fa-shopping-cart"></i> ${course.price ? 'Enroll Now' : 'Get Started'}
+                        </button>
+                        <button class="course-action secondary preview-btn" data-course-id="${courseId}">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                    `}
+                </div>
+            </div>
+        `;
+        
+        return card;
+    }
+
+    function renderActivities(activities) {
+        const list = document.getElementById('activityList');
+        if (!list) return;
+        
+        list.innerHTML = '';
+        
+        if (activities.length === 0) {
+            list.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-history fa-2x"></i>
+                    <p>No recent activity</p>
+                    <small>Your learning activities will appear here</small>
+                </div>
+            `;
+            return;
+        }
+        
+        activities.forEach(activity => {
+            const activityItem = document.createElement('div');
+            activityItem.className = 'activity-item';
+            
+            let icon = 'fas fa-check';
+            let activityClass = '';
+            
+            switch(activity.type) {
+                case 'lesson_completed':
+                case 'completed':
+                    icon = 'fas fa-check-circle';
+                    activityClass = 'completed';
+                    break;
+                case 'assignment':
+                    icon = 'fas fa-tasks';
+                    activityClass = 'assignment';
+                    break;
+                case 'enrolled':
+                    icon = 'fas fa-star';
+                    activityClass = 'enrolled';
+                    break;
+                case 'quiz':
+                    icon = 'fas fa-question-circle';
+                    activityClass = 'quiz';
+                    break;
+                default:
+                    icon = 'fas fa-bell';
+            }
+            
+            activityItem.innerHTML = `
+                <div class="activity-icon ${activityClass}">
+                    <i class="${icon}"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">${activity.title}</div>
+                    <div class="activity-desc">${activity.description || activity.course || ''}</div>
+                    <div class="activity-time">${activity.time}</div>
+                </div>
+            `;
+            
+            list.appendChild(activityItem);
+        });
+    }
+
+    function renderLeaderboard(leaderboard) {
+        const container = document.getElementById('leaderboard');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (leaderboard.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-trophy fa-2x"></i>
+                    <p>No leaderboard data available</p>
+                    <small>Be the first to top the leaderboard!</small>
+                </div>
+            `;
+            return;
+        }
+        
+        leaderboard.forEach((user, index) => {
+            const item = document.createElement('div');
+            item.className = 'leaderboard-item';
+            if (user.id === userData.user.id || user.name === userData.user.name) {
+                item.classList.add('current-user');
+            }
+            
+            item.innerHTML = `
+                <div class="leaderboard-rank">${index + 1}</div>
+                <div class="leaderboard-user">
+                    <div class="leaderboard-name">${user.name}</div>
+                    <div class="leaderboard-progress">${user.progress}% Complete</div>
+                </div>
+                <div class="leaderboard-score">${user.score || user.progress} pts</div>
+            `;
+            
+            container.appendChild(item);
+        });
+    }
+
+    function setupProgressCircles() {
+        const progressValue = userData.stats?.progress || 0;
+        const circle = document.querySelector('.progress-circle-value');
+        if (circle) {
+            const radius = circle.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            circle.style.strokeDashoffset = circumference - (progressValue / 100) * circumference;
+        }
+    }
+
+    function setupEventListeners() {
+        // Mobile menu toggle
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            });
+        }
+
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+
+        // Theme toggle
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // Payment modal
+        if (modalClose) {
+            modalClose.addEventListener('click', () => {
+                paymentModal.classList.remove('active');
+            });
+        }
+
+        // Payment options
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                const paymentMethod = this.dataset.payment;
+                document.querySelectorAll('.payment-form').forEach(form => form.classList.remove('active'));
+                const formElement = document.getElementById(paymentMethod + 'Form');
+                if (formElement) {
+                    formElement.classList.add('active');
+                }
+            });
+        });
+
+        // Course action buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.enroll-btn')) {
+                const button = e.target.closest('.enroll-btn');
+                const courseId = button.dataset.courseId;
+                const courseTitle = button.dataset.courseTitle;
+                const coursePrice = button.dataset.coursePrice;
+                
+                openPaymentModal(courseId, courseTitle, coursePrice);
+            }
+            
+            if (e.target.closest('.telegram-join')) {
+                const button = e.target.closest('.telegram-join');
+                const telegramLink = button.dataset.link;
+                joinTelegramGroup(telegramLink);
+            }
+            
+            if (e.target.closest('.continue-learning')) {
+                const button = e.target.closest('.continue-learning');
+                const courseId = button.dataset.courseId;
+                const enrollmentId = button.dataset.enrollmentId;
+                continueLearning(courseId, enrollmentId);
+            }
+
+            if (e.target.closest('.preview-btn')) {
+                const button = e.target.closest('.preview-btn');
+                const courseId = button.dataset.courseId;
+                previewCourse(courseId);
+            }
+        });
+
+        // Process payment
+        const processPaymentBtn = document.getElementById('processPayment');
+        if (processPaymentBtn) {
+            processPaymentBtn.addEventListener('click', processPayment);
+        }
+
+        const flutterwaveBtn = document.getElementById('redirectToFlutterwave');
+        if (flutterwaveBtn) {
+            flutterwaveBtn.addEventListener('click', redirectToFlutterwave);
+        }
+
+        // Logout
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', handleLogout);
+        }
+    }
+
+    function toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        document.documentElement.setAttribute('data-theme', newTheme);
+        if (themeToggle) {
+            themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+        
+        // Save theme preference
+        localStorage.setItem('theme', newTheme);
+    }
+
+    function openPaymentModal(courseId, courseTitle, coursePrice) {
+        if (!paymentModal) return;
+        
+        document.getElementById('courseModalTitle').textContent = courseTitle;
+        document.getElementById('courseModalPrice').textContent = coursePrice === 'Free' ? 'Free Course' : `Price: ₦${parseInt(coursePrice).toLocaleString()}`;
+        paymentModal.classList.add('active');
+        
+        // Store course info for payment processing
+        paymentModal.dataset.courseId = courseId;
+    }
+
+    async function joinTelegramGroup(link) {
+        if (link === '#') {
+            showToast('Telegram group link not available', 'error');
+            return;
+        }
+        
+        showToast('Redirecting to Telegram...', 'success');
+        setTimeout(() => {
+            window.open(link, '_blank');
+        }, 1000);
+    }
+
+    function continueLearning(courseId, enrollmentId) {
+        showToast('Loading your course...', 'success');
+        setTimeout(() => {
+            window.location.href = `course.html?id=${courseId}&enrollment=${enrollmentId}`;
+        }, 1500);
+    }
+
+    function previewCourse(courseId) {
+        showToast('Opening course preview...', 'success');
+        setTimeout(() => {
+            window.location.href = `course-preview.html?id=${courseId}`;
+        }, 1000);
+    }
+
+    async function processPayment() {
+        const courseId = paymentModal?.dataset.courseId;
+        if (!courseId) {
+            showToast('No course selected', 'error');
+            return;
+        }
+        
+        try {
+            showToast('Processing enrollment...', 'success');
+            
+            const token = localStorage.getItem('authToken');
+            const response = await fetch('/api/enrollments/enroll', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ courseId })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Enrollment failed');
+            }
+
+            const result = await response.json();
+            
+            showToast('Enrollment successful!', 'success');
+            if (paymentModal) {
+                paymentModal.classList.remove('active');
+            }
+            
+            // Refresh the dashboard to show new enrollment
+            setTimeout(() => {
+                initializeDashboard();
+            }, 2000);
+
+        } catch (error) {
+            console.error('Enrollment error:', error);
+            showToast(error.message || 'Enrollment failed. Please try again.', 'error');
+        }
+    }
+
+    function redirectToFlutterwave() {
+        showToast('Redirecting to secure payment gateway...', 'success');
+        // This would integrate with Flutterwave API
+        setTimeout(() => {
+            processPayment();
+        }, 2000);
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('userData');
+        showToast('Logging out...', 'success');
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1500);
+    }
+
+    function showToast(message, type) {
+        if (!toast) return;
+        
+        const toastMessage = toast.querySelector('.toast-message');
+        if (toastMessage) {
+            toastMessage.textContent = message;
+        }
+        toast.className = `toast ${type}`;
+        toast.classList.add('active');
+        
+        setTimeout(() => {
+            toast.classList.remove('active');
+        }, 3000);
+    }
+
+    function scrollToAvailableCourses() {
+        const availableCoursesSection = document.getElementById('availableCourses');
+        if (availableCoursesSection) {
+            availableCoursesSection.scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+    }
+
+    // Add this function to update progress (call it from your course pages)
+    async function updateCourseProgress(enrollmentId, progress, lessonId, timeSpent) {
+        try {
+            const token = localStorage.getItem('authToken');
+            const response = await fetch(`/api/dashboard/progress/${enrollmentId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ progress, lessonId, timeSpent })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update progress');
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error('Progress update error:', error);
+            throw error;
+        }
+    }
+
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if (themeToggle) {
+            themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+    }
+
+    // Make functions globally available for HTML onclick events
+    window.scrollToAvailableCourses = scrollToAvailableCourses;
+    window.updateCourseProgress = updateCourseProgress;
+</script>
+</body>
+</html>

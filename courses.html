@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" href="images/MDTH LOGO.jpg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <title>MDTH Courses | Learn Next-Gen Tech Skills</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
+            </a>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/courses.html" class="active">Courses</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><a href="/blog.html">Blog</a></li>
+        </ul>
+        
+            
+            <div class="theme-switch-wrapper">
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <button class="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="courses-hero">
+        <div class="container">
+            <h1>Explore Our Tech Courses</h1>
+            <p>Discover industry-leading courses designed to launch your tech career. Learn in-demand skills from experts and advance your career.</p>
+            
+            <div class="courses-search-container">
+                <input type="text" placeholder="Search for courses..." class="search-input" id="searchInput">
+                <i class="fas fa-search"></i>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            
+            <nav class="courses-categories">
+                <ul>
+                    <li><a href="#" class="active" data-category="all">All</a></li>
+                    <li><a href="#" data-category="web">Web Development</a></li>
+                    <li><a href="#" data-category="data">Data Science</a></li>
+                    <li><a href="#" data-category="design">UI/UX Design</a></li>
+                    <li><a href="#" data-category="marketing">Digital Marketing</a></li>
+                    <li><a href="#" data-category="security">Cyber Security</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Courses Grid -->
+    <div class="container">
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Course 1 -->
+            <div class="course-card" data-category="web" data-title="Web Development Bootcamp" data-description="Master HTML, CSS, JavaScript and modern frameworks to build responsive websites.">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Web Development">
+                    <span class="course-duration"><i class="far fa-clock"></i> 3 Months</span>
+                </div>
+                <div class="course-tags">
+                    <span class="tag coding-tag">
+                        <i class="fas fa-code"></i> Coding
+                    </span>                    
+                    <span class="tag beginner-tag">Beginner</span>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Web Development Bootcamp</h3>
+                    <p class="course-description">
+                        Master HTML, CSS, JavaScript and modern frameworks to build responsive websites.
+                    </p>
+                    <div class="course-rating"><span>4.7</span>⭐⭐⭐⭐⭐ <span>(142)</span></div> 
+                    <div class="course-footer">
+                        <span class="course-price">₦35,000</span>
+                      <a href="programming.html">
+  <button class="join-now-btn">Join Now</button>
+</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 2 -->
+            <div class="course-card" data-category="data" data-title="Data Science Mastery" data-description="Learn Python, SQL, and machine learning to analyze and visualize complex data.">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Data Science">
+                    <span class="course-duration"><i class="far fa-clock"></i> 4 Months</span>
+                </div>
+                <div class="course-tags">
+                    <span class="tag data-tag">
+                        <i class="fas fa-database"></i> Data
+                    </span>                    
+                    <span class="tag intermediate-tag">Intermediate</span>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Data Science Mastery</h3>
+                    <p class="course-description">
+                        Learn Python, SQL, and machine learning to analyze and visualize complex data.
+                    </p>
+                    <div class="course-rating"><span>4.9</span>⭐⭐⭐⭐⭐ <span>(76)</span></div> 
+                    <div class="course-footer">
+                        <span class="course-price">₦60,000</span>
+                        <button class="join-now-btn">Join Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 3 -->
+            <div class="course-card" data-category="design" data-title="UI/UX Design Pro" data-description="Create stunning interfaces with Figma and Adobe XD. Learn design principles.">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80" alt="UI/UX Design">
+                    <span class="course-duration"><i class="far fa-clock"></i> 2 Months</span>
+                </div>
+                <div class="course-tags">
+                    <span class="tag design-tag">
+                        <i class="fas fa-paint-brush"></i> Design
+                    </span>                    
+                    <span class="tag beginner-tag">Beginner</span>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">UI/UX Design Pro</h3>
+                    <p class="course-description">
+                        Create stunning interfaces with Figma and Adobe XD. Learn design principles.
+                    </p>
+                    <div class="course-rating"><span>4.8</span>⭐⭐⭐⭐⭐ <span>(98)</span></div> 
+                    <div class="course-footer">
+                        <span class="course-price">₦45,000</span>
+                        <button class="join-now-btn">Join Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 4 -->
+            <div class="course-card" data-category="marketing" data-title="Digital Marketing Strategy" data-description="Master SEO, social media, email marketing and analytics to grow businesses.">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Digital Marketing">
+                    <span class="course-duration"><i class="far fa-clock"></i> 6 Weeks</span>
+                </div>
+                <div class="course-tags">
+                    <span class="tag marketing-tag">
+                        <i class="fas fa-envelope"></i> Marketing
+                    </span>                    
+                    <span class="tag beginner-tag">Beginner</span>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Digital Marketing Strategy</h3>
+                    <p class="course-description">
+                        Master SEO, social media, email marketing and analytics to grow businesses.
+                    </p>
+                    <div class="course-rating"><span>4.6</span>⭐⭐⭐⭐⭐ <span>(88)</span></div> 
+                    <div class="course-footer">
+                        <span class="course-price">₦25,000</span>
+                        <button class="join-now-btn">Join Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 5 -->
+            <div class="course-card" data-category="security" data-title="Cyber Security Fundamentals" data-description="Protect systems from threats and vulnerabilities. Learn ethical hacking techniques.">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cyber Security">
+                    <span class="course-duration"><i class="far fa-clock"></i> 3 Months</span>
+                </div>
+                <div class="course-tags">
+                    <span class="tag coding-tag">
+                        <i class="fas fa-shield-alt"></i> Security
+                    </span>                    
+                    <span class="tag advanced-tag">Advanced</span>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Cyber Security Fundamentals</h3>
+                    <p class="course-description">
+                        Protect systems from threats and vulnerabilities. Learn ethical hacking techniques.
+                    </p>
+                    <div class="course-rating"><span>4.7</span>⭐⭐⭐⭐⭐ <span>(64)</span></div> 
+                    <div class="course-footer">
+                        <span class="course-price">₦55,000</span>
+                        <button class="join-now-btn">Join Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course 6 -->
+            <div class="course-card" data-category="web" data-title="AWS Cloud Practitioner" data-description="Master Amazon Web Services infrastructure and deployment strategies.">
+                <div class="course-image">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Cloud Computing">
+                    <span class="course-duration"><i class="far fa-clock"></i> 10 Weeks</span>
+                </div>
+                <div class="course-tags">
+                    <span class="tag coding-tag">
+                        <i class="fas fa-cloud"></i> Cloud
+                    </span>                    
+                    <span class="tag intermediate-tag">Intermediate</span>
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">AWS Cloud Practitioner</h3>
+                    <p class="course-description">
+                        Master Amazon Web Services infrastructure and deployment strategies.
+                    </p>
+                    <div class="course-rating"><span>4.8</span>⭐⭐⭐⭐⭐ <span>(53)</span></div> 
+                    <div class="course-footer">
+                        <span class="course-price">₦48,000</span>
+                        <button class="join-now-btn">Join Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="arrow-prev"><i class="fas fa-arrow-left"></i></button>
+            <button class="page-number active">01</button>
+            <button class="page-number">02</button>
+            <button class="page-number">03</button>
+            <button class="arrow-next"><i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-contact">
+                    <img src="https://via.placeholder.com/150x50/2563EB/FFFFFF?text=MDTH" alt="MDTH Logo" class="logo-image-footer">
+                    <p><i class="far fa-envelope"></i> mdthdig@gmail.com</p>
+                    <p><i class="fas fa-location-dot"></i> Lagos, Nigeria</p>
+                    <p><i class="fas fa-phone"></i> (+234) 816 0330 156</p>
+                </div>
+                <div class="footer-links">
+                    <h4>PAGES</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Project</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>SOCIAL MEDIA</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Dribble</a></li>
+                        <li><a href="#">Facebook</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>UTILITIES</h4>
+                    <ul>
+                        <li><a href="#">Style Guide</a></li>
+                        <li><a href="#">Change log</a></li>
+                        <li><a href="#">Licenses</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Course data for search functionality
+        const courses = [
+            {
+                id: 1,
+                title: "Web Development Bootcamp",
+                description: "Master HTML, CSS, JavaScript and modern frameworks to build responsive websites.",
+                category: "web",
+                price: "₦35,000",
+                duration: "3 Months",
+                rating: "4.7",
+                reviews: "142",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            },
+            {
+                id: 2,
+                title: "Data Science Mastery",
+                description: "Learn Python, SQL, and machine learning to analyze and visualize complex data.",
+                category: "data",
+                price: "₦60,000",
+                duration: "4 Months",
+                rating: "4.9",
+                reviews: "76",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            },
+            {
+                id: 3,
+                title: "UI/UX Design Pro",
+                description: "Create stunning interfaces with Figma and Adobe XD. Learn design principles.",
+                category: "design",
+                price: "₦45,000",
+                duration: "2 Months",
+                rating: "4.8",
+                reviews: "98",
+                image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1080&q=80"
+            },
+            {
+                id: 4,
+                title: "Digital Marketing Strategy",
+                description: "Master SEO, social media, email marketing and analytics to grow businesses.",
+                category: "marketing",
+                price: "₦25,000",
+                duration: "6 Weeks",
+                rating: "4.6",
+                reviews: "88",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80"
+            },
+            {
+                id: 5,
+                title: "Cyber Security Fundamentals",
+                description: "Protect systems from threats and vulnerabilities. Learn ethical hacking techniques.",
+                category: "security",
+                price: "₦55,000",
+                duration: "3 Months",
+                rating: "4.7",
+                reviews: "64",
+                image: "https://images.unsplash.com/photo-1563089145-599997674d42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            },
+            {
+                id: 6,
+                title: "AWS Cloud Practitioner",
+                description: "Master Amazon Web Services infrastructure and deployment strategies.",
+                category: "web",
+                price: "₦48,000",
+                duration: "10 Weeks",
+                rating: "4.8",
+                reviews: "53",
+                image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            const coursesGrid = document.getElementById('coursesGrid');
+            const categoryLinks = document.querySelectorAll('.courses-categories a');
+            const courseCards = document.querySelectorAll('.course-card');
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                
+                if (searchTerm.length === 0) {
+                    searchResults.style.display = 'none';
+                    return;
+                }
+                
+                const filteredCourses = courses.filter(course => 
+                    course.title.toLowerCase().includes(searchTerm) || 
+                    course.description.toLowerCase().includes(searchTerm)
+                );
+                
+                displaySearchResults(filteredCourses);
+            });
+            
+            function displaySearchResults(results) {
+                searchResults.innerHTML = '';
+                
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="no-results">No courses found</div>';
+                    searchResults.style.display = 'block';
+                    return;
+                }
+                
+                results.forEach(course => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <img src="${course.image}" alt="${course.title}">
+                        <div>
+                            <h4>${course.title}</h4>
+                            <p>${course.description.substring(0, 60)}...</p>
+                        </div>
+                        <span class="course-price">${course.price}</span>
+                    `;
+                    
+                    resultItem.addEventListener('click', function() {
+                        searchInput.value = course.title;
+                        searchResults.style.display = 'none';
+                        filterCourses('all', course.title);
+                    });
+                    
+                    searchResults.appendChild(resultItem);
+                });
+                
+                searchResults.style.display = 'block';
+            }
+            
+            // Close search results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+            
+            // Category filter
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const category = this.getAttribute('data-category');
+                    
+                    categoryLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    filterCourses(category);
+                    searchResults.style.display = 'none';
+                    searchInput.value = '';
+                });
+            });
+            
+            function filterCourses(category, searchTerm = '') {
+                let visibleCount = 0;
+                
+                courseCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardTitle = card.getAttribute('data-title').toLowerCase();
+                    const cardDescription = card.getAttribute('data-description').toLowerCase();
+                    
+                    const matchesCategory = category === 'all' || cardCategory === category;
+                    const matchesSearch = searchTerm === '' || 
+                                         cardTitle.includes(searchTerm.toLowerCase()) || 
+                                         cardDescription.includes(searchTerm.toLowerCase());
+                    
+                    if (matchesCategory && matchesSearch) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show no results message if no courses match
+                const noCoursesMessage = document.querySelector('.no-courses-message');
+                if (visibleCount === 0) {
+                    if (!noCoursesMessage) {
+                        const message = document.createElement('div');
+                        message.className = 'no-courses-message';
+                        message.innerHTML = `
+                            <i class="fas fa-search"></i>
+                            <h3>No courses found</h3>
+                            <p>Try adjusting your search or filter criteria</p>
+                        `;
+                        coursesGrid.appendChild(message);
+                    }
+                } else if (noCoursesMessage) {
+                    noCoursesMessage.remove();
+                }
+            }
+            
+            // Pagination
+            const pageNumbers = document.querySelectorAll('.page-number');
+            pageNumbers.forEach(number => {
+                number.addEventListener('click', function() {
+                    pageNumbers.forEach(n => n.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+    
+            
+            // Dark mode toggle
+            const toggleSwitch = document.querySelector('#checkbox');
+            
+            function switchTheme(e) {
+                if (e.target.checked) {
+                    document.documentElement.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }    
+            }
+            
+            toggleSwitch.addEventListener('change', switchTheme, false);
+            
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                document.documentElement.classList.toggle('dark-mode', currentTheme === 'dark');
+                toggleSwitch.checked = currentTheme === 'dark';
+            }
+            
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                // Toggle hamburger icon
+                const icon = hamburger.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hamburger.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    const icon = hamburger.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

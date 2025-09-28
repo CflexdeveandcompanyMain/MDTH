@@ -1,0 +1,824 @@
+<!DOCTYPE html> 
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Design Pro Course - MDTH Courses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --primary-hover: #5B52E8;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --border-color: #E5E7EB;
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --bg-primary: #111827;
+            --bg-secondary: #1F2937;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .theme-transition {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tab-active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .tab-inactive {
+            border-bottom-color: transparent;
+            color: var(--text-secondary);
+        }
+
+        .tab-inactive:hover {
+            color: var(--primary-color);
+        }
+
+        .accordion-section {
+            cursor: pointer;
+        }
+
+        .accordion-section:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen theme-transition">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-sm border-b theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: var(--primary-color);">
+                        <span class="text-white font-bold text-lg">M</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden md:flex items-center space-x-8">
+                    <a href="/" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Home</a>
+                    <a href="/courses" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Courses</a>
+                    <a href="/about" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">About Us</a>
+                    <a href="/contact" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Contact</a>
+                    <a href="/blog" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Blog</a>
+                </div>
+
+                <!-- Auth Buttons & Theme Toggle -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/login" class="px-4 py-2 border rounded-lg font-medium theme-transition" style="border-color: var(--border-color); color: var(--text-primary);">Login</a>
+                    <a href="/signup" class="px-4 py-2 rounded-lg font-medium text-white theme-transition" style="background-color: var(--primary-color);">Sign Up</a>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-lg theme-transition" style="background-color: var(--bg-secondary);">
+                        <svg id="sun-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg theme-transition" style="background-color: var(--bg-secondary);">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu md:hidden py-4 border-t theme-transition" style="border-color: var(--border-color);">
+                <div class="flex flex-col space-y-4">
+                    <a href="/" class="font-medium theme-transition" style="color: var(--text-primary);">Home</a>
+                    <a href="/courses" class="font-medium theme-transition" style="color: var(--text-primary);">Courses</a>
+                    <a href="/about" class="font-medium theme-transition" style="color: var(--text-primary);">About Us</a>
+                    <a href="/contact" class="font-medium theme-transition" style="color: var(--text-primary);">Contact</a>
+                    <a href="/blog" class="font-medium theme-transition" style="color: var(--text-primary);">Blog</a>
+                    <div class="flex flex-col space-y-2 pt-4 border-t theme-transition" style="border-color: var(--border-color);">
+                        <a href="/login" class="px-4 py-2 border rounded-lg font-medium text-center theme-transition" style="border-color: var(--border-color); color: var(--text-primary);">Login</a>
+                        <a href="/signup" class="px-4 py-2 rounded-lg font-medium text-white text-center theme-transition" style="background-color: var(--primary-color);">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Hero Section -->
+    <section class="py-12 theme-transition" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Video Player -->
+                <div class="lg:col-span-2">
+                    <div class="relative bg-black rounded-lg overflow-hidden shadow-lg">
+                        <div class="aspect-video">
+                            <video class="w-full h-full object-cover" poster="graphic-design-course-preview.png" controls>
+                                <source src="https://cdn.pixabay.com/video/2023/05/15/162845_large.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Info Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24 rounded-lg border shadow-sm theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                        <div class="p-6">
+                            <div class="text-3xl font-bold mb-4" style="color: var(--primary-color);">₦52,000</div>
+
+                            <button class="w-full mb-6 px-4 py-2 rounded-lg font-medium text-white theme-transition" style="background-color: var(--primary-color);" onmouseover="this.style.backgroundColor='var(--primary-hover)'" onmouseout="this.style.backgroundColor='var(--primary-color)'">Enroll Now</button>
+
+                            <div class="space-y-4 mb-6">
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span>3 Months Duration</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span>42 Video Lessons</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span>Certificate of Completion</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                    </svg>
+                                    <span>Lifetime Access</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span>Access on Mobile and TV</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center pt-6 border-t theme-transition" style="border-color: var(--border-color);">
+                                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                    <img src="male-instructor-avatar.png" alt="Marcus Thompson" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold" style="color: var(--text-primary);">Marcus Thompson</h4>
+                                    <p class="text-sm" style="color: var(--text-secondary);">Senior Graphic Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Tabs Section -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Tab Headers -->
+            <div class="flex border-b mb-8 theme-transition" style="border-color: var(--border-color);">
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-active" data-tab="overview">Overview</button>
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-inactive" data-tab="curriculum">Curriculum</button>
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-inactive" data-tab="reviews">Reviews</button>
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-inactive" data-tab="instructor">Instructor</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="tab-content">
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content">
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">Graphic Design Pro Course</h2>
+                            <p class="mb-4" style="color: var(--text-secondary);">
+                                Transform your creative vision into professional designs with our comprehensive Graphic Design Pro course. Master industry-standard software like Adobe Creative Suite (Photoshop, Illustrator, InDesign) while learning fundamental design principles, typography, and branding concepts that make great designs stand out.
+                            </p>
+                            <p style="color: var(--text-secondary);">
+                                Perfect for beginners and intermediate designers, this course combines theoretical knowledge with practical projects to build a stunning portfolio that showcases your skills to potential clients and employers.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">What Will You Learn?</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Master Adobe Creative Suite (Photoshop, Illustrator, InDesign)</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Understand design principles, color theory, and composition</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Create compelling brand identities and logos</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Design print materials: brochures, posters, business cards</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Create digital graphics for web and social media</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Master typography and layout design</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Build a professional design portfolio</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Learn client communication and project workflow</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Requirements</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">Creative mindset and passion for visual design</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">Computer with Windows or Mac OS</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">Stable internet connection</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">No prior design experience required</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Who is this course for?</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Complete beginners who want to learn graphic design from scratch</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Small business owners who want to create their own marketing materials</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Marketing professionals who need design skills</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Anyone looking to start a freelance design career</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Curriculum Tab -->
+                <div id="curriculum-tab" class="tab-content hidden">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">Course Content</h2>
+                        <p class="mb-6" style="color: var(--text-secondary);">8/42 Lessons (19% Complete)</p>
+
+                        <div class="space-y-4">
+                            <div class="rounded-lg border theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                                <div class="accordion-section p-4 theme-transition" onclick="toggleAccordion('foundations')">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center">
+                                            <svg id="foundations-chevron" class="w-5 h-5 mr-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                            <h3 class="font-semibold" style="color: var(--text-primary);">Design Foundations</h3>
+                                        </div>
+                                        <div class="flex gap-4 text-sm" style="color: var(--text-secondary);">
+                                            <span>6 Lessons</span>
+                                            <span>58 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="foundations-content" class="px-4 pb-4">
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">What is Graphic Design?</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">12:30</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Design Principles and Elements</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">15:45</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Color Theory and Psychology</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">09:20</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Typography Fundamentals</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">11:15</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Composition and Layout</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">06:40</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Design Resources Pack</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">ZIP</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                                <div class="accordion-section p-4 theme-transition" onclick="toggleAccordion('photoshop')">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center">
+                                            <svg id="photoshop-chevron" class="w-5 h-5 mr-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                            <h3 class="font-semibold" style="color: var(--text-primary);">Adobe Photoshop Mastery</h3>
+                                        </div>
+                                        <div class="flex gap-4 text-sm" style="color: var(--text-secondary);">
+                                            <span>8 Lessons</span>
+                                            <span>95 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="photoshop-content" class="px-4 pb-4 hidden">
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Photoshop Interface and Tools</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">18:25</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Layers and Blending Modes</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">14:30</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Photo Manipulation Techniques</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">16:40</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Text Effects and Styles</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">12:15</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Digital Art and Painting</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">20:50</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b theme-transition" style="border-color: var(--border-color);">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-7 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Creating Social Media Graphics</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">08:35</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2">
+                                            <div class="flex items-center">
+                                                <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                                </svg>
+                                                <span style="color: var(--text-primary);">Photoshop Project Files</span>
+                                            </div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">PSD</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                                <div class="accordion-section p-4 theme-transition" onclick="toggleAccordion('illustrator')">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center">
+                                            <svg id="illustrator-chevron" class="w-5 h-5 mr-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                            <h3 class="font-semibold" style="color: var(--text-primary);">Adobe Illustrator & Vector Graphics</h3>
+                                        </div>
+                                        <div class="flex gap-4 text-sm" style="color: var(--text-secondary);">
+                                            <span>7 Lessons</span>
+                                            <span>82 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div id="illustrator-content" class="px-4 pb-4" style="display:none;">
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center py-2 border-b" style="border-color: var(--border-color);">
+                                            <div class="flex items-center"><span style="color: var(--text-primary);">Vector vs. Raster Graphics</span></div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">10:20</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- InDesign accordion (completed content) -->
+                            <div class="rounded-lg border theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                                <div class="accordion-section p-4 theme-transition" onclick="toggleAccordion('indesign')">
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center">
+                                            <svg id="indesign-chevron" class="w-5 h-5 mr-3 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                                            <h3 class="font-semibold" style="color: var(--text-primary);">Adobe InDesign & Layout Design</h3>
+                                        </div>
+                                        <div class="flex gap-4 text-sm" style="color: var(--text-secondary);">
+                                            <span>6 Lessons</span>
+                                            <span>74 min</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="indesign-content" class="px-4 pb-4" style="display:none;">
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center py-2 border-b" style="border-color: var(--border-color);">
+                                            <div class="flex items-center"><span style="color: var(--text-primary);">InDesign Interface & Preferences</span></div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">12:10</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b" style="border-color: var(--border-color);">
+                                            <div class="flex items-center"><span style="color: var(--text-primary);">Working with Pages and Master Pages</span></div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">14:20</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b" style="border-color: var(--border-color);">
+                                            <div class="flex items-center"><span style="color: var(--text-primary);">Typography & Paragraph Styles</span></div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">10:45</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2 border-b" style="border-color: var(--border-color);">
+                                            <div class="flex items-center"><span style="color: var(--text-primary);">Preparing Print-Ready Files & Export</span></div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">18:00</span>
+                                        </div>
+                                        <div class="flex justify-between items-center py-2" style="border-color: var(--border-color);">
+                                            <div class="flex items-center"><span style="color: var(--text-primary);">Magazine & Multi-page Layout Project</span></div>
+                                            <span class="text-sm" style="color: var(--text-secondary);">18:25</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div id="reviews-tab" class="tab-content hidden">
+                    <div>
+                        <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">Student Reviews</h2>
+                        <p class="lead mb-6">Rated 4.8 out of 5 by 1,245 students</p>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="rounded-lg border p-4" style="border-color: var(--border-color); background-color: var(--bg-primary);">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                        <img src="student1.jpg" alt="Student 1" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">Aisha B.</h4>
+                                        <p class="text-sm lead">"This course took me from zero to confident. The projects are practical and the instructor explains complex ideas simply."</p>
+                                        <div class="text-sm mt-2" style="color: var(--text-secondary);">Completed: June 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rounded-lg border p-4" style="border-color: var(--border-color); background-color: var(--bg-primary);">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                        <img src="student2.jpg" alt="Student 2" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">Chinedu O.</h4>
+                                        <p class="text-sm lead">"Great balance between theory and hands-on work. I landed freelance clients within a month."</p>
+                                        <div class="text-sm mt-2" style="color: var(--text-secondary);">Completed: April 2025</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <a href="#leave-review" class="px-4 py-2 rounded-lg" style="background-color: var(--primary-color); color: white;">Leave a Review</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instructor Tab -->
+                <div id="instructor-tab" class="tab-content hidden">
+                    <div class="grid md:grid-cols-3 gap-6 items-start">
+                        <div class="md:col-span-1 rounded-lg border p-6" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                            <div class="w-40 h-40 mx-auto rounded-full overflow-hidden mb-4">
+                                <img src="instructor.jpg" alt="Marcus Thompson" class="w-full h-full object-cover">
+                            </div>
+                            <h3 class="text-xl font-semibold text-center" style="color: var(--text-primary);">Marcus Thompson</h3>
+                            <p class="text-center lead">Senior Graphic Designer & Instructor</p>
+                            <div class="mt-4 text-sm" style="color: var(--text-secondary);">
+                                Marcus has 10+ years experience working with brands across Europe and Africa. He specialises in branding, packaging and editorial design.
+                            </div>
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <h3 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">About Marcus</h3>
+                            <p class="lead mb-4">Marcus leads the course, sharing industry workflows, real client briefs and actionable feedback. Expect recorded lessons combined with live Q&A sessions and portfolio reviews.</p>
+
+                            <h4 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Office Hours & Support</h4>
+                            <p class="lead">Weekly live sessions, a community channel for feedback, and downloadable resources for each module.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Small CTA -->
+            <div class="mt-12 text-center">
+                <a href="/signup" class="inline-block px-6 py-3 rounded-lg font-semibold" style="background-color: var(--primary-color); color: white;">Join the Course — Start Learning</a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="border-t theme-transition" style="background-color: var(--bg-secondary); border-color: var(--border-color);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Contact Info -->
+                <div>
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background-color: var(--primary-color);">
+                        <span class="text-white font-bold text-lg">M</span>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center" style="color: var(--text-secondary);">
+                            <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>123 Education Street, Learning City</span>
+                        </div>
+                        <div class="flex items-center" style="color: var(--text-secondary);">
+                            <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span>+234 123 456 7890</span>
+                        </div>
+                        <div class="flex items-center" style="color: var(--text-secondary);">
+                            <svg class="w-4 h-4 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>info@mdthcourses.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-semibold mb-4" style="color: var(--text-primary);">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Home</a></li>
+                        <li><a href="/courses" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Courses</a></li>
+                        <li><a href="/about-us" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">About Us</a></li>
+                        <li><a href="/contact" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Contact</a></li>
+                        <li><a href="/blog" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Popular Courses -->
+                <div>
+                    <h4 class="font-semibold mb-4" style="color: var(--text-primary);">Popular Courses</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">UI/UX Design</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Web Development</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Data Science</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Digital Marketing</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Graphic Design</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-semibold mb-4" style="color: var(--text-primary);">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">FAQ</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Terms of Service</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Privacy Policy</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Refund Policy</a></li>
+                        <li><a href="#" class="theme-transition" style="color: var(--text-secondary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-secondary)'">Contact Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t mt-8 pt-8 text-center theme-transition" style="border-color: var(--border-color);">
+                <p style="color: var(--text-secondary);">
+                    &copy; 2023 <span class="font-semibold" style="color: var(--primary-color);">MDTH Courses</span>. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script>
+        // set year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Theme toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+
+        function setTheme(isDark) {
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            if (isDark) {
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            } else {
+                moonIcon.classList.add('hidden');
+                sunIcon.classList.remove('hidden');
+            }
+        }
+
+        // initialize
+        const savedTheme = localStorage.getItem('mdth_theme') || 'light';
+        setTheme(savedTheme === 'dark');
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            setTheme(!isDark);
+            localStorage.setItem('mdth_theme', !isDark ? 'dark' : 'light');
+        });
+
+        // Mobile menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Tabs
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('tab-active');
+                    b.classList.add('tab-inactive');
+                });
+                btn.classList.add('tab-active');
+                btn.classList.remove('tab-inactive');
+
+                const tab = btn.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.add('hidden'));
+                document.getElementById(tab + '-tab').classList.remove('hidden');
+
+                // smooth scroll to tab content on mobile
+                if (window.innerWidth < 768) {
+                    document.getElementById(tab + '-tab').scrollIntoView({behavior: 'smooth'});
+                }
+            });
+        });
+
+        // Accordion toggles
+        function toggleAccordion(id) {
+            const content = document.getElementById(id + '-content');
+            const chevron = document.getElementById(id + '-chevron');
+            if (!content) return;
+            const isHidden = getComputedStyle(content).display === 'none' || content.classList.contains('hidden');
+            if (isHidden) {
+                content.style.display = 'block';
+                content.classList.remove('hidden');
+                if (chevron) chevron.style.transform = 'rotate(90deg)';
+            } else {
+                content.style.display = 'none';
+                content.classList.add('hidden');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // small accessibility: keyboard navigation for tabs
+        document.querySelectorAll('.tab-btn').forEach((btn, i, arr) => {
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') arr[(i+1) % arr.length].focus();
+                if (e.key === 'ArrowLeft') arr[(i-1+arr.length) % arr.length].focus();
+            });
+        });
+        
+    </script>
+</body>
+</html>
+"""
