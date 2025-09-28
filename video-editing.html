@@ -1,447 +1,480 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDTH video-editing-course-page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="courses css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Video Editing Masterclass - MDTH Courses</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --primary-hover: #5B52E8;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --border-color: #E5E7EB;
+        }
 
+        [data-theme="dark"] {
+            --text-primary: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --bg-primary: #111827;
+            --bg-secondary: #1F2937;
+            --border-color: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .theme-transition {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tab-active {
+            border-bottom-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .tab-inactive {
+            border-bottom-color: transparent;
+            color: var(--text-secondary);
+        }
+
+        .tab-inactive:hover {
+            color: var(--primary-color);
+        }
+
+        .accordion-section {
+            cursor: pointer;
+        }
+
+        .accordion-section:hover {
+            background-color: var(--bg-secondary);
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+    </style>
 </head>
-<body>
-<!-- Navigation Bar -->
-<nav class="navbar">
-  <div class="logo">
-      <a href="#">
-          <img src="images/MDTH LOGO.jpg" alt="MDTH Logo" class="logo-image">
-      </a>
-  </div>
-  <div class="course-back" onclick="goToPreviousPage()">
-    <span>
-      <span class="arrow">←</span> Courses
-    </span>
-  </div>
-  
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li class="dropdown">
-      <a href="courses.html">Courses</a>
-      <span class="caret"></span>
-      <ul class="dropdown-menu">
-          <li><a href="programming.html">Programming</a></li>
-          <li><a href="cyber-security.html">Cyber Security</a></li>
-          <li><a href="AI.html">AI</a></li>
-          <li><a href="graphic-design.html">Graphic Design</a></li>
-          <li><a href="ui-ux.html">UI/UX Design</a></li>
-          <li><a href="project-management.html">Project Management</a></li>
-          <li><a href="video-editing.html">Video Editing</a></li>
-          <li><a href="content-marketing.html">Content Marketing</a></li>
-          <li><a href="data-analysis.html">Data Analytics</a></li>
-      </ul>
-    </li>
-  
-    <li><a href="about us.html">About Us</a></li>
-    <li><a href="contact us .html">Contact</a></li>
-    <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-    <a href="signup.html" class="btn-signup">Sign Up</a>
-    <a href="login.html" class="btn-login">Login</a>
-</div>
-<!-- Hamburger Icon -->
-<div class="hamburger" id="hamburger">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-</div>
-</nav>
-<!-- Side Menu (hidden by default) -->
-<div class="side-menu" id="sideMenu">
-<div class="side-menu-header">
-  <img src="images/MDTH_LOGO-removebg-preview.png" alt="Logo" class="side-menu-logo">
-  <div class="cancel-icon" id="cancelIcon">
-    <span>&times;</span>
-  </div>
-</div>
-<hr class="menu-separator">
-<div class="theme-switcher">
-  <p>Switch Theme</p>
-  <button id="themeToggle" class="theme-icon">
-    <i class="fa fa-moon-o" aria-hidden="true"></i>
-  </button>
-</div>
-<ul class="nav-links">
-  <li><a href="index.html">Home</a></li>
-  <li class="dropdown">
-    <a href="courses.html">Courses</a>
-    <span class="caret"></span>
-    <ul class="dropdown-menu">
-      <li><a href="programming.html">Programming</a></li>
-      <li><a href="cyber-security.html">Cyber Security</a></li>
-      <li><a href="AI.html">AI</a></li>
-      <li><a href="graphic-design.html">Graphic Design</a></li>
-      <li><a href="ui-ux.html">UI/UX Design</a></li>
-      <li><a href="project-management.html">Project Management</a></li>
-      <li><a href="video-editing.html">Video Editing</a></li>
-      <li><a href="content-marketing.html">Content Marketing</a></li>
-      <li><a href="data-analysis.html">Data Analytics</a></li>
-    </ul>
-  </li>
+<body class="min-h-screen theme-transition">
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-900 shadow-sm border-b theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="/" class="flex items-center">
+                    <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background-color: var(--primary-color);">
+                        <span class="text-white font-bold text-lg">M</span>
+                    </div>
+                </a>
 
-  <li><a href="about us.html">About Us</a></li>
-  <li><a href="contact us .html">Contact</a></li>
-  <li><a href="blog.html">Blog</a></li>
-</ul>
-<div class="auth-buttons">
-  <a href="signup.html" class="btn-signup">Sign Up</a>
-  <a href="login.html" class="btn-login">Login</a>
-</div>
-<hr class="menu-separator">
-</div>
+                <!-- Desktop Navigation -->
+                <div class="desktop-nav hidden md:flex items-center space-x-8">
+                    <a href="/" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Home</a>
+                    <a href="/courses" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Courses</a>
+                    <a href="/about" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">About Us</a>
+                    <a href="/contact" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Contact</a>
+                    <a href="/blog" class="font-medium theme-transition" style="color: var(--text-primary);" onmouseover="this.style.color='var(--primary-color)'" onmouseout="this.style.color='var(--text-primary)'">Blog</a>
+                </div>
 
+                <!-- Auth Buttons & Theme Toggle -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="/login" class="px-4 py-2 border rounded-lg font-medium theme-transition" style="border-color: var(--border-color); color: var(--text-primary);">Login</a>
+                    <a href="/signup" class="px-4 py-2 rounded-lg font-medium text-white theme-transition" style="background-color: var(--primary-color);">Sign Up</a>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-lg theme-transition" style="background-color: var(--bg-secondary);">
+                        <svg id="sun-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                </div>
 
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg theme-transition" style="background-color: var(--bg-secondary);">
+                    <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
 
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu md:hidden py-4 border-t theme-transition" style="border-color: var(--border-color);">
+                <div class="flex flex-col space-y-4">
+                    <a href="/" class="font-medium theme-transition" style="color: var(--text-primary);">Home</a>
+                    <a href="/courses" class="font-medium theme-transition" style="color: var(--text-primary);">Courses</a>
+                    <a href="/about" class="font-medium theme-transition" style="color: var(--text-primary);">About Us</a>
+                    <a href="/contact" class="font-medium theme-transition" style="color: var(--text-primary);">Contact</a>
+                    <a href="/blog" class="font-medium theme-transition" style="color: var(--text-primary);">Blog</a>
+                    <div class="flex flex-col space-y-2 pt-4 border-t theme-transition" style="border-color: var(--border-color);">
+                        <a href="/login" class="px-4 py-2 border rounded-lg font-medium text-center theme-transition" style="border-color: var(--border-color); color: var(--text-primary);">Login</a>
+                        <a href="/signup" class="px-4 py-2 rounded-lg font-medium text-white text-center theme-transition" style="background-color: var(--primary-color);">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<header class="editing-hero-section">
-  <div class="content-wrapper">
-      <div class="hero-text">
-          <h1>Video Editing Program</h1>
-          <p>Learn how to manipulate and re-arrange video footage to create a final product that is coherent, 
-            engaging, and aligned with a specific purpose or message.  </p>
-            <button class="enrol-btn" 
-            onclick="saveCourseDetails('Video Editing Program', 'Learn how to manipulate and re-arrange video footage to create a final product that is coherent, engaging, and aligned with a specific purpose or message.', 'courses img/editing.jpg')">
-            Enrol Now
-            </button>
-      </div>
-      <div class="image-wrapper">
-        <img src="courses img/bottom_left_programming_img.png" alt="Programming Illustration">
-      </div>
-  </div>
-</header>
+    <!-- Course Hero Section -->
+    <section class="py-12 theme-transition" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Video Player -->
+                <div class="lg:col-span-2">
+                    <div class="relative bg-black rounded-lg overflow-hidden shadow-lg">
+                        <div class="aspect-video">
+                            <video class="w-full h-full object-cover" poster="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" controls>
+                                <source src="https://cdn.pixabay.com/video/2024/09/24/233043_large.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Course Info Sidebar -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24 rounded-lg border shadow-sm theme-transition" style="background-color: var(--bg-primary); border-color: var(--border-color);">
+                        <div class="p-6">
+                            <div class="text-3xl font-bold mb-4" style="color: var(--primary-color);">₦40,000</div>
 
+                            <button class="w-full mb-6 px-4 py-2 rounded-lg font-medium text-white theme-transition" style="background-color: var(--primary-color);" onmouseover="this.style.backgroundColor='var(--primary-hover)'" onmouseout="this.style.backgroundColor='var(--primary-color)'">Enroll Now</button>
 
-<div class="course-overview">
-  <div class="course-content-wrapper">
-    <div class="course-image">
-      <img src="courses img/editing.jpg" alt="video-editing Course">
-    </div>
-    <div class="course-details">
-      <div class="detail-card">
-        <h4>What you'll learn</h4>
-        <ul>
-          <li>Introduction to programming</li>
-          <li>App Development</li>
-          <li>App Development</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Skill level</h4>
-        <ul>
-          <li>Beginner</li>
-          <li>Intermediate</li>
-          <li>Advanced</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Time commitment</h4>
-        <ul>
-          <li>3 months</li>
-          <li>3-5 Hours/week</li>
-          <li>3-5 Hours/week</li>
-        </ul>
-      </div>
-      <div class="detail-card">
-        <h4>Mode of learning</h4>
-        <ul>
-          <li>Self-paced</li>
-          <li>Instructor-led</li>
-          <li>Expo/ Special cent..</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="about-course">
-    <h2>About this Course</h2>
-    <p>
-   Welcome to our Video editing course! This comprehensive program will equip you with the  skills needed to manipulate 
-   and rearranging video footage to create a final product that is coherent, engaging, and aligned with a specific 
-   purpose or message. Below is an overview of the curriculum.
-  </p>
-</div>
-</div>
+                            <div class="space-y-4 mb-6">
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                    <span>2 Months Duration</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span>35 Video Lessons</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span>Certificate of Completion</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                    </svg>
+                                    <span>Lifetime Access</span>
+                                </div>
+                                <div class="flex items-center" style="color: var(--text-secondary);">
+                                    <svg class="w-5 h-5 mr-3" style="color: var(--primary-color);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span>Access on Mobile and TV</span>
+                                </div>
+                            </div>
 
-<div class="curriculum-container">
-  <h2>Curriculum</h2>
-  <hr class="straight-line">
-  <div class="modules">
-      <div class="module">
-          <button class="module-button active">
-              Module 1: Introduction to UI/UX
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container active">
-              <div class="lessons">
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 1</h3>
-                              <h4>Visual Design</h4>
-                              <p>This includes the colors, typography, icons, and overall visual style of the product. The aim is to create an appealing and cohesive look for a user-friendly experience.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 2</h3>
-                              <h4>Layout</h4>
-                              <p>Organizing elements on the screen in a way that is intuitive and user-friendly. This involves placing buttons, text, images, and other components effectively.</p>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="lesson-card">
-                      <div class="lesson-content">
-                          <div class="circle-icon"></div>
-                          <div class="lesson-text">
-                              <h3>Lesson 3</h3>
-                              <h4>Interactive Design</h4>
-                              <p>Designing components like buttons, sliders, and forms that users interact with. Ensuring these elements are easy to use and respond correctly to user actions.</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+                            <div class="flex items-center pt-6 border-t theme-transition" style="border-color: var(--border-color);">
+                                <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Alex Thompson" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold" style="color: var(--text-primary);">Alex Thompson</h4>
+                                    <p class="text-sm" style="color: var(--text-secondary);">Professional Video Editor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <div class="module">
-          <button class="module-button">
-              Module 2: User Interface UI
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
+    <!-- Course Tabs Section -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Tab Headers -->
+            <div class="flex border-b mb-8 theme-transition" style="border-color: var(--border-color);">
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-active" data-tab="overview">Overview</button>
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-inactive" data-tab="curriculum">Curriculum</button>
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-inactive" data-tab="reviews">Reviews</button>
+                <button class="tab-btn px-6 py-3 font-semibold border-b-2 transition-colors tab-inactive" data-tab="instructor">Instructor</button>
+            </div>
 
-      <div class="module">
-          <button class="module-button">
-              Module 3: User Experience UX
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
+            <!-- Tab Content -->
+            <div id="tab-content">
+                <!-- Overview Tab -->
+                <div id="overview-tab" class="tab-content">
+                    <div class="space-y-8">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-4" style="color: var(--text-primary);">Video Editing Masterclass</h2>
+                            <p class="mb-4" style="color: var(--text-secondary);">
+                                Master professional video editing with Adobe Premiere Pro and After Effects in this comprehensive course. Learn industry-standard techniques for creating stunning visuals, compelling narratives, and professional-grade video content.
+                            </p>
+                            <p style="color: var(--text-secondary);">
+                                This course is designed for beginners and intermediate editors who want to build a strong foundation in video editing and create portfolio-worthy projects that will impress clients and employers alike.
+                            </p>
+                        </div>
 
-      <div class="module">
-          <button class="module-button">
-              Module 4: How UI and UX Work Together
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">What Will You Learn?</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Master Adobe Premiere Pro interface and workflow</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Create professional transitions and effects</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Color correction and grading techniques</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Audio editing and sound design fundamentals</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Motion graphics and visual effects with After Effects</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Export settings for different platforms</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Workflow optimization and keyboard shortcuts</span>
+                                </div>
+                                <div class="flex items-start">
+                                    <svg class="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span style="color: var(--text-primary);">Build a professional video editing portfolio</span>
+                                </div>
+                            </div>
+                        </div>
 
-      <div class="module">
-          <button class="module-button">
-              Module 5: Best Practices for UI/UX Design
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Requirements</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">Basic Computer Skills</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">A computer with Adobe Creative Cloud (free trial available)</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">Internet Connection</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <svg class="w-4 h-4 mr-2" style="color: var(--primary-color);" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span style="color: var(--text-primary);">No prior video editing experience required</span>
+                                    </li>
+                                </ul>
+                            </div>
 
-      <div class="module">
-          <button class="module-button">
-              Module 6: Best Practices for UI/UX Design
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-4" style="color: var(--text-primary);">Who is this course for?</h3>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Beginners - People who have little to no prior knowledge of video editing</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Content Creators - YouTubers, social media influencers, and bloggers</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Marketing Professionals - Those who need to create compelling video content</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <div class="w-4 h-4 rounded-full mr-2 mt-2 flex-shrink-0" style="background-color: var(--primary-color);"></div>
+                                        <span style="color: var(--text-primary);">Filmmakers - Aspiring directors and producers looking to edit their own work</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="module">
-          <button class="module-button">
-              Module 7: Wireframing and Prototyping
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
+                <!-- Curriculum Tab -->
+                ```html
+                <!-- Curriculum Tab -->
+                <div id="curriculum-tab" class="tab-content hidden">
+                    <h3 class="text-xl font-bold mb-6" style="color: var(--text-primary);">Course Curriculum</h3>
+                    <div class="space-y-4">
+                        <div class="border rounded-lg theme-transition accordion-section" style="border-color: var(--border-color);">
+                            <button class="w-full px-4 py-3 flex justify-between items-center font-semibold" style="color: var(--text-primary);" onclick="toggleAccordion(this)">
+                                Introduction to Video Editing
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="hidden px-4 pb-4 space-y-2 text-sm" style="color: var(--text-secondary);">
+                                <p>Lesson 1: Setting up Adobe Premiere Pro</p>
+                                <p>Lesson 2: Understanding the interface</p>
+                                <p>Lesson 3: Importing media files</p>
+                            </div>
+                        </div>
+                        <div class="border rounded-lg theme-transition accordion-section" style="border-color: var(--border-color);">
+                            <button class="w-full px-4 py-3 flex justify-between items-center font-semibold" style="color: var(--text-primary);" onclick="toggleAccordion(this)">
+                                Editing Basics
+                                <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div class="hidden px-4 pb-4 space-y-2 text-sm" style="color: var(--text-secondary);">
+                                <p>Lesson 4: Cutting and trimming clips</p>
+                                <p>Lesson 5: Adding transitions</p>
+                                <p>Lesson 6: Working with timelines</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="module">
-          <button class="module-button">
-              Module 8: Usability Testing
-              <span class="chevron"></span>
-          </button>
-          <div class="lessons-container">
-              <!-- Lessons content would go here -->
-          </div>
-      </div>
-  </div>
-</div>
-<script>
-  document.querySelectorAll('.module-button').forEach(button => {
-      button.addEventListener('click', () => {
-          // Remove active class from all buttons and containers
-          document.querySelectorAll('.module-button').forEach(b => b.classList.remove('active'));
-          document.querySelectorAll('.lessons-container').forEach(c => c.classList.remove('active'));
-          
-          // Add active class to clicked button and its container
-          button.classList.toggle('active');
-          button.nextElementSibling.classList.toggle('active');
-      });
-  });
-</script>
+                <!-- Reviews Tab -->
+                <div id="reviews-tab" class="tab-content hidden">
+                    <h3 class="text-xl font-bold mb-6" style="color: var(--text-primary);">Student Reviews</h3>
+                    <div class="space-y-6">
+                        <div class="border rounded-lg p-4 theme-transition" style="border-color: var(--border-color);">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 mr-2">
+                                    ★★★★☆
+                                </div>
+                                <span class="text-sm" style="color: var(--text-secondary);">4/5</span>
+                            </div>
+                            <p style="color: var(--text-secondary);">Great course! Learned a lot about video editing basics. The instructor explains concepts clearly.</p>
+                            <p class="mt-2 font-semibold" style="color: var(--text-primary);">— Sarah K.</p>
+                        </div>
+                        <div class="border rounded-lg p-4 theme-transition" style="border-color: var(--border-color);">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 mr-2">
+                                    ★★★★★
+                                </div>
+                                <span class="text-sm" style="color: var(--text-secondary);">5/5</span>
+                            </div>
+                            <p style="color: var(--text-secondary);">This course gave me the confidence to start freelancing. The motion graphics section was amazing!</p>
+                            <p class="mt-2 font-semibold" style="color: var(--text-primary);">— Daniel O.</p>
+                        </div>
+                    </div>
+                </div>
 
-<section class="testimonial-section">
-  <h2>Experiences Shared by Our Clients</h2>
-  <p>Discover how our clients have found solutions and satisfaction with our services.</p>
-  <div class="testimonial-slider">
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/adekunle.jpeg" alt="" class="testimonial-img">
-      <p>MDTH transformed my coding skills! The hands-on approach and expert guidance helped me build real-world projects confidently.</p>
-      <h4>Adebayo Adekunle</h4>
-      <span>Full-Stack Developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/chioma.jpeg" alt="" class="testimonial-img">
-      <p>MDTH provided the perfect learning environment. The instructors are knowledgeable, and the projects helped me master front-end development.</p>
-      <h4>Chioma Okafor</h4>
-      <span>UI/UX Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/tunde.png" alt="" class="testimonial-img">
-      <p>Before MDTH, I struggled with JavaScript. Now, I build functional web applications with ease! The courses are well-structured and beginner-friendly.</p>
-      <h4>Alex Ogunleye</h4>
-      <span>Software Engineer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/aisha.jpeg" alt="" class="testimonial-img">
-      <p>The data science program at MDTH was an eye-opener! I learned Python, machine learning, and data visualization in a simplified way.</p>
-      <h4>Aisha Bello</h4>
-      <span>Data Analyst</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/segun.jpeg" alt="" class="testimonial-img">
-      <p>MDTH’s cybersecurity course gave me the confidence to work on real security projects. The hands-on labs were a game-changer!</p>
-      <h4>Segun Alabi</h4>
-      <span>Cybersecurity Specialist</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/fadlu.jpg" alt="" class="testimonial-img">
-      <p>The mentorship and practical approach at MDTH made my journey into tech smooth. I now work as a freelance web developer!</p>
-      <h4>Fadlurahman</h4>
-      <span>Freelance Web Developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/Abdulkhaliq.jpg" alt="" class="testimonial-img">
-      <p>MDTH played a huge role in my growth as a front-end developer.</p>
-      <h4>Abdulkhaliq Adenola</h4>
-      <span>Front-end web developer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/abiola.jpeg" alt="" class="testimonial-img">
-      <p>The graphic design course was exceptional! MDTH's training refined my skills in Adobe Photoshop and Illustrator.</p>
-      <h4>Abiola Oladipo</h4>
-      <span>Graphic Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/funke.jpeg" alt="" class="testimonial-img">
-      <p>The hands-on projects at MDTH made my learning experience enjoyable.</p>
-      <h4>Funke Adeyemi</h4>
-      <span> Designer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/emeka.jpeg" alt="" class="testimonial-img">
-      <p>Thanks to MDTH, I now understand  how to create systems and technologies that can perform tasks that typically require human intelligence.</p>
-      <h4>Emeka Uche</h4>
-      <span>AI expert</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/zinab.jpeg" alt="" class="testimonial-img">
-      <p>MDTH's content marketing program taught me  how to create and distribute valuable, relevant, and consistent content to attract and engage a target audience.</p>
-      <h4>Zainab Yusuf</h4>
-      <span>content-marketer</span>
-    </div>
-    <div class="testimonial-card">
-      <i class="fa-solid fa-quote-left quote-icon"></i>
-      <img src="test.images/ibrahim.jpeg" alt="" class="testimonial-img">
-      <p>MDTH's project management course taught me the process of planning, executing, and overseeing projects to achieve specific goals within defined constraints such as time, budget, and scope.</p>
-      <h4>Ibrahim</h4>
-      <span>Project Manager</span>
-    </div>
-  </div>
+                <!-- Instructor Tab -->
+                <div id="instructor-tab" class="tab-content hidden">
+                    <div class="flex items-start space-x-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Instructor" class="w-32 h-32 rounded-full object-cover shadow-md">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2" style="color: var(--text-primary);">Alex Thompson</h3>
+                            <p class="mb-4" style="color: var(--text-secondary);">Professional Video Editor & Motion Graphics Artist</p>
+                            <p style="color: var(--text-secondary);">Alex has over 10 years of experience in the film and digital content industry, working with top production studios and teaching thousands of students worldwide. His courses focus on practical, hands-on skills that prepare you for real projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="slider-controls">
-    <button id="prev-btn">&larr;</button>
-    <button id="next-btn">&rarr;</button>
-  </div>
-</section>
-    
+    <!-- Footer -->
+    <footer class="py-8 theme-transition" style="background-color: var(--bg-secondary);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p style="color: var(--text-secondary);">© 2025 MDTH Courses. All rights reserved.</p>
+        </div>
+    </footer>
 
-<footer class="footer">
-    <div class="footer-container">
-      <div class="footer-contact">
-    <img src="images/MDTH_LOGO-removebg-preview.png" alt="MDTH Logo" class="logo-image-footer">
-        <p><i class="fa-regular fa-envelope"></i> mdthdigitalworld@gmail.com</p>
-        <p><i class="fa-solid fa-location-dot"></i> Lagos, Nigeria</p>
-        <p><i class="fa-solid fa-phone"></i> (+234) 816 0330 156</p>
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById("theme-toggle");
+        const sunIcon = document.getElementById("sun-icon");
+        const moonIcon = document.getElementById("moon-icon");
+        themeToggle.addEventListener("click", () => {
+            const html = document.documentElement;
+            const isDark = html.getAttribute("data-theme") === "dark";
+            html.setAttribute("data-theme", isDark ? "light" : "dark");
+            sunIcon.classList.toggle("hidden", !isDark);
+            moonIcon.classList.toggle("hidden", isDark);
+        });
 
-      </div>
-      <div class="footer-links">
-        <h4>PAGES</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about us.html">About</a></li>
-          <li><a href="project.html">Project</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact us .html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>SOCIAL MEDIA</h4>
-        <ul>
-          <li><a href="https://www.instagram.com/mdth_digitalworld/profilecard/?igsh=ZHQ2cHlianp3Znl6">Twitter</a></li>
-          <li><a href="https://www.linkedin.com/company/mdth-making-a-difference-tech-hub/">LinkedIn</a></li>
-          <li><a href="#">Dribble</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61569928020379&mibextid=ZbWKwL">Facebook</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>UTILITIES</h4>
-        <ul>
-          <li><a href="#">Style Guide</a></li>
-          <li><a href="#">Change log</a></li>
-          <li><a href="#">Licenses</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy;2024 All Rights Reserved <span>MDTHdig</span></p>
-    </div>
-  </footer>
- 
-    <script src="script.js"></script>
+        // Mobile Menu Toggle
+        const mobileBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuIcon = document.getElementById("menu-icon");
+        const closeIcon = document.getElementById("close-icon");
+        mobileBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("active");
+            menuIcon.classList.toggle("hidden");
+            closeIcon.classList.toggle("hidden");
+        });
+
+        // Tabs Switching
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
+        tabButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                tabButtons.forEach(b => b.classList.replace("tab-active", "tab-inactive"));
+                btn.classList.replace("tab-inactive", "tab-active");
+                const target = btn.getAttribute("data-tab") + "-tab";
+                tabContents.forEach(content => {
+                    content.classList.toggle("hidden", content.id !== target);
+                });
+            });
+        });
+
+        // Accordion Toggle
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector("svg");
+            content.classList.toggle("hidden");
+            icon.classList.toggle("rotate-180");
+        }
+    </script>
 </body>
 </html>
